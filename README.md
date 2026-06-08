@@ -26,7 +26,7 @@ Main Menu
 <br>
 <br>
 <br> 
-<img width="1920" height="1080" alt="Tetris 08 06 2026 23_36_52" src="https://github.com/user-attachments/assets/7981461f-38de-4df9-a5fa-86473229be01" />
+<img width="1920" height="1080" alt="Tetris 08 06 2026 23_37_36" src="https://github.com/user-attachments/assets/ad0b66b8-e67e-46d7-9dc5-7e1a8ad3df53" />
 Choose Game Mode
 <br>
 <br>
@@ -36,7 +36,7 @@ Gameplay screenshot
 <br>
 <br>
 <br> 
-<img width="1920" height="1080" alt="Tetris 08 06 2026 23_38_12" src="https://github.com/user-attachments/assets/880d883f-d80f-4de5-b0fc-848bc39784e4" />
+<img width="1920" height="1080" alt="Tetris 08 06 2026 23_38_27" src="https://github.com/user-attachments/assets/d1cd3f1f-e435-43c5-8950-e3e9ae45cdfd" />
 Paused
 <br>
 <br>
