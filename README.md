@@ -2,6 +2,7 @@
 Play here: https://teamofey.itch.io/teamofey-tetris?secret=PIyL8EozPIfn84JcVRKtl54UiA
 
 My coursework on programming. Developing a computer game, Tetris, in Unity.
+<img width="1920" height="1080" alt="Tetris 08 06 2026 23_38_27" src="https://github.com/user-attachments/assets/07643f9c-f513-4ba3-bc56-b75eac40ccca" />
 
 Unity version: 6.4
 
