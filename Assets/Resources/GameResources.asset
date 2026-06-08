@@ -1,0 +1,26 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 32d833a51d48f314c81fa15a58507341, type: 3}
+  m_Name: GameResources
+  m_EditorClassIdentifier: Assembly-CSharp::GameResources
+  StartWaitTime: 3
+  BlockPrefab: {fileID: 9182660093228502586, guid: 03e32c79cd01cea40b59b38d9b0472b8, type: 3}
+  FaderPrefab: {fileID: 3571465962533584613, guid: 0a7ed45fd76f70f4087265888672071c, type: 3}
+  Backgrounds:
+  - {fileID: 21300000, guid: c237499f530e7df4ab90e58766efc528, type: 3}
+  - {fileID: 21300000, guid: a7de9339067ae534bbdb9471445b0f19, type: 3}
+  - {fileID: 21300000, guid: 0702df844499d004590338ad247317cb, type: 3}
+  - {fileID: 21300000, guid: 00db42a5eb492f04da414c5ca6a08adc, type: 3}
+  - {fileID: 21300000, guid: b8258ffea989caf4e99a052bb5c5eb2e, type: 3}
+  - {fileID: 21300000, guid: 8eab1f0f845295f42be14c03df92aa7b, type: 3}
+  - {fileID: 21300000, guid: ce143bc6ff40cf7459a99cbd87b4f729, type: 3}
+  - {fileID: 21300000, guid: 510535c1edf5b174fa92c8cdefc83221, type: 3}
