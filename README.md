@@ -8,6 +8,9 @@ This game was created as a coursework assignment for the "Programming" course in
 
 Input:
 A/D or Right/Left arrows - Horizontal Move
+
 S or Down arrow - Fast down
+
 R or Up arrow - Rotare
+
 Space - Hard drop
