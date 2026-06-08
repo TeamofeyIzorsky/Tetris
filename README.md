@@ -2,3 +2,7 @@
 My coursework on programming. Developing a computer game, Tetris, in Unity.
 
 Unity version: 6.4
+
+Данная игра была создана в качестве курсовой работы по дисциплине "Программирование" на первом курсе.
+
+This game was created as a coursework assignment for the "Programming" course in the first year.
