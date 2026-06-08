@@ -23,7 +23,8 @@ Shift - Hold
 ## Demonstration
 <img width="1920" height="1080" alt="Tetris 08 06 2026 23_36_52" src="https://github.com/user-attachments/assets/c445d193-98ab-4b72-ab2f-747b123dca95" />
 Main Menu
-  
+<br>
+<br>
   
 <img width="1920" height="1080" alt="Tetris 08 06 2026 23_36_52" src="https://github.com/user-attachments/assets/7981461f-38de-4df9-a5fa-86473229be01" />
 Choose Game Mode
