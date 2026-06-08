@@ -9079,7 +9079,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Back
+  m_text: Confirm
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 175b897537f16fd45a921af0830fa4fe, type: 2}
   m_sharedMaterial: {fileID: 1444561723388919204, guid: 175b897537f16fd45a921af0830fa4fe, type: 2}
@@ -9175,7 +9175,7 @@ GameObject:
   - component: {fileID: 883915368}
   - component: {fileID: 883915373}
   m_Layer: 5
-  m_Name: Back
+  m_Name: Confirm
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -9357,7 +9357,7 @@ MonoBehaviour:
     m_TableReference:
       m_TableCollectionName: GUID:2fb03762b3c16434a9cc9e100f14b541
     m_TableEntryReference:
-      m_KeyId: 12357785751552
+      m_KeyId: 39969325309952
       m_Key: 
     m_FallbackState: 0
     m_WaitForCompletion: 0

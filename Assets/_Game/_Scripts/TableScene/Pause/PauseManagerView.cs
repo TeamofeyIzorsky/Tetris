@@ -15,5 +15,7 @@ public class PauseManagerView : MonoBehaviour
     private void UpdatePauseView(bool pause)
     {
         _pauseCanvas.enabled = pause;
+
+        Cursor.visible = pause;
     }
 }

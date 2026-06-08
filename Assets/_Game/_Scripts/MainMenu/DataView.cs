@@ -61,10 +61,9 @@ public class DataView : MonoBehaviour
         string time = timeSpan.ToString(@"hh\:mm\:ss");
 
         // Получаем 2 цифры миллисекунд
+        _allTime.text = LocalizationSettings.StringDatabase.GetLocalizedString("Localization", "totalTime") + " " + time;
 
-        _allTime.text = LocalizationSettings.StringDatabase.GetLocalizedString("Localization", "roundsFinished") + " " + time;
-
-        _playsCount.text = LocalizationSettings.StringDatabase.GetLocalizedString("Localization", "totalTime") + " " + G.DataManager.currentGameData.gamesPlayed.ToString();
+        _playsCount.text = LocalizationSettings.StringDatabase.GetLocalizedString("Localization", "roundsFinished") + " " + G.DataManager.currentGameData.gamesPlayed.ToString();
 
     }
 

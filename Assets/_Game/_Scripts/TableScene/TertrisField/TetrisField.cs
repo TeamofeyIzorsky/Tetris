@@ -121,6 +121,12 @@ public class TetrisField : PausableBehaviour, ITetrisField
             return;
         }
 
+        if (G.PlayerInput.Rotate)
+        {
+            //Поворот фигуры
+            PlayerRotatePiece();
+        }
+
         if (G.PlayerInput.Down || G.PlayerInput.DownHold)
         {
             //Ускоренный спуск вниз
@@ -140,12 +146,6 @@ public class TetrisField : PausableBehaviour, ITetrisField
             //Вправо
 
             PlayerMoveHorizontal(Vector2Int.right);
-        }
-
-        else if (G.PlayerInput.Rotate)
-        {
-            //Поворот фигуры
-            PlayerRotatePiece();
         }
 
         OnAfterUpdate?.Invoke(_piecePositions, _grid, _currentPiece, _finalPositions);

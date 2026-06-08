@@ -35,6 +35,8 @@ public class TableBoot : MonoBehaviour
 
     private IEnumerator StartAnimation()
     {
+        Cursor.visible = false;
+
         yield return new WaitForSeconds(0.5f);
 
         _startText.gameObject.SetActive(true);

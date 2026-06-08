@@ -159,11 +159,15 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 23698542039040
-    m_Localized: 'Total time in the game: '
+    m_Localized: 'Total time in the game:'
     m_Metadata:
       m_Items: []
   - m_Id: 23805417099264
     m_Localized: 'Rounds finished:'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 39969325309952
+    m_Localized: Confirm
     m_Metadata:
       m_Items: []
   references:
