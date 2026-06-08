@@ -18,3 +18,5 @@ S or Down arrow - Fast down
 R or Up arrow - Rotare
 
 Space - Hard drop
+
+Shift - Hold
