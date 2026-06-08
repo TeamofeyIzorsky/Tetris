@@ -1,6 +1,7 @@
 using System;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Localization.Settings;
 
 public class GameEndView : MonoBehaviour
 {
@@ -37,15 +38,17 @@ public class GameEndView : MonoBehaviour
     private void StandartEnd(int bestScore, int score, float bestTime, float time)
     {
         _gameEndCanvas.enabled = true;
-        _gameEndStatus.text = "Game Ended";
+        _gameEndStatus.text = LocalizationSettings.StringDatabase.GetLocalizedString("Localization", "gameEnded");
 
-        _gameModeTitle.text = "Standart";
-        _decription.text = "Collect as big a score as possible and survive as long as you can.";
+        _gameModeTitle.text = LocalizationSettings.StringDatabase.GetLocalizedString("Localization", "standart");
 
-        _firstBestTitle.text = "Best Score:";
+        _decription.text = LocalizationSettings.StringDatabase.GetLocalizedString("Localization", "standartDescription");
+
+
+        _firstBestTitle.text = LocalizationSettings.StringDatabase.GetLocalizedString("Localization", "bestScore");
         _firstBestValue.text = bestScore.ToString();
 
-        _secondBestTitle.text = "Best Time:";
+        _secondBestTitle.text = LocalizationSettings.StringDatabase.GetLocalizedString("Localization", "bestTime");
 
         TimeSpan timeSpan = TimeSpan.FromSeconds(bestTime);
 
@@ -59,11 +62,11 @@ public class GameEndView : MonoBehaviour
 
         if (bestScore < score)
         {
-            _firstTitlie.text = "Score [New Best!]:";
+            _firstTitlie.text = LocalizationSettings.StringDatabase.GetLocalizedString("Localization", "scoreNewBest");
         }
         else
         {
-            _firstTitlie.text = "Score:";
+            _firstTitlie.text = LocalizationSettings.StringDatabase.GetLocalizedString("Localization", "scoreEnd");
         }
 
         _firstValue.text = score.ToString();
@@ -71,11 +74,11 @@ public class GameEndView : MonoBehaviour
 
         if (bestTime < time)
         {
-            _secondTitlie.text = "Time [New Best!]:";
+            _secondTitlie.text = LocalizationSettings.StringDatabase.GetLocalizedString("Localization", "timeNewBest");
         }
         else
         {
-            _secondTitlie.text = "Time:";
+            _secondTitlie.text = LocalizationSettings.StringDatabase.GetLocalizedString("Localization", "timeEnd");
         }
 
         timeSpan = TimeSpan.FromSeconds(time);
@@ -95,30 +98,30 @@ public class GameEndView : MonoBehaviour
 
         if (defeat)
         {
-            _gameEndStatus.text = "Defeat!";
+            _gameEndStatus.text = LocalizationSettings.StringDatabase.GetLocalizedString("Localization", "defeat");
         }
         else
         {
-            _gameEndStatus.text = "Game Ended";
+            _gameEndStatus.text = LocalizationSettings.StringDatabase.GetLocalizedString("Localization", "gameEnded");
         }
 
-        _gameModeTitle.text = "Blitz";
-        _decription.text = "Break as many lines as possible in 2 minutes.";
+        _gameModeTitle.text = LocalizationSettings.StringDatabase.GetLocalizedString("Localization", "blitz");
+        _decription.text = LocalizationSettings.StringDatabase.GetLocalizedString("Localization", "blitzDescription");
 
-        _firstBestTitle.text = "Best Score:";
+        _firstBestTitle.text = LocalizationSettings.StringDatabase.GetLocalizedString("Localization", "bestScore");
         _firstBestValue.text = bestScore.ToString();
 
-        _secondBestTitle.text = "Best Lines Count:";
+        _secondBestTitle.text = LocalizationSettings.StringDatabase.GetLocalizedString("Localization", "bestLinesCountEnd");
         _secondBestValue.text = bestLinesCount.ToString();
 
 
         if (bestScore < score)
         {
-            _firstTitlie.text = "Score [New Best!]:";
+            _firstTitlie.text = LocalizationSettings.StringDatabase.GetLocalizedString("Localization", "scoreNewBest");
         }
         else
         {
-            _firstTitlie.text = "Score:";
+            _firstTitlie.text = LocalizationSettings.StringDatabase.GetLocalizedString("Localization", "scoreEnd");
         }
 
         _firstValue.text = score.ToString();
@@ -126,11 +129,11 @@ public class GameEndView : MonoBehaviour
 
         if (bestLinesCount < linesCount)
         {
-            _secondTitlie.text = "Lines Count [New Best!]:";
+            _secondTitlie.text = LocalizationSettings.StringDatabase.GetLocalizedString("Localization", "linesNewBest");
         }
         else
         {
-            _secondTitlie.text = "Lines Count:";
+            _secondTitlie.text = LocalizationSettings.StringDatabase.GetLocalizedString("Localization", "linesEnd");
         }
 
         _secondValue.text = linesCount.ToString();
@@ -142,19 +145,17 @@ public class GameEndView : MonoBehaviour
 
         if (defeat)
         {
-            _gameEndStatus.text = "Defeat!";
+            _gameEndStatus.text = LocalizationSettings.StringDatabase.GetLocalizedString("Localization", "defeat");
         }
         else
         {
-            _gameEndStatus.text = "Game Ended";
+            _gameEndStatus.text = LocalizationSettings.StringDatabase.GetLocalizedString("Localization", "gameEnded");
         }
 
-        _gameModeTitle.text = "40-Lines";
-        _decription.text = "Break 40 lines in as little time as possible.";
+        _gameModeTitle.text = LocalizationSettings.StringDatabase.GetLocalizedString("Localization", "40Lines");
+        _decription.text = LocalizationSettings.StringDatabase.GetLocalizedString("Localization", "40LinesDescription");
 
-        _firstBestTitle.text = "Best Time:";
-
-        _secondBestTitle.text = "Best Time:";
+        _firstBestTitle.text = LocalizationSettings.StringDatabase.GetLocalizedString("Localization", "bestTime");
 
         TimeSpan timeSpan = TimeSpan.FromSeconds(bestTime);
 
@@ -172,11 +173,11 @@ public class GameEndView : MonoBehaviour
 
         if (bestTime < time)
         {
-            _firstTitlie.text = "Time [New Best!]:";
+            _firstTitlie.text = LocalizationSettings.StringDatabase.GetLocalizedString("Localization", "timeNewBest");
         }
         else
         {
-            _firstTitlie.text = "Time:";
+            _firstTitlie.text = LocalizationSettings.StringDatabase.GetLocalizedString("Localization", "timeEnd");
         }
 
         timeSpan = TimeSpan.FromSeconds(time);

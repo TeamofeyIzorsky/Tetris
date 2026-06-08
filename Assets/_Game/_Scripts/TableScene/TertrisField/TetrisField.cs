@@ -576,7 +576,7 @@ public class TetrisField : PausableBehaviour, ITetrisField
 
         if(_destroyedLines >= speedLevel.LinesCount)
         {
-            if(_currentSpeedLevel < _speedLevels.Count)
+            if(_currentSpeedLevel < _speedLevels.Count - 1)
             {
                 _currentSpeedLevel++;
             }

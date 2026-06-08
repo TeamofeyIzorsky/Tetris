@@ -15,4 +15,6 @@ EditorBuildSettings:
     path: Assets/_Game/Scenes/TableScene.unity
     guid: bd46d4aca7ec88c4d845470c361e59b1
   m_configObjects:
+    com.unity.addressableassets: {fileID: 11400000, guid: ba69d69142f4c644abb2e7a43ee18cb6, type: 2}
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 2bcd2660ca9b64942af0de543d8d7100, type: 3}
+    com.unity.localization.settings: {fileID: 11400000, guid: ac1693fbfb403f14ca1de055043e7d12, type: 2}

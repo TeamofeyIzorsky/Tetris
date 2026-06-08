@@ -1,0 +1,171 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e9620f8c34305754d8cc9a7e49e852d9, type: 3}
+  m_Name: Localization_en
+  m_EditorClassIdentifier: Unity.Localization::UnityEngine.Localization.Tables.StringTable
+  m_LocaleId:
+    m_Code: en
+  m_SharedData: {fileID: 11400000, guid: 2fb03762b3c16434a9cc9e100f14b541, type: 2}
+  m_Metadata:
+    m_Items: []
+  m_TableData:
+  - m_Id: 8043499520
+    m_Localized: Start Game
+    m_Metadata:
+      m_Items: []
+  - m_Id: 109864423424
+    m_Localized: Settings
+    m_Metadata:
+      m_Items: []
+  - m_Id: 174184075264
+    m_Localized: Quit
+    m_Metadata:
+      m_Items: []
+  - m_Id: 241834004480
+    m_Localized: Statistics
+    m_Metadata:
+      m_Items: []
+  - m_Id: 324436627456
+    m_Localized: Standart
+    m_Metadata:
+      m_Items: []
+  - m_Id: 556901732352
+    m_Localized: Choose game mode
+    m_Metadata:
+      m_Items: []
+  - m_Id: 661524451328
+    m_Localized: 40-Lines
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1072067121152
+    m_Localized: Blitz
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1149191983104
+    m_Localized: 'Best Score:'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1237456916480
+    m_Localized: 'Best Time:'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1295879376896
+    m_Localized: 'Best Lines Count:'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1500221673472
+    m_Localized: Start
+    m_Metadata:
+      m_Items: []
+  - m_Id: 10244280160256
+    m_Localized: Score
+    m_Metadata:
+      m_Items: []
+  - m_Id: 10292787286016
+    m_Localized: Lines
+    m_Metadata:
+      m_Items: []
+  - m_Id: 10388631326720
+    m_Localized: Time
+    m_Metadata:
+      m_Items: []
+  - m_Id: 10459091439616
+    m_Localized: Combo
+    m_Metadata:
+      m_Items: []
+  - m_Id: 10961300623360
+    m_Localized: Game Paused!
+    m_Metadata:
+      m_Items: []
+  - m_Id: 11044419145728
+    m_Localized: Resume
+    m_Metadata:
+      m_Items: []
+  - m_Id: 11098575998976
+    m_Localized: Restart
+    m_Metadata:
+      m_Items: []
+  - m_Id: 11169799475200
+    m_Localized: Exit
+    m_Metadata:
+      m_Items: []
+  - m_Id: 12357785751552
+    m_Localized: Back
+    m_Metadata:
+      m_Items: []
+  - m_Id: 12499410620416
+    m_Localized: Collect as big a score as possible and survive as long as you can.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 12558378340352
+    m_Localized: Break 40 lines in as little time as possible.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 12607887904768
+    m_Localized: Break as many lines as possible in 2 minutes.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 16506564775936
+    m_Localized: Language
+    m_Metadata:
+      m_Items: []
+  - m_Id: 20999335448576
+    m_Localized: Game Ended
+    m_Metadata:
+      m_Items: []
+  - m_Id: 21053232254976
+    m_Localized: Defeat!
+    m_Metadata:
+      m_Items: []
+  - m_Id: 21099503816704
+    m_Localized: 'Score [New Best]:'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 21304689168384
+    m_Localized: 'Score:'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 21383391088640
+    m_Localized: 'Time [New Best]:'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 21467730153472
+    m_Localized: 'Time:'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 21550068535296
+    m_Localized: 'Lines [New Best]:'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 21712446820352
+    m_Localized: 'Lines:'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 22769419816960
+    m_Localized: 'Best Lines:'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 23054921895936
+    m_Localized: Main Menu
+    m_Metadata:
+      m_Items: []
+  - m_Id: 23698542039040
+    m_Localized: 'Total time in the game: '
+    m_Metadata:
+      m_Items: []
+  - m_Id: 23805417099264
+    m_Localized: 'Rounds finished:'
+    m_Metadata:
+      m_Items: []
+  references:
+    version: 2
+    RefIds: []

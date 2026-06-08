@@ -1,6 +1,8 @@
 using System;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Localization;
+using UnityEngine.Localization.Settings;
 
 public class DataView : MonoBehaviour
 {
@@ -17,7 +19,9 @@ public class DataView : MonoBehaviour
 
     private void Start()
     {
-        ShowStatistic();
+        LocalizationSettings.SelectedLocaleChanged += ShowStatistic;
+
+        ShowStatistic(null);
         ShowGameModsStatistic();
     }
     private void ShowGameModsStatistic()
@@ -49,7 +53,7 @@ public class DataView : MonoBehaviour
         _blitzLinesCount.text = G.DataManager.currentGameData.BestBlitzLinesCount.ToString();
     }
 
-    private void ShowStatistic()
+    private void ShowStatistic(Locale locale)
     {
         TimeSpan timeSpan = TimeSpan.FromSeconds(G.DataManager.currentGameData.allTime);
 
@@ -58,9 +62,22 @@ public class DataView : MonoBehaviour
 
         // Получаем 2 цифры миллисекунд
 
-        _allTime.text = "Total time in the game: " + time;
+        _allTime.text = LocalizationSettings.StringDatabase.GetLocalizedString("Localization", "roundsFinished") + " " + time;
 
-        _playsCount.text = "Rounds played: " + G.DataManager.currentGameData.gamesPlayed.ToString();
+        _playsCount.text = LocalizationSettings.StringDatabase.GetLocalizedString("Localization", "totalTime") + " " + G.DataManager.currentGameData.gamesPlayed.ToString();
 
+    }
+
+    private void OnEnable()
+    {
+        LocalizationSettings.SelectedLocaleChanged += ShowStatistic;
+    }
+    private void OnDisable()
+    {
+        LocalizationSettings.SelectedLocaleChanged -= ShowStatistic;
+    }
+    private void OnDestroy()
+    {
+        LocalizationSettings.SelectedLocaleChanged -= ShowStatistic;
     }
 }
