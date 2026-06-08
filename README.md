@@ -9,8 +9,7 @@ Unity version: 6.4
 
 This game was created as a coursework assignment for the "Programming" course in the first year.
 
-Input:
-
+## Controll:
 A/D or Right/Left arrows - Horizontal Move
 
 S or Down arrow - Fast down
