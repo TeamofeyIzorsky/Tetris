@@ -54,7 +54,7 @@ public struct GameData
         }
         else if (gameMode == GameMode.Lines40)
         {
-            if (Best40LinesTime < time)
+            if (Best40LinesTime > time)
             {
                 Best40LinesTime = time;
                 return true;

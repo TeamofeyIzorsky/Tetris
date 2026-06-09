@@ -115,7 +115,7 @@ public class GameEndView : MonoBehaviour
         _secondBestValue.text = bestLinesCount.ToString();
 
 
-        if (bestScore < score)
+        if (!defeat && bestScore < score)
         {
             _firstTitlie.text = LocalizationSettings.StringDatabase.GetLocalizedString("Localization", "scoreNewBest");
         }
@@ -127,7 +127,7 @@ public class GameEndView : MonoBehaviour
         _firstValue.text = score.ToString();
 
 
-        if (bestLinesCount < linesCount)
+        if (!defeat && bestLinesCount < linesCount)
         {
             _secondTitlie.text = LocalizationSettings.StringDatabase.GetLocalizedString("Localization", "linesNewBest");
         }
@@ -171,7 +171,7 @@ public class GameEndView : MonoBehaviour
         _secondBestTitle.text = "———:";
         _secondBestValue.text = "———";
 
-        if (bestTime < time)
+        if (!defeat && bestTime > time)
         {
             _firstTitlie.text = LocalizationSettings.StringDatabase.GetLocalizedString("Localization", "timeNewBest");
         }
