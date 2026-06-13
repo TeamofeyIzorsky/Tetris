@@ -16,9 +16,9 @@ This game is my first-year coursework for a Programming course at university. Th
 <br> 
 
 Основной стэк технологий / Core technology stack:
-C#,
-Unity,
-DOTween,
+<br>C#,
+<br>Unity,
+<br>DOTween,
 <br>
 <br>
 <br>
