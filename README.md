@@ -45,6 +45,8 @@ This game is my first-year coursework for a Programming course at university. Th
 
 ## Инструкцию по запуску | Launch instructions
 ///
+<br>
+<br>
 
 ## Управление | Controll:
 A/D or Right/Left arrows - Горизонтальное движение | Horizontal Move 
@@ -53,25 +55,27 @@ A/D or Right/Left arrows - Горизонтальное движение | Horiz
 <br>ESC - Пауза | Pause
 <br>Space - Мгновенный спуск | Hard drop
 <br>Shift - Удержание фигуры | Hold
+<br>
+<br>
 
 ## Демонстрация | Demonstration
 <img width="1920" height="1080" alt="Tetris 08 06 2026 23_36_52" src="https://github.com/user-attachments/assets/c445d193-98ab-4b72-ab2f-747b123dca95" />
-Main Menu
+Главное меню | Main Menu
 <br>
 <br>
 <br> 
 <img width="1920" height="1080" alt="Tetris 08 06 2026 23_37_36" src="https://github.com/user-attachments/assets/ad0b66b8-e67e-46d7-9dc5-7e1a8ad3df53" />
-Choose Game Mode
+Выбор игровых режимов | Choose Game Mode
 <br>
 <br>
 <br> 
 <img width="1920" height="1080" alt="Tetris 08 06 2026 23_38_12" src="https://github.com/user-attachments/assets/8928115e-c196-4be6-a295-6b69783ee1b3" />
-Gameplay screenshot
+Геймплей скриншот | Gameplay screenshot
 <br>
 <br>
 <br> 
 <img width="1920" height="1080" alt="Tetris 08 06 2026 23_38_27" src="https://github.com/user-attachments/assets/d1cd3f1f-e435-43c5-8950-e3e9ae45cdfd" />
-Paused
+Пауза | Paused
 <br>
 <br>
 <br> 
