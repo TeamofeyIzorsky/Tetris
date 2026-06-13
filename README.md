@@ -4,7 +4,7 @@
 <br>
 <br> 
 
-# Описание проекта | Project Description
+## Описание проекта | Project Description
 Эта игра является моей курсовой работой по дисциплине "Программирование" на первом курсе ВУЗа. Проект представляет собой компьютерную игру "Тетрис" со всеми основными механиками данной игры.
 <br>
 <br>
@@ -21,7 +21,7 @@ This game is my first-year coursework for a Programming course at university. Th
 <br>
 <br>
 
-# Основные возможности приложения | Main features of the application
+## Основные возможности приложения | Main features of the application
 <br>Главное меню,
 <br>Выбор из 3 игровых режимов,
 <br>Сохранение и демонстрация лучших рекордов,
@@ -42,7 +42,7 @@ This game is my first-year coursework for a Programming course at university. Th
 <br>
 <br>
 
-# Инструкцию по запуску | Launch instructions
+## Инструкцию по запуску | Launch instructions
 ///
 
 ## Controll:
