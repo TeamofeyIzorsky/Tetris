@@ -46,7 +46,7 @@ This game is my first-year coursework for a Programming course at university. Th
 ## Инструкцию по запуску | Launch instructions
 ///
 
-## Controll:
+## Управление | Controll:
 A/D or Right/Left arrows - Горизонтальное движение | Horizontal Move 
 <br>S or Down arrow - Быстрый спуск | Fast down
 <br>R or Up arrow - Поворот | Rotare
@@ -54,7 +54,7 @@ A/D or Right/Left arrows - Горизонтальное движение | Horiz
 <br>Space - Мгновенный спуск | Hard drop
 <br>Shift - Удержание фигуры | Hold
 
-## Demonstration
+## Демонстрация | Demonstration
 <img width="1920" height="1080" alt="Tetris 08 06 2026 23_36_52" src="https://github.com/user-attachments/assets/c445d193-98ab-4b72-ab2f-747b123dca95" />
 Main Menu
 <br>
