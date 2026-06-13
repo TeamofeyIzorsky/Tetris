@@ -22,7 +22,7 @@ This game is my first-year coursework for a Programming course at university. Th
 <br>
 
 ## Основные возможности приложения | Main features of the application
-<br>Главное меню,
+Главное меню,
 <br>Выбор из 3 игровых режимов,
 <br>Сохранение и демонстрация лучших рекордов,
 <br>Основные механики Тетриса,
@@ -46,7 +46,7 @@ This game is my first-year coursework for a Programming course at university. Th
 ///
 
 ## Controll:
-<br>A/D or Right/Left arrows - Горизонтальное движение | Horizontal Move 
+A/D or Right/Left arrows - Горизонтальное движение | Horizontal Move 
 <br>S or Down arrow - Быстрый спуск | Fast down
 <br>R or Up arrow - Поворот | Rotare
 <br>ESC - Пауза | Pause
