@@ -24,3 +24,7 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 8eab1f0f845295f42be14c03df92aa7b, type: 3}
   - {fileID: 21300000, guid: ce143bc6ff40cf7459a99cbd87b4f729, type: 3}
   - {fileID: 21300000, guid: 510535c1edf5b174fa92c8cdefc83221, type: 3}
+  ThemeSOs:
+  - {fileID: 11400000, guid: 16f9aa54bf7ad7243923d0c317170ecd, type: 2}
+  - {fileID: 11400000, guid: 46986f7f594550b4e88c72679a98bedc, type: 2}
+  - {fileID: 11400000, guid: e3186c9ee83bb3a469fb7763fd3c17c5, type: 2}

@@ -4,8 +4,6 @@ public class SBlock : Piece
 {
     public SBlock()
     {
-        color = new Color32(130, 220, 65, 255);
-
         string[,] shape = new string[,]
         {
             {" ", " ", " ", " " },

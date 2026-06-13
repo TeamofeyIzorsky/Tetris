@@ -11,13 +11,17 @@ public class HoldPieceView : NextPieceView
     {
         if(piece == null) return;
 
+        var theme = G.DataManager.currentGameData.Theme.GetTheme(piece);
+
         base.ShowPiece(piece);
 
         foreach(var block in _firstLine)
         {
+            block.SetSprite(theme.Item2);
+
             if (active)
             {
-                block.SetColor(piece.color);
+                block.SetColor(theme.Item1);
             }
             else
             {
@@ -27,9 +31,11 @@ public class HoldPieceView : NextPieceView
 
         foreach (var block in _secondLine)
         {
+            block.SetSprite(theme.Item2);
+
             if (active)
             {
-                block.SetColor(piece.color);
+                block.SetColor(theme.Item1);
             }
             else
             {

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 public abstract class Piece
 {
-    public Color color = Color.white;
+    //public Color color = Color.white;
 
     public int currentRotate = 0;
     public List<string[,]> shapes = new List<string[,]>();

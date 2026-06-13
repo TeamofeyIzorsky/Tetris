@@ -62,21 +62,31 @@ public class TetrisFieldView : MonoBehaviour
 
 
                     blocks[x, y].SetColor(grid[x, y].Color);
+                    blocks[x, y].SetSprite(grid[x, y].Sprite);
                 }
                 else if (piecePositions.Contains(position))
                 {
                     blocks[x, y].ChangeActive(true);
 
+                    Debug.Log(G.DataManager.currentGameData.Theme);
+                    var theme = G.DataManager.currentGameData.Theme.GetTheme(currentPiece);
 
-                    blocks[x, y].SetColor(currentPiece.color);
+
+                    blocks[x, y].SetColor(theme.Item1);
+                    blocks[x, y].SetSprite(theme.Item2);
                 }
                 else if (finalPositions.Contains(position))
                 {
                     blocks[x, y].ChangeActive(true);
 
-                    Color color = new Color(currentPiece.color.r, currentPiece.color.g, currentPiece.color.b, 0.075f);
+                    Debug.Log(G.DataManager.currentGameData.Theme);
+
+                    var theme = G.DataManager.currentGameData.Theme.GetTheme(currentPiece);
+
+                    Color color = new Color(theme.Item1.r, theme.Item1.g, theme.Item1.b, 0.075f);
 
                     blocks[x, y].SetColor(color);
+                    blocks[x, y].SetSprite(theme.Item2);
                 }
                 else
                 {

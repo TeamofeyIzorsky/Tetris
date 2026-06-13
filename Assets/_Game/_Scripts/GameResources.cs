@@ -9,4 +9,6 @@ public class GameResources : ScriptableObject
     public GameObject FaderPrefab;
 
     public List<Sprite> Backgrounds;
+
+    public List<ThemeSO> ThemeSOs;
 }

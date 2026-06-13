@@ -14,6 +14,11 @@ public class Block : MonoBehaviour
         _spriteRenderer.color = color;
     }
 
+    public void SetSprite(Sprite sprite)
+    {
+        _spriteRenderer.sprite = sprite;
+    }
+
     public void ChangeActive(bool activeStatus)
     {
         _spriteRenderer.enabled = activeStatus;

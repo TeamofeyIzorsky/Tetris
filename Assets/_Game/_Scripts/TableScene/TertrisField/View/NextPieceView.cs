@@ -36,13 +36,16 @@ public class NextPieceView : MonoBehaviour
         int firstLine = 0;
         int secondLine = 0;
 
+        var theme = G.DataManager.currentGameData.Theme.GetTheme(piece);
+
         for (int x = 0; x < 4; x++)
         {
             if(shape[1, x].ToLower() == "x")
             {
                 _firstLine[x].ChangeActive(true);
 
-                _firstLine[x].SetColor(piece.color);
+                _firstLine[x].SetSprite(theme.Item2);
+                _firstLine[x].SetColor(theme.Item1);
                 firstLine += 1;
             }
             else
@@ -54,7 +57,8 @@ public class NextPieceView : MonoBehaviour
             {
                 _secondLine[x].ChangeActive(true);
 
-                _secondLine[x].SetColor(piece.color);
+                _secondLine[x].SetSprite(theme.Item2);
+                _secondLine[x].SetColor(theme.Item1);
                 secondLine += 1;
             }
             else

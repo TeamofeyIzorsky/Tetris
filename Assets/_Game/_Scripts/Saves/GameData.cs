@@ -4,6 +4,7 @@ using UnityEngine.SocialPlatforms.Impl;
 
 public struct GameData
 {
+
     //StandartMode
     public float BestStandartTime;
     public int BestStandartScore;
@@ -19,7 +20,9 @@ public struct GameData
     public float allTime;
     public int gamesPlayed;
 
-    public GameSesion gameSesion;
+    public ThemeSO Theme;
+
+    //public GameSesion gameSesion;
 
     public void GamePlayed()
     {
@@ -90,7 +93,7 @@ public struct GameData
     }
 }
 
-public struct GameSesion
+/*public struct GameSesion
 {
     public int linesCount;
     public int score;
@@ -106,4 +109,4 @@ public struct GameSesion
     public List<Vector2Int> piecePositions;
     public bool[,] grid;
     public bool isCanHold;
-}
+}*/

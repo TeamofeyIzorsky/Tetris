@@ -4,8 +4,6 @@ public class OBlock : Piece
 {
     public OBlock()
     {
-        color = new Color32(220, 210, 65, 255);
-
         string[,] shape = new string[,]
         {
             {" ", " ", " ", " " },

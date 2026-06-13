@@ -2699,7 +2699,7 @@ MonoBehaviour:
     Speed: 0.83
   - LinesCount: 450
     Speed: 0.71
-  _timeForFastDown: 0.05
+  _timeForFastDown: 0.075
   _timeForStartHorizontalMove: 0.12
   _timeForFastHorizontalMove: 0.05
 --- !u!114 &463156053

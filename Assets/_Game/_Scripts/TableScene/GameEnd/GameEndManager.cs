@@ -54,6 +54,7 @@ public class GameEndManager : MonoBehaviour, IEndGameManager
 
                 OnStandartEnd?.Invoke(oldBestScore, score, oldBestTime, timer);
 
+
                 break;
 
             case GameMode.Blitz:
@@ -63,7 +64,7 @@ public class GameEndManager : MonoBehaviour, IEndGameManager
                 if (!defeat)
                 {
                     G.DataManager.currentGameData.BestScore(score, GameMode.Blitz);
-                    G.DataManager.currentGameData.BestLinesCount(oldLinesCount, GameMode.Blitz);
+                    G.DataManager.currentGameData.BestLinesCount(linesCount, GameMode.Blitz);
                 }
 
                 OnBlitzEnd?.Invoke(defeat, oldBestScore, score, oldLinesCount, linesCount);

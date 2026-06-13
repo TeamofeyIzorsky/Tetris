@@ -227,7 +227,11 @@ public class TetrisField : PausableBehaviour, ITetrisField
         {
             _grid[piece.x, piece.y].Occupied = true;
 
-            _grid[piece.x, piece.y].Color = _currentPiece.color;
+            var theme = G.DataManager.currentGameData.Theme.GetTheme(_currentPiece);
+
+            _grid[piece.x, piece.y].Color = theme.Item1;
+
+            _grid[piece.x, piece.y].Sprite = theme.Item2;
         }
 
         _piecePositions.Clear();

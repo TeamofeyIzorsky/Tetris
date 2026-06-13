@@ -6,10 +6,6 @@ public class DataManager : MonoBehaviour
 {
     public GameData currentGameData;
 
-    void Start()
-    {
-        DeserializeSave();
-    }
 
     private void Update()
     {
@@ -36,7 +32,7 @@ public class DataManager : MonoBehaviour
     }
 
 
-    private void DeserializeSave()
+    public void DeserializeSave()
     {
         Debug.Log($"GAME DATA LOADING");
 
