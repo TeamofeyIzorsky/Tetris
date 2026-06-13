@@ -1,5 +1,6 @@
 # Tetris
-Сыграй или скачай тут / Play or Download here: https://teamofey.itch.io/teamofey-tetris?secret=PIyL8EozPIfn84JcVRKtl54UiA
+Сыграй или скачай тут / Play or Download here: 
+<br>https://teamofey.itch.io/teamofey-tetris?secret=PIyL8EozPIfn84JcVRKtl54UiA
 <br>
 <br>
 <br> 
