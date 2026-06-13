@@ -1,26 +1,65 @@
 # Tetris
-Play here: https://teamofey.itch.io/teamofey-tetris?secret=PIyL8EozPIfn84JcVRKtl54UiA
-
-My coursework on programming. Developing a computer game, Tetris, in Unity.
-
-Unity version: 6.4
+Сыграй или скачай тут / Play or Download here: https://teamofey.itch.io/teamofey-tetris?secret=PIyL8EozPIfn84JcVRKtl54UiA
 <br>
 <br>
 <br> 
-Данная игра была создана в качестве курсовой работы по дисциплине "Программирование" на первом курсе.
 
-This game was created as a coursework assignment for the "Programming" course in the first year.
+#Описание проекта | Project Description
+Эта игра является моей курсовой работой по дисциплине "Программирование" на первом курсе ВУЗа. Проект представляет собой компьютерную игру "Тетрис" со всеми основными механиками данной игры.
+<br>
+<br>
+<br> 
+
+This game is my first-year coursework for a Programming course at university. The project is a computer game called Tetris, complete with all the core mechanics.
+<br>
+<br>
+<br> 
+
+Основной стэк технологий / Core technology stack:
+C#,
+Unity,
+DOTween,
+<br>
+<br>
+<br>
+
+#Основные возможности приложения | Main features of the application
+Главное меню,
+Выбор из 3 игровых режимов,
+Сохранение и демонстрация лучших рекордов,
+Основные механики Тетриса,
+Отображение следующих 5 фигур,
+Рандомизация фигур с помощью тасование Фишера — Йетса,
+Возможность удерживать 1 фигуру,
+Пауза и меню паузы,
+
+Main menu,
+Choose from 3 game modes,
+Saving and displaying your best scores,
+Basic Tetris mechanics,
+Displaying the next 5 pieces,
+Piece randomization using the Fisher-Yates shuffle,
+The ability to hold one piece,
+Pause and pause menu,
+<br>
+<br>
+<br> 
+
+#Инструкцию по запуску | Launch instructions
+///
 
 ## Controll:
-A/D or Right/Left arrows - Horizontal Move
+A/D or Right/Left arrows - Горизонтальное движение | Horizontal Move 
 
-S or Down arrow - Fast down
+S or Down arrow - Быстрый спуск | Fast down
 
-R or Up arrow - Rotare
+R or Up arrow - Поворот | Rotare
 
-Space - Hard drop
+ESC - Пауза | Pause
 
-Shift - Hold
+Space - Мгновенный спуск | Hard drop
+
+Shift - Удержание фигуры | Hold
 
 ## Demonstration
 <img width="1920" height="1080" alt="Tetris 08 06 2026 23_36_52" src="https://github.com/user-attachments/assets/c445d193-98ab-4b72-ab2f-747b123dca95" />
