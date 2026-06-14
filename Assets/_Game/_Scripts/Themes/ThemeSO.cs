@@ -2,6 +2,8 @@ using UnityEngine;
 
 public class ThemeSO : ScriptableObject
 {
+    //РАБОТА В ПРОЦЕССЕ
+
     [Header("Theme Settings")]
     public ThemeSpiteType ThemeSpiteType;
     public ThemeColorType ThemeColorType;

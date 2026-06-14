@@ -5,8 +5,7 @@ using UnityEngine;
 
 public class TableBoot : MonoBehaviour
 {
-    //Этот класс запускает сцену и стартовую анимацию
-
+    //Этот класс является точкой входа на игровом поле. Он иницилизирует системы и стартовую анимацию
 
     [SerializeField] private SpriteRenderer _backGround;
 
@@ -19,11 +18,27 @@ public class TableBoot : MonoBehaviour
         G.PauseManager.Pause(true);
 
         G.PlayerInput.SetActive(false);
+
+        Bag bag = new Bag();
+
+        G.Bag = bag;
+
+        TetrisField tetrisField = new TetrisField();
+        tetrisField.Init();
+        G.TetrisField = tetrisField;
+
+        G.GameConfig = new GameConfig();
+        G.GameConfig.Init();
+
+        GameObject GameManagerObject = new GameObject("Game Manager");
+        GameManager gameManager = GameManagerObject.AddComponent<GameManager>();
+        gameManager.Init(bag, tetrisField);
+
+        G.GameManager = gameManager;
     }
 
     private void Start()
     {
-
         _startText.gameObject.SetActive(false);
 
         _startCanvas.gameObject.SetActive(true);

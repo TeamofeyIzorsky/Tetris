@@ -12,6 +12,46 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 32d833a51d48f314c81fa15a58507341, type: 3}
   m_Name: GameResources
   m_EditorClassIdentifier: Assembly-CSharp::GameResources
+  TimeForDown: 1
+  LockDelay: 0.5
+  SpeedLevels:
+  - LinesCount: 10
+    Speed: 0.75
+  - LinesCount: 20
+    Speed: 0.6
+  - LinesCount: 30
+    Speed: 0.5
+  - LinesCount: 40
+    Speed: 0.4
+  - LinesCount: 50
+    Speed: 0.333
+  - LinesCount: 60
+    Speed: 0.286
+  - LinesCount: 70
+    Speed: 0.25
+  - LinesCount: 80
+    Speed: 0.222
+  - LinesCount: 90
+    Speed: 0.2
+  - LinesCount: 100
+    Speed: 0.182
+  - LinesCount: 120
+    Speed: 0.167
+  - LinesCount: 140
+    Speed: 0.154
+  - LinesCount: 160
+    Speed: 0.143
+  - LinesCount: 180
+    Speed: 0.133
+  - LinesCount: 200
+    Speed: 0.1
+  - LinesCount: 300
+    Speed: 0.084
+  - LinesCount: 450
+    Speed: 0.071
+  TimeForFastDown: 0.075
+  TimeForStartHorizontalMove: 0.12
+  TimeForFastHorizontalMove: 0.05
   StartWaitTime: 3
   BlockPrefab: {fileID: 9182660093228502586, guid: 03e32c79cd01cea40b59b38d9b0472b8, type: 3}
   FaderPrefab: {fileID: 3571465962533584613, guid: 0a7ed45fd76f70f4087265888672071c, type: 3}
@@ -25,6 +65,6 @@ MonoBehaviour:
   - {fileID: 21300000, guid: ce143bc6ff40cf7459a99cbd87b4f729, type: 3}
   - {fileID: 21300000, guid: 510535c1edf5b174fa92c8cdefc83221, type: 3}
   ThemeSOs:
+  - {fileID: 11400000, guid: e3186c9ee83bb3a469fb7763fd3c17c5, type: 2}
   - {fileID: 11400000, guid: 16f9aa54bf7ad7243923d0c317170ecd, type: 2}
   - {fileID: 11400000, guid: 46986f7f594550b4e88c72679a98bedc, type: 2}
-  - {fileID: 11400000, guid: e3186c9ee83bb3a469fb7763fd3c17c5, type: 2}

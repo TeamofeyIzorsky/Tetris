@@ -2,6 +2,8 @@ using UnityEngine;
 
 public class Block : MonoBehaviour
 {
+    //Компонент, который отображает отдельную клетку игрового поля
+
     [SerializeField] private SpriteRenderer _spriteRenderer;
 
     public void SetPosition(Vector3 positon)

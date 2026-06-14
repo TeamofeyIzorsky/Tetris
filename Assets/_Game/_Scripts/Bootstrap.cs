@@ -26,8 +26,6 @@ public class Bootstrap : MonoBehaviour
 
         G.DataManager.DeserializeSave();
 
-        G.DataManager.currentGameData.Theme = G.GResources.ThemeSOs[0];
-
         GameObject playerInputObject = new GameObject("playerInput Object");
         DontDestroyOnLoad(playerInputObject);
         PlayerInput playerInput = playerInputObject.AddComponent<OldInputSystem>();

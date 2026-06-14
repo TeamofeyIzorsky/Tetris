@@ -4,9 +4,11 @@ using UnityEngine;
 
 public interface ITetrisField
 {
-    public event Action<IReadOnlyList<Vector2Int>, Cell[,], Piece, IReadOnlyList<Vector2Int>> OnAfterUpdate;
-    public event Action<IReadOnlyList<Piece>> OnUpdateBag;
-    public event Action<Piece, bool> OnUpdateHoldPiece;
     public event Action<int, int> OnDeleteLinesEnd;
-    public event Action OnGameOver;
+
+
+    public Cell[,] GetGrid();
+    public void Place(Piece piece);
+    public int GetDeletedLinesCount();
+    public bool CheckPositions(List<Vector2Int> positions);
 }

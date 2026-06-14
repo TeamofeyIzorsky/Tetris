@@ -4,6 +4,7 @@ using UnityEngine.SocialPlatforms.Impl;
 
 public struct GameData
 {
+    //Структура, хранящая данные рекордов и другую статистику, которую надо сохранить между сессиями
 
     //StandartMode
     public float BestStandartTime;
@@ -19,10 +20,6 @@ public struct GameData
     //Global
     public float allTime;
     public int gamesPlayed;
-
-    public ThemeSO Theme;
-
-    //public GameSesion gameSesion;
 
     public void GamePlayed()
     {
@@ -92,21 +89,3 @@ public struct GameData
         return false;
     }
 }
-
-/*public struct GameSesion
-{
-    public int linesCount;
-    public int score;
-    public int comboCount;
-
-    public ComboType comboType;
-
-    public float time;
-
-    public Piece CurrentPiece;
-    public List<Piece> Bag;
-
-    public List<Vector2Int> piecePositions;
-    public bool[,] grid;
-    public bool isCanHold;
-}*/

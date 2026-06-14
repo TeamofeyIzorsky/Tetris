@@ -2,6 +2,7 @@ using UnityEngine;
 
 public class MenuOrRestart : MonoBehaviour
 {
+    //UI Кнопки вызывают методы класса для возвращения в меню или рестарта
     public void Restart()
     {
         G.LoadManager.Load(new LoadSettings()

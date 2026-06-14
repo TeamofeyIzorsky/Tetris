@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class GameScoreView : MonoBehaviour
 {
+    //Отображает игровой счет, время и комбо на уровне
+
     [SerializeField] private TMP_Text _timeText;
     [SerializeField] private TMP_Text _timeValueText;
 

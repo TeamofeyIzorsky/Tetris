@@ -2,6 +2,8 @@ using UnityEngine;
 
 public class PauseManagerView : MonoBehaviour
 {
+    //Отображает экран паузы
+
     [SerializeField] private Canvas _pauseCanvas;
 
     private void Start()

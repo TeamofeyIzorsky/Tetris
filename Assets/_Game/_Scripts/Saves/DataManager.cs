@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class DataManager : MonoBehaviour
 {
+    //Класс, отвечающий за сохранения данных между сессиями
+
     public GameData currentGameData;
 
 

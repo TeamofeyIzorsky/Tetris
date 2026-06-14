@@ -3,6 +3,8 @@ using UnityEngine;
 
 public class NextPieceView : MonoBehaviour
 {
+    //Компонент, который отображает следующую фигуру
+
     [SerializeField] protected List<Block> _firstLine = new();
     [SerializeField] protected List<Block> _secondLine = new();
 
@@ -36,7 +38,7 @@ public class NextPieceView : MonoBehaviour
         int firstLine = 0;
         int secondLine = 0;
 
-        var theme = G.DataManager.currentGameData.Theme.GetTheme(piece);
+        var theme = G.GameConfig.Theme.GetTheme(piece);
 
         for (int x = 0; x < 4; x++)
         {

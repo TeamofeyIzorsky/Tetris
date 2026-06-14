@@ -3,6 +3,8 @@ using UnityEngine;
 
 public class PauseManager : MonoBehaviour, IPauseManager
 {
+    //Управлет состоянием паузы
+
     private bool _paused;
 
     public event Action<bool> OnChangePauseStatus;

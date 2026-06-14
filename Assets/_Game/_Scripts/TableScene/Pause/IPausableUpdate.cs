@@ -1,12 +1,14 @@
 using UnityEngine;
 
-public interface IPausableUpdate
+/*public interface IPausableUpdate
 {
     void PausableUpdate();
-}
+}*/
 
-public abstract class PausableBehaviour : MonoBehaviour, IPausableUpdate
+
+public abstract class PausableBehaviour : MonoBehaviour
 {
+    //Классы наследники обновляются только, если нет паузы
 
     private void Update()
     {
@@ -16,5 +18,5 @@ public abstract class PausableBehaviour : MonoBehaviour, IPausableUpdate
         }
     }
 
-    public abstract void PausableUpdate();
+    protected abstract void PausableUpdate();
 }

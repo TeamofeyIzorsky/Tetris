@@ -3,11 +3,13 @@ using UnityEngine;
 
 public class BagView : MonoBehaviour
 {
+    //Отображение следующих фигур
+
     [SerializeField] private List<NextPieceView> _nextPieceViews = new();
 
-    private void Awake()
+    private void Start()
     {
-        G.TetrisField.OnUpdateBag += UpdateBag;
+        G.Bag.OnBagUpdate += UpdateBag;
     }
 
     private void UpdateBag(IReadOnlyList<Piece> bag)

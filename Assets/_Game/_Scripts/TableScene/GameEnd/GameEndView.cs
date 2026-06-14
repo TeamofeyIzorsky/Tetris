@@ -5,6 +5,8 @@ using UnityEngine.Localization.Settings;
 
 public class GameEndView : MonoBehaviour
 {
+    //Отображает экран конца игры
+
     [SerializeField] private Canvas _gameEndCanvas;
 
     [SerializeField] private TMP_Text _gameEndStatus;

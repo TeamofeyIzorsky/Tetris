@@ -2,16 +2,18 @@ using UnityEngine;
 
 public class HoldPieceView : NextPieceView
 {
+    //Компнент, который отображает удержанную фигуру
+
     private void Start()
     {
-        G.TetrisField.OnUpdateHoldPiece += ShowHoldPiece;
+        G.GameManager.OnUpdateHoldPiece += ShowHoldPiece;
     }
 
     public void ShowHoldPiece(Piece piece, bool active)
     {
         if(piece == null) return;
 
-        var theme = G.DataManager.currentGameData.Theme.GetTheme(piece);
+        var theme = G.GameConfig.Theme.GetTheme(piece);
 
         base.ShowPiece(piece);
 

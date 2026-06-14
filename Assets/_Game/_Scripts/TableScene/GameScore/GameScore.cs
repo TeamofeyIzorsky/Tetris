@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class GameScore : PausableBehaviour, IGameScore
 {
+    //Класс, который считает статистику во время игры и вызывает конец игры
+
     private int _linesCount;
 
     private ComboType _comboType = ComboType.None;
@@ -30,7 +32,7 @@ public class GameScore : PausableBehaviour, IGameScore
     private void Start()
     {
         G.TetrisField.OnDeleteLinesEnd += IncreaseScore;
-        G.TetrisField.OnGameOver += Defeat;
+        G.GameManager.OnGameOver += Defeat;
 
         _score = 0;
         _linesCount = 0;
@@ -58,7 +60,7 @@ public class GameScore : PausableBehaviour, IGameScore
         }
     }
 
-    public override void PausableUpdate()
+    protected override void PausableUpdate()
     {
         switch (G.GameMode)
         {
