@@ -1,9 +1,10 @@
 using System;
 using System.Collections.Generic;
-using UnityEngine;
 
 public class Bag : IBag
 {
+    //Класс, отвечающий за хранение следующих фигур и их рандомизацию
+
     private List<Piece> _bag = new();
 
     public event Action<IReadOnlyList<Piece>> OnBagUpdate;
@@ -51,6 +52,8 @@ public class Bag : IBag
             new IBlock(),
             new TBlock(),
         };
+
+        //Тасование Фишера — Йетса
 
         for (int i = 0; i < bag.Length; i++)
         {

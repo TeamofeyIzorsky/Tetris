@@ -4,6 +4,8 @@ using UnityEngine.SceneManagement;
 
 public class Fader : MonoBehaviour
 {
+    //Переход между сценами
+
     [SerializeField] private Animation _fadeOpen;
     [SerializeField] private Animation _fadeClose;
 

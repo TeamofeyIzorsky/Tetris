@@ -1,7 +1,3 @@
-using System.Collections.Generic;
-using UnityEngine;
-using UnityEngine.SocialPlatforms.Impl;
-
 public struct GameData
 {
     //Структура, хранящая данные рекордов и другую статистику, которую надо сохранить между сессиями

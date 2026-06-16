@@ -34,22 +34,4 @@ public class PauseManager : MonoBehaviour, IPauseManager
 
         OnChangePauseStatus?.Invoke(pauseStatus);
     }
-
-    /*public void Restart()
-    {
-        G.LoadManager.Load(new LoadSettings()
-        {
-            needFade = true,
-            sceneName = "TableScene"
-        });
-    }
-
-    public void Exit()
-    {
-        G.LoadManager.Load(new LoadSettings()
-        {
-            needFade = true,
-            sceneName = "MainMenu"
-        });
-    }*/
 }

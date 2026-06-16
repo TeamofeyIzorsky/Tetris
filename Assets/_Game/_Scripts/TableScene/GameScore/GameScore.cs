@@ -14,8 +14,6 @@ public class GameScore : PausableBehaviour, IGameScore
 
     private float _timerTime;
 
-
-
     //Events
     public event Action<float, int, int> OnAfterUpdate;
     public event Action<ComboType, int> OnComboUpdate;

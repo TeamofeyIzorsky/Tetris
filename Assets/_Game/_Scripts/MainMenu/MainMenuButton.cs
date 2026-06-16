@@ -6,6 +6,8 @@ using TMPro;
 
 public class MainMenuButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IPointerDownHandler, IPointerUpHandler
 {
+    //Отображение красивых кнопок для UI
+
 
     [SerializeField] private bool _selectedOn = false;
     [SerializeField, Range(0.05f, 10f)] private float _selectedDuration = 1f;
@@ -23,43 +25,6 @@ public class MainMenuButton : MonoBehaviour, IPointerEnterHandler, IPointerExitH
 
     private bool _inside;
     private bool _click;
-
-    
-    
-    /*    public void OnPointerClick(PointerEventData eventData)
-        {
-            if (!_clickOn)
-            {
-                return;
-            }
-
-            if (_currentAnimation != null)
-            {
-                _currentAnimation.Kill();
-            }
-
-            _currentAnimation = DOTween.Sequence();
-
-            if (ClickSetting.ChangeButtonSize)
-            {
-                _currentAnimation.Append(transform.DOScale(ClickSetting.SizeButtonMultiply, _clickDuration));
-            }
-
-            if (ClickSetting.ChangeButtonColor)
-            {
-                _currentAnimation.Join(_buttonImage.DOColor(ClickSetting.SelectedButtonColor, _clickDuration));
-            }
-
-            if (ClickSetting.ChangeTextSize)
-            {
-                _currentAnimation.Join(_text.transform.DOScale(ClickSetting.SizeTextMultiply, _clickDuration));
-            }
-
-            if (ClickSetting.ChangeTextColor)
-            {
-                _currentAnimation.Join(_text.DOColor(ClickSetting.SelectedTextColor, _clickDuration));
-            }
-        }*/
 
     public void OnPointerDown(PointerEventData eventData)
     {

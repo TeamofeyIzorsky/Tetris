@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class PanelManager : MonoBehaviour
 {
+    //Смена экранов с анимацией в главном Меню
+
     [SerializeField] private List<Panel> _panels = new List<Panel>();
     [SerializeField, Range(0.05f, 10)] float _animationDuration = 1.0f;
 
