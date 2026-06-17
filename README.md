@@ -3,6 +3,7 @@
 <br>https://teamofey.itch.io/teamofey-tetris?secret=PIyL8EozPIfn84JcVRKtl54UiA
 <br>
 <br>
+Unity Version: 6.5
 <br> 
 
 Путь к коду | Path to the code
