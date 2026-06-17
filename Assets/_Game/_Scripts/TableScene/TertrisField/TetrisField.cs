@@ -15,6 +15,8 @@ public class TetrisField : ITetrisField
 
     private int _destroyedLines = 0;
 
+    private Vector2Int? _randomLastPlace;
+
     //Events
     public event Action<int, int> OnDeleteLinesEnd;
     
@@ -38,6 +40,10 @@ public class TetrisField : ITetrisField
 
             _grid[position.x, position.y].Sprite = theme.Item2;
         }
+
+        var randomPiece = piece.FinalPositons[Random.Range(0, piece.FinalPositons.Count)];
+
+        _randomLastPlace = new Vector2Int(randomPiece.x, randomPiece.y);
 
         FoundAndDeleteFillLines();
     }
@@ -105,6 +111,14 @@ public class TetrisField : ITetrisField
     public Cell[,] GetGrid()
     {
         return _grid;
+    }
+
+    public Vector2Int? GetRandomLastPlace()
+    {
+        Vector2Int? random = _randomLastPlace;
+        _randomLastPlace = null;
+
+        return random;
     }
 
     public int GetDeletedLinesCount()

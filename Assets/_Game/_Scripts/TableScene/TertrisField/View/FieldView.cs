@@ -4,6 +4,7 @@ using UnityEngine;
 public class TetrisFieldView : MonoBehaviour
 {
     //Компнент, который отображает игровое поле
+    [SerializeField] private ParticleSystem _particleSystem;
 
     [SerializeField] private Grid _grid;
 
@@ -41,6 +42,8 @@ public class TetrisFieldView : MonoBehaviour
         Cell[,] grid = tetrisField.GetGrid();
         List<Vector2Int> posistions = currentPiece.GetPositions();
 
+        Vector2Int? randomPlace = tetrisField.GetRandomLastPlace();
+
         for (int y = 0; y < TetrisField.HEIGHT; y++)
         {
             for (int x = 0; x < TetrisField.WIDTH; x++)
@@ -49,6 +52,12 @@ public class TetrisFieldView : MonoBehaviour
 
                 if (grid[x, y].Occupied)
                 {
+                    if(G.PlayerInput.HardDrop && randomPlace.HasValue && randomPlace.Value == position)
+                    {
+                        _particleSystem.transform.position = blocks[x, y].transform.position;
+                        _particleSystem.Play(false);
+                    }
+
                     blocks[x, y].ChangeActive(true);
 
 

@@ -9,6 +9,7 @@ public class GameManager : PausableBehaviour, IGameManager
     //Зависимости
     private IBag _bag;
     private ITetrisField _tetrisField;
+    private IPlayerInput _playerInput;
 
 
     private int _currentSpeedLevel = 0;
@@ -25,10 +26,11 @@ public class GameManager : PausableBehaviour, IGameManager
     public event Action<ITetrisField, Piece> OnTickOver;
 
 
-    public void Init(IBag bag, ITetrisField tetrisField)
+    public void Init(IBag bag, ITetrisField tetrisField, IPlayerInput playerInput)
     {
         _bag = bag;
         _tetrisField = tetrisField;
+        _playerInput = playerInput;
     }
 
 
@@ -42,52 +44,54 @@ public class GameManager : PausableBehaviour, IGameManager
     protected override void PausableUpdate()
     {
         Down();
+        
+        ProcessInput();
 
-        if (G.PlayerInput.HardDown)
+        OnTickOver?.Invoke(_tetrisField, _currentPiece);
+    }
+
+    private void ProcessInput()
+    {
+        if (_playerInput.HardDrop)
         {
-
             PlacePiece();
 
-            OnTickOver?.Invoke(_tetrisField, _currentPiece);
             return;
         }
-        else if (G.PlayerInput.HoldPiece)
+        else if (_playerInput.HoldPiece)
         {
             //Холдим фигуру в карман
             PlayerHold();
 
-            OnTickOver?.Invoke(_tetrisField, _currentPiece);
             return;
         }
 
-        if (G.PlayerInput.Rotate)
+        if (_playerInput.Rotate)
         {
             //Поворот фигуры
             PlayerRotatePiece();
         }
 
-        if (G.PlayerInput.Down || G.PlayerInput.DownHold)
+        if (_playerInput.Down || _playerInput.DownHold)
         {
             //Ускоренный спуск вниз
 
             PlayerFastDown();
         }
 
-        if (G.PlayerInput.Left || G.PlayerInput.LeftHold)
+        if (_playerInput.Left || _playerInput.LeftHold)
         {
             //Влыво
 
             PlayerMoveHorizontal(Vector2Int.left);
         }
 
-        else if (G.PlayerInput.Right || G.PlayerInput.RightHold)
+        else if (_playerInput.Right || _playerInput.RightHold)
         {
             //Вправо
 
             PlayerMoveHorizontal(Vector2Int.right);
         }
-
-        OnTickOver?.Invoke(_tetrisField, _currentPiece);
     }
 
     //Создаем новую фигуру на поле из бэга
@@ -95,7 +99,7 @@ public class GameManager : PausableBehaviour, IGameManager
     {
         _currentPiece = _bag.NextPiece();
 
-        if (_currentPiece.CheckCreate())
+        if (_currentPiece.IsSpawnPositionValid())
         {
             Debug.Log("GAMEOVER!");
 
@@ -155,10 +159,7 @@ public class GameManager : PausableBehaviour, IGameManager
     //Игрок двигает фигуру вниз быстрее
     private void PlayerFastDown()
     {
-        if (_currentPiece.FastDown())
-        {
-            PlacePiece();
-        }
+        _currentPiece.FastDown();
     }
 
     //Игрок двигает фигуру горизонтально

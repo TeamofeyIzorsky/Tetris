@@ -37,7 +37,7 @@ public abstract class Piece
 
 
     //Проверка не занято ли место спавна
-    public bool CheckCreate()
+    public bool IsSpawnPositionValid()
     {
         if (!G.TetrisField.CheckPositions(GetPositions()))
         {

@@ -8,7 +8,7 @@ public static class G
     public static LoadManager LoadManager;
     public static GameResources GResources;
     public static DataManager DataManager;
-    public static PlayerInput PlayerInput;
+    public static IPlayerInput PlayerInput;
 
     //Локальные системы
     public static GameConfig GameConfig;

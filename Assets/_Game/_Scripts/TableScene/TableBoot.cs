@@ -32,7 +32,7 @@ public class TableBoot : MonoBehaviour
 
         GameObject GameManagerObject = new GameObject("Game Manager");
         GameManager gameManager = GameManagerObject.AddComponent<GameManager>();
-        gameManager.Init(bag, tetrisField);
+        gameManager.Init(bag, tetrisField, G.PlayerInput);
 
         G.GameManager = gameManager;
     }

@@ -1,43 +1,21 @@
 using UnityEngine;
 
-public abstract class PlayerInput : MonoBehaviour
+public interface IPlayerInput
 {
     //Отсюда мы передаем инпут игрока
-    [HideInInspector] public bool Pause;
+    public bool Pause { get; }
 
-    [HideInInspector] public bool HardDown;
-    [HideInInspector] public bool Rotate;
-    [HideInInspector] public bool HoldPiece;
+    public bool HardDrop { get; }
+    public bool Rotate { get; }
+    public bool HoldPiece { get; }
 
-    [HideInInspector] public bool Down;
-    [HideInInspector] public bool Left;
-    [HideInInspector] public bool Right;
+    public bool Down { get; }
+    public bool Left { get; }
+    public bool Right { get; }
 
-    [HideInInspector] public bool LeftHold;
-    [HideInInspector] public bool RightHold;
-    [HideInInspector] public bool DownHold;
+    public bool LeftHold { get; }
+    public bool RightHold { get; }
+    public bool DownHold { get; }
 
-    protected bool _isActive;
-
-    public void SetActive(bool isActive)
-    {
-        _isActive = isActive;
-    }
-
-    protected void Clear()
-    {
-        Pause = false;
-
-        HardDown = false;
-        Rotate = false;
-        HoldPiece = false;
-
-        Down = false;
-        Left = false;
-        Right = false;
-
-        LeftHold = false;
-        RightHold = false;
-        DownHold = false;
-    }
+    public void SetActive(bool isActive);
 }

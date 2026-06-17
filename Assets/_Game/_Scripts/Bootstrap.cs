@@ -28,7 +28,7 @@ public class Bootstrap : MonoBehaviour
 
         GameObject playerInputObject = new GameObject("playerInput Object");
         DontDestroyOnLoad(playerInputObject);
-        PlayerInput playerInput = playerInputObject.AddComponent<OldInputSystem>();
+        IPlayerInput playerInput = playerInputObject.AddComponent<OldInputSystem>();
 
         G.PlayerInput = playerInput;
 

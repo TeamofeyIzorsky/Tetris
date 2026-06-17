@@ -4,7 +4,7 @@ using UnityEngine;
 
 public interface IGameManager
 {
-    public void Init(IBag bag, ITetrisField tetrisField);
+    public void Init(IBag bag, ITetrisField tetrisField, IPlayerInput playerInput);
 
     public event Action<IReadOnlyList<Piece>> OnUpdateBag;
     public event Action<Piece, bool> OnUpdateHoldPiece;

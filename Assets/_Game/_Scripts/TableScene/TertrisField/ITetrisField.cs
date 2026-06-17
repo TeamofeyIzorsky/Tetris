@@ -8,6 +8,7 @@ public interface ITetrisField
 
 
     public Cell[,] GetGrid();
+    public Vector2Int? GetRandomLastPlace();
     public void Place(Piece piece);
     public int GetDeletedLinesCount();
     public bool CheckPositions(List<Vector2Int> positions);
