@@ -12,6 +12,11 @@ public class MenuOrRestart : MonoBehaviour
         });
     }
 
+    public void Resume()
+    {
+        G.PauseManager.Pause(false);
+    }
+
     public void Exit()
     {
         G.LoadManager.Load(new LoadSettings()

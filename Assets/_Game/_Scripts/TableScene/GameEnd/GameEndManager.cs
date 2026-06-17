@@ -1,7 +1,7 @@
 using System;
 using UnityEngine;
 
-public class GameEndManager : MonoBehaviour, IEndGameManager
+public class GameEndManager : IEndGameManager
 {
     //Завершает игру и проверяет рекорды
 
@@ -9,15 +9,10 @@ public class GameEndManager : MonoBehaviour, IEndGameManager
     public event Action<bool, int, int, int, int> OnBlitzEnd;
     public event Action<bool, float, float> On40LinesEnd;
 
-    private void Awake()
+    public void Init(IGameScore gameScore)
     {
-        G.GameEndManager = this;
-    }
-
-    private void Start()
-    {
-        G.GameScore.OnDefeat += Defeat;
-        G.GameScore.OnGameEnd += GameEnd;
+        gameScore.OnDefeat += Defeat;
+        gameScore.OnGameEnd += GameEnd;
     }
 
     //Если игрок проиграл (проиграть можно только в блице или 40 линий)

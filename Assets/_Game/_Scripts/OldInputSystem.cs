@@ -57,7 +57,7 @@ public class OldInputSystem : MonoBehaviour, IPlayerInput
 
     public void SetActive(bool isActive)
     {
-        throw new System.NotImplementedException();
+        _isActive = isActive;
     }
 
     protected void Clear()

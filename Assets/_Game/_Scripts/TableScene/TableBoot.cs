@@ -15,6 +15,9 @@ public class TableBoot : MonoBehaviour
 
     void Awake()
     {
+        GameObject pauseManagerObject = new GameObject("Pause Manager");
+        PauseManager pauseManager = pauseManagerObject.AddComponent<PauseManager>();
+        G.PauseManager = pauseManager;
         G.PauseManager.Pause(true);
 
         G.PlayerInput.SetActive(false);
@@ -35,6 +38,15 @@ public class TableBoot : MonoBehaviour
         gameManager.Init(bag, tetrisField, G.PlayerInput);
 
         G.GameManager = gameManager;
+
+        GameObject gameScoreObject = new GameObject("Game Score");
+        GameScore gameScore = gameScoreObject.AddComponent<GameScore>();
+        gameScore.Init(tetrisField, gameManager);
+        G.GameScore = gameScore;
+
+        GameEndManager gameEndManager = new();
+        gameEndManager.Init(gameScore);
+        G.GameEndManager = gameEndManager;
     }
 
     private void Start()

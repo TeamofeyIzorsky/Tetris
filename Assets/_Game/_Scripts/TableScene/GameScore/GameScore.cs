@@ -21,13 +21,8 @@ public class GameScore : PausableBehaviour, IGameScore
     public event Action<int, int, float> OnDefeat;
     public event Action<int, int, float> OnGameEnd;
 
-    private void Awake()
-    {
-        G.GameScore = this;
-    }
 
-
-    private void Start()
+    public void Init(ITetrisField tetrisField, IGameManager gameManager)
     {
         G.TetrisField.OnDeleteLinesEnd += IncreaseScore;
         G.GameManager.OnGameOver += Defeat;

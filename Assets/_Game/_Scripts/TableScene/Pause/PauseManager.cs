@@ -14,11 +14,6 @@ public class PauseManager : MonoBehaviour, IPauseManager
         return _paused;
     }
 
-    private void Awake()
-    {
-        G.PauseManager = this;
-    }
-
     private void Update()
     {
         if (G.PlayerInput.Pause)
