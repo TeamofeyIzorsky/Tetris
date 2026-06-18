@@ -6,11 +6,13 @@ public class Bag : IBag
     //Класс, отвечающий за хранение следующих фигур и их рандомизацию
     private ITetrisField _tetrisField;
     private IPlayerInput _playerInput;
+    private IGameParameters _gameParameters;
 
-    public Bag(ITetrisField field, IPlayerInput playerInput)
+    public Bag(ITetrisField field, IPlayerInput playerInput, IGameParameters gameParameters)
     {
         _tetrisField = field;
         _playerInput = playerInput;
+        _gameParameters = gameParameters;
     }
 
 
@@ -53,13 +55,13 @@ public class Bag : IBag
     {
         Piece[] bag = new Piece[]
         {
-            new OBlock(_playerInput, _tetrisField),
-            new ZBlock(_playerInput, _tetrisField),
-            new SBlock(_playerInput, _tetrisField),
-            new LBlock(_playerInput, _tetrisField),
-            new JBlock(_playerInput, _tetrisField),
-            new IBlock(_playerInput, _tetrisField),
-            new TBlock(_playerInput, _tetrisField),
+            new OBlock(_playerInput, _tetrisField, _gameParameters),
+            new ZBlock(_playerInput, _tetrisField, _gameParameters),
+            new SBlock(_playerInput, _tetrisField, _gameParameters),
+            new LBlock(_playerInput, _tetrisField, _gameParameters),
+            new JBlock(_playerInput, _tetrisField, _gameParameters),
+            new IBlock(_playerInput, _tetrisField,_gameParameters),
+            new TBlock(_playerInput, _tetrisField,_gameParameters),
         };
 
         //Тасование Фишера — Йетса
@@ -82,5 +84,10 @@ public class Bag : IBag
     public void InsertPiece(Piece piece, int index)
     {
         _bag.Insert(index, piece);
+    }
+
+    public IReadOnlyList<Piece> GetPieces()
+    {
+        return GetNextFivePieces();
     }
 }

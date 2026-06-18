@@ -3,8 +3,10 @@ using UnityEngine;
 public class HoldPieceView : NextPieceView
 {
     //Компнент, который отображает удержанную фигуру
-    public void Construct(IGameManager gameManager)
+    public void Construct(IGameManager gameManager, ThemeSO theme)
     {
+        base.Construct(theme);
+
         gameManager.OnUpdateHoldPiece += ShowHoldPiece;
     }
 
@@ -13,7 +15,7 @@ public class HoldPieceView : NextPieceView
     {
         if(piece == null) return;
 
-        var theme = G.GameConfig.Theme.GetTheme(piece);
+        var theme = _theme.GetTheme(piece);
 
         base.ShowPiece(piece);
 

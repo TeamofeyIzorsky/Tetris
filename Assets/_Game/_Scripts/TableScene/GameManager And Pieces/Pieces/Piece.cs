@@ -7,11 +7,13 @@ public abstract class Piece
 
     private ITetrisField _tetrisField;
     private IPlayerInput _playerInput;
+    private IGameParameters _gameParameters;
 
-    public Piece(ITetrisField tetrisField, IPlayerInput playerInput)
+    public Piece(ITetrisField tetrisField, IPlayerInput playerInput, IGameParameters gameParameters)
     {
         _tetrisField = tetrisField;
         _playerInput = playerInput;
+        _gameParameters = gameParameters;
     }
 
     //Точка спавна на поле
@@ -136,7 +138,7 @@ public abstract class Piece
             _downTimer = 0;
         }
 
-        if (!isOnGround && _downTimer >= G.GameConfig.TimeForDown)
+        if (!isOnGround && _downTimer >= _gameParameters.TimeForDown)
         {
             //Фигура в воздухе, опускаем
 
@@ -150,7 +152,7 @@ public abstract class Piece
 
             return false;
         }
-        else if (isOnGround && _downTimer >= G.GameConfig.LockDelay)
+        else if (isOnGround && _downTimer >= _gameParameters.LockDelay)
         {
             //Фигура на земле и игрок не двигает её или уже не может двигать
 
@@ -206,7 +208,7 @@ public abstract class Piece
             if (_horizontalMovesCount >= 2)
             {
 
-                if (_horizontalTimer >= G.GameConfig.TimeForFastHorizontalMove)
+                if (_horizontalTimer >= _gameParameters.TimeForFastHorizontalMove)
                 {
                     //Ускоренно двигаем горизонатально
 
@@ -231,7 +233,7 @@ public abstract class Piece
             else
             {
 
-                if (_horizontalTimer >= G.GameConfig.TimeForStartHorizontalMove)
+                if (_horizontalTimer >= _gameParameters.TimeForStartHorizontalMove)
                 {
                     //Первые движения горизонтально делаем медленее
 
@@ -286,7 +288,7 @@ public abstract class Piece
 
             _downMoveTimer += Time.deltaTime;
 
-            if (_downMoveTimer >= G.GameConfig.TimeForFastDown)
+            if (_downMoveTimer >= _gameParameters.TimeForFastDown)
             {
                 _downMoveTimer = 0;
 

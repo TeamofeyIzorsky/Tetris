@@ -4,9 +4,9 @@ public class Bootstrap : MonoBehaviour
 {
     void Start()
     {
-        G.GResources = Resources.Load<GameResources>("GameResources");
+        GameResourcesSO gameResources = Resources.Load<GameResourcesSO>("GameResources");
 
-        GameObject faderObject = Instantiate(G.GResources.FaderPrefab);
+        GameObject faderObject = Instantiate(gameResources.FaderPrefab);
         DontDestroyOnLoad(faderObject);
         Fader fader = faderObject.GetComponent<Fader>();
 
@@ -14,7 +14,7 @@ public class Bootstrap : MonoBehaviour
         GameObject loadManagerGameObject = new GameObject("LoadManager Object");
         DontDestroyOnLoad(loadManagerGameObject);
         LoadManager loadManager = loadManagerGameObject.AddComponent<LoadManager>();
-        loadManager.Init(fader);
+        loadManager.Construct(fader);
 
 
         GameObject DataManagerGameObject = new GameObject("DataManager Object");
@@ -22,11 +22,12 @@ public class Bootstrap : MonoBehaviour
         DataManager dataManager = DataManagerGameObject.AddComponent<DataManager>();
         G.DataManager = dataManager;
 
-        Debug.Log(G.GResources.ThemeSOs[0]);
 
         G.DataManager.DeserializeSave();
 
-        GlobalServices.Register(loadManager);
+        TicketManager ticketManager = new();
+
+        GlobalServices.Register(loadManager, ticketManager, gameResources);
 
         loadManager.Load(new LoadSettings()
         {

@@ -10,6 +10,7 @@ public class GameManager : IGameManager
     private IBag _bag;
     private ITetrisField _tetrisField;
     private IPlayerInput _playerInput;
+    private IGameParameters _gameParametes;
 
     public GameManager(IBag bag, ITetrisField tetrisField, IPlayerInput playerInput)
     {
@@ -20,8 +21,6 @@ public class GameManager : IGameManager
         CreatePieceFromBag();
     }
 
-    private int _currentSpeedLevel = 0;
-
     private Piece _currentPiece;
 
     private Piece _holdPiece;
@@ -29,7 +28,6 @@ public class GameManager : IGameManager
 
     public bool IsPausable { get => true; set => throw new NotImplementedException(); }
 
-    public event Action<IReadOnlyList<Piece>> OnUpdateBag;
     public event Action<Piece, bool> OnUpdateHoldPiece;
     public event Action OnGameOver;
     public event Action<ITetrisField, Piece> OnGameManagerTickOver;
@@ -110,8 +108,6 @@ public class GameManager : IGameManager
 
         _isCanHold = true;
 
-        CheckSpeedLevel();
-
         OnUpdateHoldPiece?.Invoke(_holdPiece, _isCanHold);
     }
 
@@ -164,20 +160,8 @@ public class GameManager : IGameManager
         }
     }
 
-
-    //Проверяем не должны ли мы ускорить игру
-    private void CheckSpeedLevel()
+    public Piece GetCurrentPiece()
     {
-        SpeedLevel speedLevel = G.GResources.SpeedLevels[_currentSpeedLevel];
-
-        if (_tetrisField.GetDeletedLinesCount() >= speedLevel.LinesCount)
-        {
-            if (_currentSpeedLevel < G.GResources.SpeedLevels.Count - 1)
-            {
-                _currentSpeedLevel++;
-            }
-
-            G.GameConfig.NewDownSpeed(speedLevel.Speed);
-        }
+        return _currentPiece;
     }
 }

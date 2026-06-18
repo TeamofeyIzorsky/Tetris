@@ -5,18 +5,22 @@ public class NextPieceView : MonoBehaviour
 {
     //Компонент, который отображает следующую фигуру
 
+    protected ThemeSO _theme;
+
     [SerializeField] protected List<Block> _firstLine = new();
     [SerializeField] protected List<Block> _secondLine = new();
 
     float startY;
     float startX;
 
-    private void Awake()
+    public void Construct(ThemeSO theme)
     {
+        _theme = theme;
+
         startY = transform.localPosition.y;
         startX = transform.localPosition.x;
 
-        foreach(var block in _firstLine)
+        foreach (var block in _firstLine)
         {
             block.ChangeActive(false);
         }
@@ -38,7 +42,7 @@ public class NextPieceView : MonoBehaviour
         int firstLine = 0;
         int secondLine = 0;
 
-        var theme = G.GameConfig.Theme.GetTheme(piece);
+        var theme = _theme.GetTheme(piece);
 
         for (int x = 0; x < 4; x++)
         {

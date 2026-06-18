@@ -8,5 +8,7 @@ public interface IBag
 
     public void InsertPiece(Piece piece, int num);
 
+    public IReadOnlyList<Piece> GetPieces();
+
     public Piece NextPiece();
 }

@@ -39,7 +39,7 @@ public struct GameData
 
     public bool BestTime(float time, GameMode gameMode)
     {
-        if (gameMode == GameMode.Standart)
+        if (gameMode == GameMode.Standard)
         {
             if (BestStandartTime < time)
             {
@@ -63,7 +63,7 @@ public struct GameData
 
     public bool BestScore(int score, GameMode gameMode)
     {
-        if (gameMode == GameMode.Standart)
+        if (gameMode == GameMode.Standard)
         {
             if (BestStandartScore < score)
             {

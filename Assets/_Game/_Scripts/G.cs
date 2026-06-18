@@ -6,29 +6,16 @@ public static class G
 
     //Глобальные Системы
     //public static LoadManager LoadManager;
-    public static GameResources GResources;
+    //public static GameResources GResources;
     public static DataManager DataManager;
     //public static IPlayerInput PlayerInput;
 
     //Локальные системы
-    public static GameConfig GameConfig;
+    //public static GameConfig GameConfig;
     //public static ITetrisField TetrisField;
     //public static IGameScore GameScore;
     //public static IEndGameManager GameEndManager;
     //public static IPauseController PauseManager;
     //public static IBag Bag;
     //public static IGameManager GameManager;
-
-
-    public static GameMode GameMode = GameMode.Standart;
-}
-
-//Текуший игровой режим
-public enum GameMode
-{
-    None,
-    Standart,
-    Casual,
-    Lines40,
-    Blitz,
 }

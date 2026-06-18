@@ -1,0 +1,54 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 21ca9c754a98ef643a29c0c4d797cccc, type: 3}
+  m_Name: GameConfig
+  m_EditorClassIdentifier: Assembly-CSharp::GameConfig
+  _timeForDown: 1
+  _lockDelay: 0.5
+  _timeForFastDown: 0.075
+  _timeForStartHorizontalMove: 0.12
+  _timeForFastHorizontalMove: 0.05
+  _speedLevels:
+  - LinesCount: 10
+    Speed: 0.75
+  - LinesCount: 20
+    Speed: 0.6
+  - LinesCount: 30
+    Speed: 0.5
+  - LinesCount: 40
+    Speed: 0.4
+  - LinesCount: 50
+    Speed: 0.333
+  - LinesCount: 60
+    Speed: 0.286
+  - LinesCount: 70
+    Speed: 0.25
+  - LinesCount: 80
+    Speed: 0.222
+  - LinesCount: 90
+    Speed: 0.2
+  - LinesCount: 100
+    Speed: 0.182
+  - LinesCount: 120
+    Speed: 0.167
+  - LinesCount: 140
+    Speed: 0.154
+  - LinesCount: 160
+    Speed: 0.143
+  - LinesCount: 180
+    Speed: 0.133
+  - LinesCount: 200
+    Speed: 0.1
+  - LinesCount: 300
+    Speed: 0.084
+  - LinesCount: 450
+    Speed: 0.071

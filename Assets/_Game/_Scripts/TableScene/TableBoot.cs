@@ -6,6 +6,10 @@ using UnityEngine;
 public class TableBoot : MonoBehaviour
 {
     //Этот класс является точкой входа на игровом поле. Он иницилизирует системы и стартовую анимацию
+    [Header("Game Config")]
+    [SerializeField] private GameConfigSO gameConfig;
+
+    [Header("View")]
     [SerializeField] private BagView _bagView;
     [SerializeField] private HoldPieceView _holdPieceView;
     [SerializeField] private PauseMenuView _pauseManagerView;
@@ -24,16 +28,25 @@ public class TableBoot : MonoBehaviour
 
     private GameComposition _gameComposition;
 
+    private GameResourcesSO _gameResources;
+
     void Awake()
     {
-        _gameComposition = new();
+        GameTicket gameTicket = GlobalServices.TicketManager.GetGameTicket();
+
+        _gameResources = GlobalServices.Resources;
+
+        ThemeSO theme = gameTicket.Theme;
+        GameMode gameMode = gameTicket.GameMode;
+
+        _gameComposition = new GameComposition(gameConfig, gameMode, theme);
 
         _gameComposition.CreateUpdateOrder();
 
-        _bagView.Construct(_gameComposition.Bag);
-        _holdPieceView.Construct(_gameComposition.GameManager);
+        _bagView.Construct(_gameComposition.Bag, theme);
+        _holdPieceView.Construct(_gameComposition.GameManager, theme);
         _pauseManagerView.Construct(_gameComposition.PauseController);
-        _tetrisFieldView.Construct(_gameComposition.GameManager, _gameComposition.PlayerInput);
+        _tetrisFieldView.Construct(_gameComposition.GameManager, _gameComposition.PlayerInput, theme, _gameResources.BlockPrefab);
         _gameScoreView.Construct(_gameComposition.GameScore);
         _gameEndView.Construct(_gameComposition.EndGameManager);
 
@@ -48,7 +61,7 @@ public class TableBoot : MonoBehaviour
 
         _startCanvas.gameObject.SetActive(true);
 
-        _backGround.sprite = G.GResources.Backgrounds[Random.Range(0, G.GResources.Backgrounds.Count)];
+        _backGround.sprite = _gameResources.Backgrounds[Random.Range(0, _gameResources.Backgrounds.Count)];
 
         StartCoroutine(StartAnimation());
     }

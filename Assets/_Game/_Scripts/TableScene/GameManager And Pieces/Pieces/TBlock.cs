@@ -2,8 +2,8 @@ using UnityEngine;
 
 public class TBlock : Piece
 {
-    public TBlock(IPlayerInput playerInput, ITetrisField tetrisField) : base(tetrisField, playerInput)
-    {
+    public TBlock(IPlayerInput playerInput, ITetrisField tetrisField, IGameParameters gameParameters) : base(tetrisField, playerInput, gameParameters)
+    { 
         string[,] shape = new string[,]
         {
             {" ", " ", " ", " " },

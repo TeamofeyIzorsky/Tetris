@@ -2,7 +2,7 @@ using System;
 using TMPro;
 using UnityEngine;
 
-public class GameScore : IPauseUpdatable, IGameScore
+public class GameScore : IGameScore
 {
     //Класс, который считает статистику во время игры и вызывает конец игры
 
@@ -20,7 +20,7 @@ public class GameScore : IPauseUpdatable, IGameScore
 
         switch (_gameMode)
         {
-            case GameMode.Standart:
+            case GameMode.Standard:
                 _timerTime = 0f;
                 break;
 
@@ -63,7 +63,7 @@ public class GameScore : IPauseUpdatable, IGameScore
     {
         switch (_gameMode)
         {
-            case GameMode.Standart:
+            case GameMode.Standard:
                 IncreaseTime();
 
                 break;
@@ -162,7 +162,7 @@ public class GameScore : IPauseUpdatable, IGameScore
 
     private void Defeat()
     {
-        if(_gameMode == GameMode.Standart)
+        if(_gameMode == GameMode.Standard)
         {
             GameEnd();
             return;

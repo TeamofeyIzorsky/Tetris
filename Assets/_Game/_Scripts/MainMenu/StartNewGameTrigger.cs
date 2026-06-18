@@ -7,16 +7,16 @@ public class StartNewGameTrigger : MonoBehaviour
         switch (mode)
         {
             case "Blitz":
-                G.GameMode = GameMode.Blitz;
+                GlobalServices.TicketManager.SetGameTicket(new GameTicket(GameMode.Blitz, GlobalServices.Resources.ThemeSOs[0]));
                 break;
             case "Standart":
-                G.GameMode = GameMode.Standart;
+                GlobalServices.TicketManager.SetGameTicket(new GameTicket(GameMode.Standard, GlobalServices.Resources.ThemeSOs[0]));
                 break;
             case "40Lines":
-                G.GameMode = GameMode.Lines40;
+                GlobalServices.TicketManager.SetGameTicket(new GameTicket(GameMode.Lines40, GlobalServices.Resources.ThemeSOs[0]));
                 break;
             default:
-                G.GameMode = GameMode.None;
+                //NONE
                 return;
 
         }

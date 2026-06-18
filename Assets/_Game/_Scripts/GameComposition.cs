@@ -13,8 +13,10 @@ public class GameComposition
     public IGameScore GameScore { get; private set; }
     public IEndGameManager EndGameManager { get; private set; }
 
+    public IGameParameters GameParameters { get; private set; }
 
-    public GameComposition()
+
+    public GameComposition(IGameConfig gameConfig, GameMode gameMode, ThemeSO theme)
     {
         UpdateManager = new GameObject("Update Manager Object").AddComponent<UpdateManager>();
 
@@ -22,14 +24,13 @@ public class GameComposition
 
         PauseController = new PauseController(PlayerInput, UpdateManager);
 
-        G.GameConfig = new GameConfig(G.GResources);
-        TetrisField = new TetrisField(G.GameConfig.Theme);
+        TetrisField = new TetrisField(theme);
 
-        Bag = new Bag(TetrisField, PlayerInput);
+        GameParameters = new GameParameters(gameConfig, TetrisField);
+
+        Bag = new Bag(TetrisField, PlayerInput, GameParameters);
 
         GameManager = new GameManager(Bag, TetrisField, PlayerInput);
-
-        GameMode gameMode = GameMode.Standart;
 
         GameScore = new GameScore(gameMode, TetrisField, GameManager);
 

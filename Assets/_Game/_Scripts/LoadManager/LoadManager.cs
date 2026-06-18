@@ -6,12 +6,12 @@ public class LoadManager : MonoBehaviour, ILoadManager
 {
     private Fader _fader;
 
-    private bool _loadingIsNow;
-
-    public void Init(Fader fader)
+    public void Construct(Fader fader)
     {
         _fader = fader;
     }
+
+    private bool _loadingIsNow;
 
 
     public void Load(LoadSettings loadSettings)

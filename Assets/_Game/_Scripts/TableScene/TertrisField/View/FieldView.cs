@@ -5,22 +5,33 @@ using UnityEngine.InputSystem;
 public class FieldView : MonoBehaviour
 {
     //Компнент, который отображает игровое поле
+
+    private GameObject _blockPrefab;
+    private IPlayerInput _playerInput;
+
+    public void Construct(IGameManager gameManager, IPlayerInput playerInput, ThemeSO theme, GameObject blockPrefab)
+    {
+        _playerInput = playerInput;
+
+        _blockPrefab = blockPrefab;
+
+        gameManager.OnGameManagerTickOver += UpdateView;
+
+        _theme = theme;
+
+        CreateField();
+
+        UpdateView(null, gameManager.GetCurrentPiece());
+    }
+
+
     [SerializeField] private ParticleSystem _particleSystem;
 
     [SerializeField] private Grid _grid;
 
-    private IPlayerInput _playerInput;
+    private ThemeSO _theme;
 
     private Block[,] blocks;
-
-    public void Construct(IGameManager gameManager, IPlayerInput playerInput)
-    {
-        _playerInput = playerInput;
-
-        gameManager.OnGameManagerTickOver += UpdateView;
-
-        CreateField();
-    }
 
 
     private void CreateField()
@@ -31,7 +42,7 @@ public class FieldView : MonoBehaviour
         {
             for (int x = 0; x < TetrisField.WIDTH; x++)
             {
-                GameObject blockGameObject = Instantiate(G.GResources.BlockPrefab, _grid.CellToWorld(new Vector3Int(x, y, 0)), _grid.transform.rotation, _grid.transform);
+                GameObject blockGameObject = Instantiate(_blockPrefab, _grid.CellToWorld(new Vector3Int(x, y, 0)), _grid.transform.rotation, _grid.transform);
 
                 Block block = blockGameObject.GetComponent<Block>();
 
@@ -44,10 +55,21 @@ public class FieldView : MonoBehaviour
 
     private void UpdateView(ITetrisField tetrisField, Piece currentPiece)
     {
-        Cell[,] grid = tetrisField.GetGrid();
+        Cell[,] grid = null;
+
+        if(tetrisField != null)
+        {
+            grid = tetrisField.GetGrid();
+        }
+
         List<Vector2Int> posistions = currentPiece.GetPositions();
 
-        Vector2Int? randomPlace = tetrisField.GetRandomLastPlace();
+        Vector2Int? randomLastPlace = null;
+
+        if(tetrisField != null)
+        {
+            randomLastPlace = tetrisField.GetRandomLastPlace();
+        }
 
         for (int y = 0; y < TetrisField.HEIGHT; y++)
         {
@@ -55,13 +77,14 @@ public class FieldView : MonoBehaviour
             {
                 Vector2Int position = new Vector2Int(x, y);
 
-                if (grid[x, y].Occupied)
+                if (_playerInput.HardDrop && randomLastPlace.HasValue && randomLastPlace.Value == position)
                 {
-                    if(_playerInput.HardDrop && randomPlace.HasValue && randomPlace.Value == position)
-                    {
-                        _particleSystem.transform.position = blocks[x, y].transform.position;
-                        _particleSystem.Play();
-                    }
+                    _particleSystem.transform.position = blocks[x, y].transform.position + new Vector3(0.22f, 0.22f, 0);
+                    _particleSystem.Play();
+                }
+
+                if (grid != null && grid[x, y].Occupied)
+                {
 
                     blocks[x, y].ChangeActive(true);
 
@@ -74,7 +97,7 @@ public class FieldView : MonoBehaviour
                     blocks[x, y].ChangeActive(true);
 
                     //Debug.Log(G.DataManager.currentGameData.Theme);
-                    var theme = G.GameConfig.Theme.GetTheme(currentPiece);
+                    var theme = _theme.GetTheme(currentPiece);
 
 
                     blocks[x, y].SetColor(theme.Item1);
@@ -86,7 +109,7 @@ public class FieldView : MonoBehaviour
 
                    // Debug.Log(G.DataManager.currentGameData.Theme);
 
-                    var theme = G.GameConfig.Theme.GetTheme(currentPiece);
+                    var theme = _theme.GetTheme(currentPiece);
 
                     Color color = new Color(theme.Item1.r, theme.Item1.g, theme.Item1.b, 0.075f);
 

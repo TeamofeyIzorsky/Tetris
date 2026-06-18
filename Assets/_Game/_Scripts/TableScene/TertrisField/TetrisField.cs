@@ -22,7 +22,7 @@ public class TetrisField : ITetrisField
 
     private Cell[,] _grid;
 
-    private int _destroyedLines = 0;
+    private int _allDestroyedLines = 0;
 
     private Vector2Int? _randomLastPlace;
 
@@ -57,7 +57,7 @@ public class TetrisField : ITetrisField
     //После установки удаляем полные линии и сдвигаем верхние линии вниз
     private void FoundAndDeleteFillLines()
     {
-        int deleteCount = 0;
+        int deletedLines = 0;
 
 
         for (int y = HEIGHT - 1; y >= 0; y--)
@@ -74,8 +74,8 @@ public class TetrisField : ITetrisField
 
             if (flagLine)
             {
-                _destroyedLines++;
-                deleteCount++;
+                _allDestroyedLines++;
+                deletedLines++;
 
                 for (int x = 0; x < WIDTH; x++)
                 {
@@ -92,9 +92,9 @@ public class TetrisField : ITetrisField
                 }
             }
         }
-        if(deleteCount > 0)
+        if(deletedLines > 0)
         {
-            OnDeleteLinesEnd?.Invoke(deleteCount, _destroyedLines);
+            OnDeleteLinesEnd?.Invoke(deletedLines, _allDestroyedLines);
         }
     }
    
@@ -129,7 +129,7 @@ public class TetrisField : ITetrisField
 
     public int GetDeletedLinesCount()
     {
-        return _destroyedLines;
+        return _allDestroyedLines;
     }
 }
 

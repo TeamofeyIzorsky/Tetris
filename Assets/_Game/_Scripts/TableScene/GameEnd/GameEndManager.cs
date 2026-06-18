@@ -45,15 +45,15 @@ public class GameEndManager : IEndGameManager
 
         switch (_gameMode)
         {
-            case GameMode.Standart:
+            case GameMode.Standard:
 
                 int oldBestScore = G.DataManager.currentGameData.BestStandartScore;
                 float oldBestTime = G.DataManager.currentGameData.BestStandartTime;
 
                 if (!defeat)
                 {
-                    G.DataManager.currentGameData.BestScore(score, GameMode.Standart);
-                    G.DataManager.currentGameData.BestTime(timer, GameMode.Standart);
+                    G.DataManager.currentGameData.BestScore(score, GameMode.Standard);
+                    G.DataManager.currentGameData.BestTime(timer, GameMode.Standard);
                 }
 
                 OnStandartEnd?.Invoke(oldBestScore, score, oldBestTime, timer);
