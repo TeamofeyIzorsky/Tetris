@@ -4,16 +4,25 @@ using UnityEngine;
 public class GameEndManager : IEndGameManager
 {
     //Завершает игру и проверяет рекорды
+    private GameMode _gameMode;
+
+    private IPlayerInput _playerInput;
+    private IPauseController _pauseController;
+
+    public GameEndManager(GameMode gameMode, IGameScore gameScore, IPlayerInput playerInput, IPauseController pauseController)
+    {
+        gameScore.OnDefeat += Defeat;
+        gameScore.OnGameEnd += GameEnd;
+
+        _gameMode = gameMode;
+
+        _playerInput = playerInput;
+        _pauseController = pauseController;
+    }
 
     public event Action<int, int, float, float> OnStandartEnd;
     public event Action<bool, int, int, int, int> OnBlitzEnd;
     public event Action<bool, float, float> On40LinesEnd;
-
-    public void Init(IGameScore gameScore)
-    {
-        gameScore.OnDefeat += Defeat;
-        gameScore.OnGameEnd += GameEnd;
-    }
 
     //Если игрок проиграл (проиграть можно только в блице или 40 линий)
     private void Defeat(int score, int linesCount, float timer)
@@ -32,11 +41,9 @@ public class GameEndManager : IEndGameManager
     //Конец игры
     private void GameOver(bool defeat, int score, int linesCount, float timer)
     {
-        G.PlayerInput.SetActive(false);
+        _pauseController.Pause(true);
 
-        G.PauseManager.Pause(true);
-
-        switch (G.GameMode)
+        switch (_gameMode)
         {
             case GameMode.Standart:
 

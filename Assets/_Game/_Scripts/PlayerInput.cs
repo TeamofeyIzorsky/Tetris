@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public interface IPlayerInput
+public interface IPlayerInput : IUpdatable
 {
     //Отсюда мы передаем инпут игрока
     public bool Pause { get; }
@@ -17,5 +17,4 @@ public interface IPlayerInput
     public bool RightHold { get; }
     public bool DownHold { get; }
 
-    public void SetActive(bool isActive);
 }

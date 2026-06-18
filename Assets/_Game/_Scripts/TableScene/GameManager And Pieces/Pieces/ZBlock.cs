@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class ZBlock : Piece
 {
-    public ZBlock()
+    public ZBlock(IPlayerInput playerInput, ITetrisField tetrisField) : base(tetrisField, playerInput)
     {
         string[,] shape = new string[,]
         {

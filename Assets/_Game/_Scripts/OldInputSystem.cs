@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class OldInputSystem : MonoBehaviour, IPlayerInput
+public class OldInputSystem : IPlayerInput
 {
     private bool Pause;
     private bool HardDrop;
@@ -28,17 +28,8 @@ public class OldInputSystem : MonoBehaviour, IPlayerInput
     bool IPlayerInput.Down { get => Down; }
     bool IPlayerInput.DownHold { get => DownHold; }
 
-    private bool _isActive;
-
-    protected void Update()
+    public void Tick(float deltaTime)
     {
-        if (!_isActive)
-        {
-            Clear();
-
-            return;
-        }
-
         Pause = Input.GetKeyDown(KeyCode.Escape);
 
         HardDrop = Input.GetKeyDown(KeyCode.Space);
@@ -55,12 +46,7 @@ public class OldInputSystem : MonoBehaviour, IPlayerInput
         DownHold = Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.DownArrow);
     }
 
-    public void SetActive(bool isActive)
-    {
-        _isActive = isActive;
-    }
-
-    protected void Clear()
+ /*   protected void Clear()
     {
         Pause = false;
 
@@ -76,5 +62,6 @@ public class OldInputSystem : MonoBehaviour, IPlayerInput
         RightHold = false;
 
         DownHold = false;
-    }
+    }*/
+
 }

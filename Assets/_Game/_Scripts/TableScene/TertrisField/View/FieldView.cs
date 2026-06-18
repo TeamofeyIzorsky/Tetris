@@ -1,18 +1,23 @@
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
-public class TetrisFieldView : MonoBehaviour
+public class FieldView : MonoBehaviour
 {
     //Компнент, который отображает игровое поле
     [SerializeField] private ParticleSystem _particleSystem;
 
     [SerializeField] private Grid _grid;
 
+    private IPlayerInput _playerInput;
+
     private Block[,] blocks;
 
-    private void Start()
+    public void Construct(IGameManager gameManager, IPlayerInput playerInput)
     {
-        G.GameManager.OnTickOver += UpdateView;
+        _playerInput = playerInput;
+
+        gameManager.OnGameManagerTickOver += UpdateView;
 
         CreateField();
     }
@@ -52,10 +57,10 @@ public class TetrisFieldView : MonoBehaviour
 
                 if (grid[x, y].Occupied)
                 {
-                    if(G.PlayerInput.HardDrop && randomPlace.HasValue && randomPlace.Value == position)
+                    if(_playerInput.HardDrop && randomPlace.HasValue && randomPlace.Value == position)
                     {
                         _particleSystem.transform.position = blocks[x, y].transform.position;
-                        _particleSystem.Play(false);
+                        _particleSystem.Play();
                     }
 
                     blocks[x, y].ChangeActive(true);

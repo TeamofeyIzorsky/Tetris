@@ -7,6 +7,15 @@ public class TetrisField : ITetrisField
 {
     //Класс отвечающий за логику игрового поля
 
+    private ThemeSO _theme;
+
+    public TetrisField(ThemeSO themeSO)
+    {
+        _grid = new Cell[WIDTH, HEIGHT];
+
+        _theme = themeSO;
+    }
+
     //Grid Settings
     public const int HEIGHT = 24;
     public const int WIDTH = 10;
@@ -20,10 +29,7 @@ public class TetrisField : ITetrisField
     //Events
     public event Action<int, int> OnDeleteLinesEnd;
     
-    public void Init()
-    {
-        _grid = new Cell[WIDTH, HEIGHT];
-    }
+
 
     //Устанавливаем фигуру
     public void Place(Piece piece)
@@ -34,7 +40,7 @@ public class TetrisField : ITetrisField
         {
             _grid[position.x, position.y].Occupied = true;
 
-            var theme = G.GameConfig.Theme.GetTheme(piece);
+            var theme = _theme.GetTheme(piece);
 
             _grid[position.x, position.y].Color = theme.Item1;
 

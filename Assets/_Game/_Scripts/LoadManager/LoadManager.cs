@@ -2,14 +2,11 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using System.Collections;
 
-public class LoadManager : MonoBehaviour
+public class LoadManager : MonoBehaviour, ILoadManager
 {
-    //public static LoadManager Instance;
-    private static Fader _fader;
+    private Fader _fader;
 
     private bool _loadingIsNow;
-
-    public LoadSettings LoadSettings = new();
 
     public void Init(Fader fader)
     {
@@ -25,7 +22,7 @@ public class LoadManager : MonoBehaviour
             return;
         }
 
-        if (loadSettings.needFade == true)
+        if (loadSettings.NeedFade == true)
         {
             StartCoroutine(LoadingFade(loadSettings));
         }
@@ -39,15 +36,13 @@ public class LoadManager : MonoBehaviour
     {
         _loadingIsNow = true;
 
-        LoadSettings = loadSettings;
-
-        if (loadSettings.sceneNum != null)
+        if (loadSettings.SceneNum != null)
         {
-            SceneManager.LoadScene((int)loadSettings.sceneNum);
+            SceneManager.LoadScene((int)loadSettings.SceneNum);
         }
         else
         {
-            SceneManager.LoadScene(loadSettings.sceneName);
+            SceneManager.LoadScene(loadSettings.SceneName);
         }
 
         _loadingIsNow = false;
@@ -57,7 +52,6 @@ public class LoadManager : MonoBehaviour
 
     private IEnumerator LoadingFade(LoadSettings loadSettings)
     {
-        LoadSettings = loadSettings;
 
         _loadingIsNow = true;
 
@@ -73,13 +67,13 @@ public class LoadManager : MonoBehaviour
         AsyncOperation progress = null;
 
 
-        if (loadSettings.sceneNum != null)
+        if (loadSettings.SceneNum != null)
         {
-            progress = SceneManager.LoadSceneAsync((int)loadSettings.sceneNum);
+            progress = SceneManager.LoadSceneAsync((int)loadSettings.SceneNum);
         }
         else
         {
-            progress = SceneManager.LoadSceneAsync(loadSettings.sceneName);
+            progress = SceneManager.LoadSceneAsync(loadSettings.SceneName);
         }
 
         while (!progress.isDone)
@@ -87,52 +81,22 @@ public class LoadManager : MonoBehaviour
             yield return null;
         }
 
-
         yield return null;
         yield return null;
         yield return null;
-
-        //if (loadSettings.save == SaveSetting.NeedAfterLoad) G.DataManager.Save(SaveLoadMode.CurrentSave); //, null); LoadManager не должен заниматься сохранениями
 
         animation = _fader.FadeOpen();
 
         state = animation["FadeOpen"];
 
-        //AudioManager.Instance.SetPitch(1f, true);
-
         while (animation.isPlaying)
         {
-            //if (state.normalizedTime > 0.25f && G.SceneStart == false)
-            //{
-               //AudioManager.ResetVolume();
-
-                //G.SceneStart = true;
-            //}
 
             yield return null;
-
-            //Debug.Log("Yeld");
         }
 
-
         _loadingIsNow = false;
-
 
         yield return null;
     }
 }
-
-public enum SceneType
-{
-    Scene,
-    Level,
-    BattleScene,
-}
-
-public class LoadSettings
-{
-    public string sceneName;
-    public int? sceneNum = null;
-    public bool needFade = true;
-}
-

@@ -1,7 +1,7 @@
 using System;
 using UnityEngine;
 
-public interface IGameScore 
+public interface IGameScore : IPauseUpdatable
 {
     public event Action<float, int, int> OnAfterUpdate;
     public event Action<ComboType, int> OnComboUpdate;

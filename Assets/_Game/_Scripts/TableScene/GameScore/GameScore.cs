@@ -2,35 +2,23 @@ using System;
 using TMPro;
 using UnityEngine;
 
-public class GameScore : PausableBehaviour, IGameScore
+public class GameScore : IPauseUpdatable, IGameScore
 {
     //Класс, который считает статистику во время игры и вызывает конец игры
 
-    private int _linesCount;
+    private GameMode _gameMode;
 
-    private ComboType _comboType = ComboType.None;
-    private int _comboCount = 0;
-    private int _score;
-
-    private float _timerTime;
-
-    //Events
-    public event Action<float, int, int> OnAfterUpdate;
-    public event Action<ComboType, int> OnComboUpdate;
-
-    public event Action<int, int, float> OnDefeat;
-    public event Action<int, int, float> OnGameEnd;
-
-
-    public void Init(ITetrisField tetrisField, IGameManager gameManager)
+    public GameScore(GameMode gameMode, ITetrisField tetrisField, IGameManager gameManager)
     {
-        G.TetrisField.OnDeleteLinesEnd += IncreaseScore;
-        G.GameManager.OnGameOver += Defeat;
+        tetrisField.OnDeleteLinesEnd += IncreaseScore;
+        gameManager.OnGameOver += Defeat;
 
         _score = 0;
         _linesCount = 0;
 
-        switch (G.GameMode)
+        _gameMode = gameMode;
+
+        switch (_gameMode)
         {
             case GameMode.Standart:
                 _timerTime = 0f;
@@ -53,9 +41,27 @@ public class GameScore : PausableBehaviour, IGameScore
         }
     }
 
-    protected override void PausableUpdate()
+    private int _linesCount;
+
+    private ComboType _comboType = ComboType.None;
+    private int _comboCount = 0;
+    private int _score;
+
+    private float _timerTime;
+
+    public bool IsPausable { get => true; set => throw new NotImplementedException(); }
+
+    //Events
+    public event Action<float, int, int> OnAfterUpdate;
+    public event Action<ComboType, int> OnComboUpdate;
+
+    public event Action<int, int, float> OnDefeat;
+    public event Action<int, int, float> OnGameEnd;
+
+
+    public void Tick(float deltaTime)
     {
-        switch (G.GameMode)
+        switch (_gameMode)
         {
             case GameMode.Standart:
                 IncreaseTime();
@@ -125,13 +131,13 @@ public class GameScore : PausableBehaviour, IGameScore
             _comboCount = 1;
         }
 
-        Debug.Log(linesCount + " " +  score);
+        //Debug.Log(linesCount + " " +  score);
 
         _score += (int)MathF.Round(score * (1 + 0.25f * _comboCount));
 
         OnComboUpdate?.Invoke(_comboType, _comboCount);
 
-        if(G.GameMode == GameMode.Lines40 && _linesCount >= 40)
+        if(_gameMode == GameMode.Lines40 && _linesCount >= 40)
         {
             GameEnd();
         }
@@ -156,7 +162,7 @@ public class GameScore : PausableBehaviour, IGameScore
 
     private void Defeat()
     {
-        if(G.GameMode == GameMode.Standart)
+        if(_gameMode == GameMode.Standart)
         {
             GameEnd();
             return;
@@ -169,7 +175,6 @@ public class GameScore : PausableBehaviour, IGameScore
     {
         OnGameEnd?.Invoke(_score, _linesCount, _timerTime);
     }
-
 }
 
 public enum ComboType

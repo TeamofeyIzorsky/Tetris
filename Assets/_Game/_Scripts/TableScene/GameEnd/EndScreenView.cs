@@ -3,7 +3,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.Localization.Settings;
 
-public class GameEndView : MonoBehaviour
+public class EndScreenView : MonoBehaviour
 {
     //Отображает экран конца игры
 
@@ -27,14 +27,13 @@ public class GameEndView : MonoBehaviour
     [SerializeField] private TMP_Text _secondBestTitle;
     [SerializeField] private TMP_Text _secondBestValue;
 
-
-    private void Start()
+    public void Construct(IEndGameManager endGameManager)
     {
         _gameEndCanvas.enabled = false;
 
-        G.GameEndManager.OnStandartEnd += StandartEnd;
-        G.GameEndManager.OnBlitzEnd += BlitzEnd;
-        G.GameEndManager.On40LinesEnd += Lines40End;
+        endGameManager.OnStandartEnd += StandartEnd;
+        endGameManager.OnBlitzEnd += BlitzEnd;
+        endGameManager.On40LinesEnd += Lines40End;
     }
 
     private void StandartEnd(int bestScore, int score, float bestTime, float time)

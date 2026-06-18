@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class JBlock : Piece
 {
-    public JBlock()
+    public JBlock(IPlayerInput playerInput, ITetrisField tetrisField) : base(tetrisField, playerInput)
     {
         string[,] shape = new string[,]
         {

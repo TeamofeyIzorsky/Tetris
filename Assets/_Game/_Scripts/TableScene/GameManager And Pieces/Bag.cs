@@ -4,6 +4,15 @@ using System.Collections.Generic;
 public class Bag : IBag
 {
     //Класс, отвечающий за хранение следующих фигур и их рандомизацию
+    private ITetrisField _tetrisField;
+    private IPlayerInput _playerInput;
+
+    public Bag(ITetrisField field, IPlayerInput playerInput)
+    {
+        _tetrisField = field;
+        _playerInput = playerInput;
+    }
+
 
     private List<Piece> _bag = new();
 
@@ -44,13 +53,13 @@ public class Bag : IBag
     {
         Piece[] bag = new Piece[]
         {
-            new OBlock(),
-            new ZBlock(),
-            new SBlock(),
-            new LBlock(),
-            new JBlock(),
-            new IBlock(),
-            new TBlock(),
+            new OBlock(_playerInput, _tetrisField),
+            new ZBlock(_playerInput, _tetrisField),
+            new SBlock(_playerInput, _tetrisField),
+            new LBlock(_playerInput, _tetrisField),
+            new JBlock(_playerInput, _tetrisField),
+            new IBlock(_playerInput, _tetrisField),
+            new TBlock(_playerInput, _tetrisField),
         };
 
         //Тасование Фишера — Йетса

@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GameManager : PausableBehaviour, IGameManager
+public class GameManager : IGameManager
 {
     //Класс отвечающий за управление основным игровым процессом
 
@@ -11,6 +11,14 @@ public class GameManager : PausableBehaviour, IGameManager
     private ITetrisField _tetrisField;
     private IPlayerInput _playerInput;
 
+    public GameManager(IBag bag, ITetrisField tetrisField, IPlayerInput playerInput)
+    {
+        _bag = bag;
+        _tetrisField = tetrisField;
+        _playerInput = playerInput;
+
+        CreatePieceFromBag();
+    }
 
     private int _currentSpeedLevel = 0;
 
@@ -19,35 +27,20 @@ public class GameManager : PausableBehaviour, IGameManager
     private Piece _holdPiece;
     private bool _isCanHold = true;
 
+    public bool IsPausable { get => true; set => throw new NotImplementedException(); }
 
     public event Action<IReadOnlyList<Piece>> OnUpdateBag;
     public event Action<Piece, bool> OnUpdateHoldPiece;
     public event Action OnGameOver;
-    public event Action<ITetrisField, Piece> OnTickOver;
+    public event Action<ITetrisField, Piece> OnGameManagerTickOver;
 
-
-    public void Init(IBag bag, ITetrisField tetrisField, IPlayerInput playerInput)
-    {
-        _bag = bag;
-        _tetrisField = tetrisField;
-        _playerInput = playerInput;
-    }
-
-
-    private void Start()
-    {
-        CreatePieceFromBag();
-
-        OnTickOver?.Invoke(_tetrisField, _currentPiece);
-    }
-
-    protected override void PausableUpdate()
+    public void Tick(float deltaTime)
     {
         Down();
         
         ProcessInput();
 
-        OnTickOver?.Invoke(_tetrisField, _currentPiece);
+        OnGameManagerTickOver?.Invoke(_tetrisField, _currentPiece);
     }
 
     private void ProcessInput()

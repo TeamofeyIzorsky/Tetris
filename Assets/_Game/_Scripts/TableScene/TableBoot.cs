@@ -6,6 +6,14 @@ using UnityEngine;
 public class TableBoot : MonoBehaviour
 {
     //Этот класс является точкой входа на игровом поле. Он иницилизирует системы и стартовую анимацию
+    [SerializeField] private BagView _bagView;
+    [SerializeField] private HoldPieceView _holdPieceView;
+    [SerializeField] private PauseMenuView _pauseManagerView;
+    [SerializeField] private FieldView _tetrisFieldView;
+    [SerializeField] private ScoreView _gameScoreView;
+    [SerializeField] private EndScreenView _gameEndView;
+
+    [SerializeField] private MenuOrRestart _menuOrRestart;
 
     [SerializeField] private SpriteRenderer _backGround;
 
@@ -13,40 +21,25 @@ public class TableBoot : MonoBehaviour
     [SerializeField] private Canvas _startCanvas;
     [SerializeField] private TMP_Text _startText;
 
+
+    private GameComposition _gameComposition;
+
     void Awake()
     {
-        GameObject pauseManagerObject = new GameObject("Pause Manager");
-        PauseManager pauseManager = pauseManagerObject.AddComponent<PauseManager>();
-        G.PauseManager = pauseManager;
-        G.PauseManager.Pause(true);
+        _gameComposition = new();
 
-        G.PlayerInput.SetActive(false);
+        _gameComposition.CreateUpdateOrder();
 
-        Bag bag = new Bag();
+        _bagView.Construct(_gameComposition.Bag);
+        _holdPieceView.Construct(_gameComposition.GameManager);
+        _pauseManagerView.Construct(_gameComposition.PauseController);
+        _tetrisFieldView.Construct(_gameComposition.GameManager, _gameComposition.PlayerInput);
+        _gameScoreView.Construct(_gameComposition.GameScore);
+        _gameEndView.Construct(_gameComposition.EndGameManager);
 
-        G.Bag = bag;
+        _menuOrRestart.Construct(_gameComposition.PauseController);
 
-        TetrisField tetrisField = new TetrisField();
-        tetrisField.Init();
-        G.TetrisField = tetrisField;
-
-        G.GameConfig = new GameConfig();
-        G.GameConfig.Init();
-
-        GameObject GameManagerObject = new GameObject("Game Manager");
-        GameManager gameManager = GameManagerObject.AddComponent<GameManager>();
-        gameManager.Init(bag, tetrisField, G.PlayerInput);
-
-        G.GameManager = gameManager;
-
-        GameObject gameScoreObject = new GameObject("Game Score");
-        GameScore gameScore = gameScoreObject.AddComponent<GameScore>();
-        gameScore.Init(tetrisField, gameManager);
-        G.GameScore = gameScore;
-
-        GameEndManager gameEndManager = new();
-        gameEndManager.Init(gameScore);
-        G.GameEndManager = gameEndManager;
+        _gameComposition.PauseController.Pause(true);
     }
 
     private void Start()
@@ -88,8 +81,6 @@ public class TableBoot : MonoBehaviour
 
         _startCanvas.gameObject.SetActive(false);
 
-        G.PauseManager.Pause(false);
-
-        G.PlayerInput.SetActive(true);
+        _gameComposition.PauseController.Pause(false);
     }
 }

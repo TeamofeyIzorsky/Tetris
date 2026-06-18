@@ -2,7 +2,7 @@ using System;
 using TMPro;
 using UnityEngine;
 
-public class GameScoreView : MonoBehaviour
+public class ScoreView : MonoBehaviour
 {
     //Отображает игровой счет, время и комбо на уровне
 
@@ -17,16 +17,16 @@ public class GameScoreView : MonoBehaviour
 
     [SerializeField] private TMP_Text _comboText;
     [SerializeField] private TMP_Text _comboValueText;
-
-    private void Start()
+    
+    public void Construct(IGameScore gameScore)
     {
-        G.GameScore.OnAfterUpdate += UpdateView;
-        G.GameScore.OnComboUpdate += UpdateComboView;
+        gameScore.OnAfterUpdate += UpdateView;
+        gameScore.OnComboUpdate += UpdateComboView;
 
         _comboText.gameObject.SetActive(false);
         _comboValueText.gameObject.SetActive(false);
     }
-    
+
     private void UpdateView(float time, int score, int lines)
     {
         UpdateTimer(time);

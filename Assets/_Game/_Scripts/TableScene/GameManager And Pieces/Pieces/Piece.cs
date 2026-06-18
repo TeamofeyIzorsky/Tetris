@@ -5,6 +5,15 @@ public abstract class Piece
 {
     //Класс, отвечающий за поведение фигуры на поле
 
+    private ITetrisField _tetrisField;
+    private IPlayerInput _playerInput;
+
+    public Piece(ITetrisField tetrisField, IPlayerInput playerInput)
+    {
+        _tetrisField = tetrisField;
+        _playerInput = playerInput;
+    }
+
     //Точка спавна на поле
     const int DEFUALT_SPAWN_X_POSITION = 3;
     const int DEFUALT_SPAWN_Y_POSITION = 19;
@@ -39,7 +48,7 @@ public abstract class Piece
     //Проверка не занято ли место спавна
     public bool IsSpawnPositionValid()
     {
-        if (!G.TetrisField.CheckPositions(GetPositions()))
+        if (!_tetrisField.CheckPositions(GetPositions()))
         {
             Debug.Log("GAMEOVER!");
 
@@ -92,7 +101,7 @@ public abstract class Piece
                 positions.Add(new Vector2Int(position.x, position.y - i));
             }
 
-            if (!G.TetrisField.CheckPositions(positions) && prevPositions.Count > 0)
+            if (!_tetrisField.CheckPositions(positions) && prevPositions.Count > 0)
             {
                 //Debug.Log("FOUND!");
 
@@ -114,7 +123,7 @@ public abstract class Piece
 
         (List<Vector2Int> positions, Vector2Int pivotPosition) newMove = Move(Vector2Int.down, GetPositions(), PivotPosition);
 
-        bool isOnGround = !G.TetrisField.CheckPositions(newMove.positions);
+        bool isOnGround = !_tetrisField.CheckPositions(newMove.positions);
 
         //Debug.Log(_isAnyMove);
 
@@ -164,7 +173,7 @@ public abstract class Piece
     //Двигаем фигуру горизонтально
     public bool HorizontalMove(Vector2Int direction)
     {
-        if ((G.PlayerInput.Left || G.PlayerInput.Right) || direction != _prevDirection)
+        if ((_playerInput.Left || _playerInput.Right) || direction != _prevDirection)
         {
             //Мгновенно сдвигаем при начале движения
 
@@ -177,7 +186,7 @@ public abstract class Piece
 
             (List<Vector2Int> positions, Vector2Int pivotPosition) newMove = Move(direction, GetPositions(), PivotPosition);
 
-            if (G.TetrisField.CheckPositions(newMove.positions))
+            if (_tetrisField.CheckPositions(newMove.positions))
             {
                 PivotPosition = newMove.pivotPosition;
 
@@ -188,7 +197,7 @@ public abstract class Piece
 
             //Debug.Log("Slow!");
         }
-        else if ((G.PlayerInput.LeftHold || G.PlayerInput.RightHold) && _prevDirection == direction)
+        else if ((_playerInput.LeftHold || _playerInput.RightHold) && _prevDirection == direction)
         {
             //Сдвигаем с задержкой, если кнопка зажата
 
@@ -207,7 +216,7 @@ public abstract class Piece
 
                     (List<Vector2Int> positions, Vector2Int pivotPosition) newMove = Move(direction, GetPositions(), PivotPosition);
 
-                    if (G.TetrisField.CheckPositions(newMove.positions))
+                    if (_tetrisField.CheckPositions(newMove.positions))
                     {
                         PivotPosition = newMove.pivotPosition;
 
@@ -232,7 +241,7 @@ public abstract class Piece
 
                     (List<Vector2Int> positions, Vector2Int pivotPosition) newMove = Move(direction, GetPositions(), PivotPosition);
 
-                    if (G.TetrisField.CheckPositions(newMove.positions))
+                    if (_tetrisField.CheckPositions(newMove.positions))
                     {
                         PivotPosition = newMove.pivotPosition;
 
@@ -254,7 +263,7 @@ public abstract class Piece
     //Ускоренный спуск ниже игроком
     public bool FastDown()
     {
-        if (G.PlayerInput.Down)
+        if (_playerInput.Down)
         {
             //Мгновенно спускаем, если это начало движения вниз или единичное нажатие
 
@@ -262,14 +271,14 @@ public abstract class Piece
 
             (List<Vector2Int> positions, Vector2Int pivotPosition) newMove = Move(Vector2Int.down, GetPositions(), PivotPosition);
 
-            if (G.TetrisField.CheckPositions(newMove.positions))
+            if (_tetrisField.CheckPositions(newMove.positions))
             {
                 PivotPosition = newMove.pivotPosition;
 
                 FoundFinalPositions();
             }
         }
-        else if (G.PlayerInput.DownHold)
+        else if (_playerInput.DownHold)
         {
             //Спускаем с задержкой, если кнопка зажата
 
@@ -283,7 +292,7 @@ public abstract class Piece
 
                 (List<Vector2Int> positions, Vector2Int pivotPosition) newMove = Move(Vector2Int.down, GetPositions(), PivotPosition);
 
-                if (G.TetrisField.CheckPositions(newMove.positions))
+                if (_tetrisField.CheckPositions(newMove.positions))
                 {
                     PivotPosition = newMove.pivotPosition;
 
@@ -322,7 +331,7 @@ public abstract class Piece
         Rotate();
 
         List<Vector2Int> positions = GetPositions();
-        bool flag = G.TetrisField.CheckPositions(positions);
+        bool flag = _tetrisField.CheckPositions(positions);
 
         //Проверяем можем ли повернуть фигуру в данной позиции, если нет, то пытаемся сдвинуть ниже
         if (flag)
@@ -342,7 +351,7 @@ public abstract class Piece
             tryPos.Add(pos + Vector2Int.left);
         }
 
-        flag = G.TetrisField.CheckPositions(tryPos);
+        flag = _tetrisField.CheckPositions(tryPos);
 
         if (flag)
         {
@@ -359,7 +368,7 @@ public abstract class Piece
             tryPos.Add(pos + Vector2Int.left);
         }
 
-        flag = G.TetrisField.CheckPositions(tryPos);
+        flag = _tetrisField.CheckPositions(tryPos);
 
         if (flag)
         {
@@ -378,7 +387,7 @@ public abstract class Piece
             tryPos.Add(pos + Vector2Int.right);
         }
 
-        flag = G.TetrisField.CheckPositions(tryPos);
+        flag = _tetrisField.CheckPositions(tryPos);
 
         if (flag)
         {
@@ -397,7 +406,7 @@ public abstract class Piece
             tryPos.Add(pos + Vector2Int.right);
         }
 
-        flag = G.TetrisField.CheckPositions(tryPos);
+        flag = _tetrisField.CheckPositions(tryPos);
 
         if (flag)
         {

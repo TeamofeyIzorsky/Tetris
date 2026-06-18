@@ -3,26 +3,34 @@ using UnityEngine;
 public class MenuOrRestart : MonoBehaviour
 {
     //UI Кнопки вызывают методы класса для возвращения в меню или рестарта
+    private IPauseController _pauseController;
+
+    public void Construct(IPauseController pauseController)
+    {
+        _pauseController = pauseController;
+    }
+
+
     public void Restart()
     {
-        G.LoadManager.Load(new LoadSettings()
+        GlobalServices.LoadManager.Load(new LoadSettings()
         {
-            needFade = true,
-            sceneName = "TableScene"
+            NeedFade = true,
+            SceneName = "TableScene"
         });
     }
 
     public void Resume()
     {
-        G.PauseManager.Pause(false);
+        _pauseController.Pause(false);
     }
 
     public void Exit()
     {
-        G.LoadManager.Load(new LoadSettings()
+        GlobalServices.LoadManager.Load(new LoadSettings()
         {
-            needFade = true,
-            sceneName = "MainMenu"
+            NeedFade = true,
+            SceneName = "MainMenu"
         });
     }
 }

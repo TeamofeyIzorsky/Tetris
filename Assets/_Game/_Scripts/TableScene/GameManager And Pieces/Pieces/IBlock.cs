@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class IBlock : Piece
 {
-    public IBlock()
+    public IBlock(IPlayerInput playerInput, ITetrisField tetrisField) : base(tetrisField, playerInput)
     {
         string[,] shape = new string[,]
         {

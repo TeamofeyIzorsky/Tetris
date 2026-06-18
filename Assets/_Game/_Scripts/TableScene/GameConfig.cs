@@ -5,6 +5,17 @@ public struct GameConfig
 {
     //Хранит в себе данные скоростей и тему для данного раунда
 
+    public GameConfig(GameResources resources)
+    {
+        Theme = resources.ThemeSOs[0];
+
+        TimeForDown = resources.TimeForDown;
+        LockDelay = resources.LockDelay;
+        TimeForFastDown = resources.TimeForFastDown;
+        TimeForStartHorizontalMove = resources.TimeForStartHorizontalMove;
+        TimeForFastHorizontalMove = resources.TimeForFastHorizontalMove;
+    }
+
     public ThemeSO Theme { get; private set; }
 
     public float TimeForDown { get; private set;}
@@ -15,17 +26,6 @@ public struct GameConfig
     public float TimeForStartHorizontalMove { get; private set; }
     public float TimeForFastHorizontalMove { get; private set; }
 
-
-    public void Init()
-    {
-        Theme = G.GResources.ThemeSOs[0];
-
-        TimeForDown = G.GResources.TimeForDown;
-        LockDelay = G.GResources.LockDelay;
-        TimeForFastDown = G.GResources.TimeForFastDown;
-        TimeForStartHorizontalMove = G.GResources.TimeForStartHorizontalMove;
-        TimeForFastHorizontalMove = G.GResources.TimeForFastHorizontalMove;
-    }
 
     public void NewDownSpeed(float timeForDown)
     {

@@ -21,10 +21,10 @@ public class StartNewGameTrigger : MonoBehaviour
 
         }
 
-        G.LoadManager.Load(new LoadSettings()
+        GlobalServices.LoadManager.Load(new LoadSettings()
         {
-            needFade = true,
-            sceneName = "TableScene"
+            NeedFade = true,
+            SceneName = "TableScene"
         });
     }
 }

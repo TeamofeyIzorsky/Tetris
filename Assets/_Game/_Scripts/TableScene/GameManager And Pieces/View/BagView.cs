@@ -7,9 +7,9 @@ public class BagView : MonoBehaviour
 
     [SerializeField] private List<NextPieceView> _nextPieceViews = new();
 
-    private void Start()
+    public  void Construct(IBag bag)
     {
-        G.Bag.OnBagUpdate += UpdateBag;
+        bag.OnBagUpdate += UpdateBag;
     }
 
     private void UpdateBag(IReadOnlyList<Piece> bag)

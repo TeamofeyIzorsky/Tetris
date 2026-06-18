@@ -15,7 +15,7 @@ public class Bootstrap : MonoBehaviour
         DontDestroyOnLoad(loadManagerGameObject);
         LoadManager loadManager = loadManagerGameObject.AddComponent<LoadManager>();
         loadManager.Init(fader);
-        G.LoadManager = loadManager;
+
 
         GameObject DataManagerGameObject = new GameObject("DataManager Object");
         DontDestroyOnLoad(DataManagerGameObject);
@@ -26,16 +26,12 @@ public class Bootstrap : MonoBehaviour
 
         G.DataManager.DeserializeSave();
 
-        GameObject playerInputObject = new GameObject("playerInput Object");
-        DontDestroyOnLoad(playerInputObject);
-        IPlayerInput playerInput = playerInputObject.AddComponent<OldInputSystem>();
+        GlobalServices.Register(loadManager);
 
-        G.PlayerInput = playerInput;
-
-        G.LoadManager.Load(new LoadSettings()
+        loadManager.Load(new LoadSettings()
         {
-            needFade = false,
-            sceneName = "MainMenu"
+            NeedFade = false,
+            SceneName = "MainMenu"
         });
     }
 }
