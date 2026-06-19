@@ -8,7 +8,7 @@ public class GameScore : IGameScore
 
     private GameMode _gameMode;
 
-    public GameScore(GameMode gameMode, ITetrisField tetrisField, IGameManager gameManager)
+    public GameScore(ITicketManager ticketManager, ITetrisField tetrisField, IGameManager gameManager)
     {
         tetrisField.OnDeleteLinesEnd += IncreaseScore;
         gameManager.OnGameOver += Defeat;
@@ -16,7 +16,7 @@ public class GameScore : IGameScore
         _score = 0;
         _linesCount = 0;
 
-        _gameMode = gameMode;
+        _gameMode = ticketManager.GetGameTicket().GameMode;
 
         switch (_gameMode)
         {

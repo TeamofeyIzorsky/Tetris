@@ -3,9 +3,9 @@ using UnityEngine;
 public class HoldPieceView : NextPieceView
 {
     //Компнент, который отображает удержанную фигуру
-    public void Construct(IGameManager gameManager, ThemeSO theme)
+    public void Construct(IGameManager gameManager, ITicketManager ticketManager)
     {
-        base.Construct(theme);
+        base.Construct(ticketManager.GetGameTicket().Theme);
 
         gameManager.OnUpdateHoldPiece += ShowHoldPiece;
     }

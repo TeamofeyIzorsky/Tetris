@@ -9,11 +9,11 @@ public class TetrisField : ITetrisField
 
     private ThemeSO _theme;
 
-    public TetrisField(ThemeSO themeSO)
+    public TetrisField(ITicketManager ticketManager)
     {
         _grid = new Cell[WIDTH, HEIGHT];
 
-        _theme = themeSO;
+        _theme = ticketManager.GetGameTicket().Theme;
     }
 
     //Grid Settings

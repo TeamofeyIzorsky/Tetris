@@ -28,29 +28,20 @@ public class TableBoot : MonoBehaviour
 
     private GameComposition _gameComposition;
 
-    private GameResourcesSO _gameResources;
-
     void Awake()
     {
-        GameTicket gameTicket = GlobalServices.TicketManager.GetGameTicket();
-
-        _gameResources = GlobalServices.Resources;
-
-        ThemeSO theme = gameTicket.Theme;
-        GameMode gameMode = gameTicket.GameMode;
-
-        _gameComposition = new GameComposition(gameConfig, gameMode, theme);
+        _gameComposition = new GameComposition(GlobalServices.TicketManager, GlobalServices.LoadManager, GlobalServices.GameDataManager, gameConfig, GlobalServices.Resources);
 
         _gameComposition.CreateUpdateOrder();
 
-        _bagView.Construct(_gameComposition.Bag, theme);
-        _holdPieceView.Construct(_gameComposition.GameManager, theme);
+        _bagView.Construct(_gameComposition.Bag, _gameComposition.TicketManager);
+        _holdPieceView.Construct(_gameComposition.GameManager, _gameComposition.TicketManager);
         _pauseManagerView.Construct(_gameComposition.PauseController);
-        _tetrisFieldView.Construct(_gameComposition.GameManager, _gameComposition.PlayerInput, theme, _gameResources.BlockPrefab);
+        _tetrisFieldView.Construct(_gameComposition.GameManager, _gameComposition.PlayerInput, _gameComposition.TicketManager, _gameComposition.GameResources);
         _gameScoreView.Construct(_gameComposition.GameScore);
         _gameEndView.Construct(_gameComposition.EndGameManager);
 
-        _menuOrRestart.Construct(_gameComposition.PauseController);
+        _menuOrRestart.Construct(_gameComposition.PauseController, _gameComposition.LoadManager);
 
         _gameComposition.PauseController.Pause(true);
     }
@@ -61,7 +52,7 @@ public class TableBoot : MonoBehaviour
 
         _startCanvas.gameObject.SetActive(true);
 
-        _backGround.sprite = _gameResources.Backgrounds[Random.Range(0, _gameResources.Backgrounds.Count)];
+        _backGround.sprite = _gameComposition.GameResources.Backgrounds[Random.Range(0, _gameComposition.GameResources.Backgrounds.Count)];
 
         StartCoroutine(StartAnimation());
     }

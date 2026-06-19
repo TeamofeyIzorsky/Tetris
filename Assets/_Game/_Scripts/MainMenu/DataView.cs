@@ -6,6 +6,19 @@ using UnityEngine.Localization.Settings;
 
 public class DataView : MonoBehaviour
 {
+    private IGameDataManager _gameDataManager;
+
+    public void Construct(IGameDataManager gameDataManager)
+    {
+        _gameDataManager  = gameDataManager;
+
+        LocalizationSettings.SelectedLocaleChanged += ShowStatistic;
+
+        ShowStatistic(null);
+        ShowGameModsStatistic();
+    }
+
+
     [SerializeField] private TMP_Text _standartScoreText;
     [SerializeField] private TMP_Text _standartTimeText;
 
@@ -17,18 +30,11 @@ public class DataView : MonoBehaviour
     [SerializeField] private TMP_Text _playsCount;
     [SerializeField] private TMP_Text _allTime;
 
-    private void Start()
-    {
-        LocalizationSettings.SelectedLocaleChanged += ShowStatistic;
-
-        ShowStatistic(null);
-        ShowGameModsStatistic();
-    }
     private void ShowGameModsStatistic()
     {
-        _standartScoreText.text = G.DataManager.currentGameData.BestStandartScore.ToString();
+        _standartScoreText.text = _gameDataManager.GetGameData().BestStandartScore.ToString();
 
-        TimeSpan timeSpan = TimeSpan.FromSeconds(G.DataManager.currentGameData.BestStandartTime);
+        TimeSpan timeSpan = TimeSpan.FromSeconds(_gameDataManager.GetGameData().BestStandartTime);
 
         // Получаем минуты и секунды в стандартном формате
         string minutesAndSeconds = timeSpan.ToString(@"mm\:ss");
@@ -39,7 +45,7 @@ public class DataView : MonoBehaviour
         _standartTimeText.text = $"{minutesAndSeconds}<size=70%>.{milliseconds}";
 
 
-        timeSpan = TimeSpan.FromSeconds(G.DataManager.currentGameData.Best40LinesTime);
+        timeSpan = TimeSpan.FromSeconds(_gameDataManager.GetGameData().Best40LinesTime);
 
         // Получаем минуты и секунды в стандартном формате
         minutesAndSeconds = timeSpan.ToString(@"mm\:ss");
@@ -49,13 +55,13 @@ public class DataView : MonoBehaviour
 
         _40linesTimeText.text = $"{minutesAndSeconds}<size=70%>.{milliseconds}";
 
-        _blitzScoreText.text = G.DataManager.currentGameData.BestBlirzScore.ToString();
-        _blitzLinesCount.text = G.DataManager.currentGameData.BestBlitzLinesCount.ToString();
+        _blitzScoreText.text = _gameDataManager.GetGameData().BestBlirzScore.ToString();
+        _blitzLinesCount.text = _gameDataManager.GetGameData().BestBlitzLinesCount.ToString();
     }
 
     private void ShowStatistic(Locale locale)
     {
-        TimeSpan timeSpan = TimeSpan.FromSeconds(G.DataManager.currentGameData.allTime);
+        TimeSpan timeSpan = TimeSpan.FromSeconds(_gameDataManager.GetGameData().allTime);
 
         // Получаем минуты и секунды в стандартном формате
         string time = timeSpan.ToString(@"hh\:mm\:ss");
@@ -63,7 +69,7 @@ public class DataView : MonoBehaviour
         // Получаем 2 цифры миллисекунд
         _allTime.text = LocalizationSettings.StringDatabase.GetLocalizedString("Localization", "totalTime") + " " + time;
 
-        _playsCount.text = LocalizationSettings.StringDatabase.GetLocalizedString("Localization", "roundsFinished") + " " + G.DataManager.currentGameData.gamesPlayed.ToString();
+        _playsCount.text = LocalizationSettings.StringDatabase.GetLocalizedString("Localization", "roundsFinished") + " " + _gameDataManager.GetGameData().gamesPlayed.ToString();
 
     }
 

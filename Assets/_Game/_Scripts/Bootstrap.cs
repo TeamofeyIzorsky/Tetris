@@ -11,25 +11,22 @@ public class Bootstrap : MonoBehaviour
         Fader fader = faderObject.GetComponent<Fader>();
 
 
-        GameObject loadManagerGameObject = new GameObject("LoadManager Object");
+        GameObject loadManagerGameObject = new GameObject("Load Manager Object");
         DontDestroyOnLoad(loadManagerGameObject);
         LoadManager loadManager = loadManagerGameObject.AddComponent<LoadManager>();
         loadManager.Construct(fader);
 
+        ISaveManager saveManager = new SaveManager();
 
-        GameObject DataManagerGameObject = new GameObject("DataManager Object");
-        DontDestroyOnLoad(DataManagerGameObject);
-        DataManager dataManager = DataManagerGameObject.AddComponent<DataManager>();
-        G.DataManager = dataManager;
+        GameObject GameDataManagerGameObject = new GameObject("Game Data Manager Object");
+        DontDestroyOnLoad(GameDataManagerGameObject);
+        IGameDataManager gameDataManager = GameDataManagerGameObject.AddComponent<GameDataManager>().Construct(saveManager);
 
+        ITicketManager ticketManager = new TicketManager();
 
-        G.DataManager.DeserializeSave();
+        GlobalServices.Register(loadManager, ticketManager, gameDataManager, gameResources);
 
-        TicketManager ticketManager = new();
-
-        GlobalServices.Register(loadManager, ticketManager, gameResources);
-
-        loadManager.Load(new LoadSettings()
+        GlobalServices.LoadManager.Load(new LoadSettings()
         {
             NeedFade = false,
             SceneName = "MainMenu"

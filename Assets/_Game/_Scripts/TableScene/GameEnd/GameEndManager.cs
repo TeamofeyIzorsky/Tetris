@@ -9,15 +9,19 @@ public class GameEndManager : IEndGameManager
     private IPlayerInput _playerInput;
     private IPauseController _pauseController;
 
-    public GameEndManager(GameMode gameMode, IGameScore gameScore, IPlayerInput playerInput, IPauseController pauseController)
+    private IGameDataManager _gameDataManager;
+
+    public GameEndManager(ITicketManager ticketManager, IGameScore gameScore, IPlayerInput playerInput, IPauseController pauseController, IGameDataManager gameDataManager)
     {
         gameScore.OnDefeat += Defeat;
         gameScore.OnGameEnd += GameEnd;
 
-        _gameMode = gameMode;
+        _gameMode = ticketManager.GetGameTicket().GameMode;
 
         _playerInput = playerInput;
         _pauseController = pauseController;
+
+        _gameDataManager = gameDataManager;
     }
 
     public event Action<int, int, float, float> OnStandartEnd;
@@ -33,8 +37,6 @@ public class GameEndManager : IEndGameManager
     //Если игрок завершил игру
     private void GameEnd(int score, int linesCount, float timer)
     {
-        G.DataManager.currentGameData.GamePlayed();
-
         GameOver(false, score, linesCount, timer);
     }
 
@@ -47,13 +49,12 @@ public class GameEndManager : IEndGameManager
         {
             case GameMode.Standard:
 
-                int oldBestScore = G.DataManager.currentGameData.BestStandartScore;
-                float oldBestTime = G.DataManager.currentGameData.BestStandartTime;
+                int oldBestScore = _gameDataManager.GetGameData().BestStandartScore;
+                float oldBestTime = _gameDataManager.GetGameData().BestStandartTime;
 
                 if (!defeat)
                 {
-                    G.DataManager.currentGameData.BestScore(score, GameMode.Standard);
-                    G.DataManager.currentGameData.BestTime(timer, GameMode.Standard);
+                    //_gameDataManager.RoundEnd();
                 }
 
                 OnStandartEnd?.Invoke(oldBestScore, score, oldBestTime, timer);
@@ -62,13 +63,12 @@ public class GameEndManager : IEndGameManager
                 break;
 
             case GameMode.Blitz:
-                oldBestScore = G.DataManager.currentGameData.BestBlirzScore;
-                int oldLinesCount = G.DataManager.currentGameData.BestBlitzLinesCount;
+                oldBestScore = _gameDataManager.GetGameData().BestBlirzScore;
+                int oldLinesCount = _gameDataManager.GetGameData().BestBlitzLinesCount;
 
                 if (!defeat)
                 {
-                    G.DataManager.currentGameData.BestScore(score, GameMode.Blitz);
-                    G.DataManager.currentGameData.BestLinesCount(linesCount, GameMode.Blitz);
+                    //_gameDataManager.RoundEnd();
                 }
 
                 OnBlitzEnd?.Invoke(defeat, oldBestScore, score, oldLinesCount, linesCount);
@@ -77,11 +77,11 @@ public class GameEndManager : IEndGameManager
 
             case GameMode.Lines40:
 
-                oldBestTime = G.DataManager.currentGameData.Best40LinesTime;
+                oldBestTime = _gameDataManager.GetGameData().Best40LinesTime;
 
                 if (!defeat)
                 {
-                    G.DataManager.currentGameData.BestTime(timer, GameMode.Lines40);
+                    //_gameDataManager.RoundEnd();
                 }
 
                 On40LinesEnd?.Invoke(defeat, oldBestTime, timer);

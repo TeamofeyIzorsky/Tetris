@@ -2,19 +2,11 @@ using Newtonsoft.Json;
 using System.IO;
 using UnityEngine;
 
-public class DataManager : MonoBehaviour
+public class SaveManager : ISaveManager
 {
     //Класс, отвечающий за сохранения данных между сессиями
 
-    public GameData currentGameData;
-
-
-    private void Update()
-    {
-        currentGameData.allTime += Time.deltaTime;
-    }
-
-    private void SerializationSave()
+    public void SerializeSave(GameData gameData)
     {
         Debug.Log($"SAVING");
 
@@ -24,7 +16,7 @@ public class DataManager : MonoBehaviour
             TypeNameHandling = TypeNameHandling.Auto
         };
 
-        string json = JsonConvert.SerializeObject(currentGameData, settings);
+        string json = JsonConvert.SerializeObject(gameData, settings);
 
         string savePath = Path.Combine(Application.persistentDataPath, $"GameData.json");
 
@@ -34,7 +26,7 @@ public class DataManager : MonoBehaviour
     }
 
 
-    public void DeserializeSave()
+    public GameData DeserializeSave()
     {
         Debug.Log($"GAME DATA LOADING");
 
@@ -53,23 +45,11 @@ public class DataManager : MonoBehaviour
 
             GameData gameData = JsonConvert.DeserializeObject<GameData>(json, settings);
 
-            currentGameData = gameData;
+            return gameData;
         }
         else
         {
-            currentGameData = new GameData();
+            return new GameData();
         }
-    }
-
-    private void OnAplicationPause(bool focus)
-    {
-        if(!focus) {
-        SerializationSave();
-        }
-    }
-
-    private void OnApplicationQuit()
-    {
-        SerializationSave();
     }
 }

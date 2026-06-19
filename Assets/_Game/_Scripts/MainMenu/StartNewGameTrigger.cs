@@ -2,18 +2,32 @@ using UnityEngine;
 
 public class StartNewGameTrigger : MonoBehaviour
 {
+    private ILoadManager _loadManager;
+    private ITicketManager _ticketManager;
+
+    private GameResourcesSO _gameResources;
+
+    public void Construct(ILoadManager loadManager, ITicketManager ticketManager, GameResourcesSO gameResources)
+    {
+        _loadManager = loadManager;
+        _ticketManager = ticketManager;
+
+        _gameResources = gameResources;
+    }
+
+
     public void StartNewGame(string mode)
     {
         switch (mode)
         {
             case "Blitz":
-                GlobalServices.TicketManager.SetGameTicket(new GameTicket(GameMode.Blitz, GlobalServices.Resources.ThemeSOs[0]));
+                _ticketManager.SetGameTicket(new GameTicket(GameMode.Blitz, _gameResources.ThemeSOs[0]));
                 break;
             case "Standart":
-                GlobalServices.TicketManager.SetGameTicket(new GameTicket(GameMode.Standard, GlobalServices.Resources.ThemeSOs[0]));
+                _ticketManager.SetGameTicket(new GameTicket(GameMode.Standard, _gameResources.ThemeSOs[0]));
                 break;
             case "40Lines":
-                GlobalServices.TicketManager.SetGameTicket(new GameTicket(GameMode.Lines40, GlobalServices.Resources.ThemeSOs[0]));
+                _ticketManager.SetGameTicket(new GameTicket(GameMode.Lines40, _gameResources.ThemeSOs[0]));
                 break;
             default:
                 //NONE
@@ -21,7 +35,7 @@ public class StartNewGameTrigger : MonoBehaviour
 
         }
 
-        GlobalServices.LoadManager.Load(new LoadSettings()
+        _loadManager.Load(new LoadSettings()
         {
             NeedFade = true,
             SceneName = "TableScene"

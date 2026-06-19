@@ -9,15 +9,15 @@ public class FieldView : MonoBehaviour
     private GameObject _blockPrefab;
     private IPlayerInput _playerInput;
 
-    public void Construct(IGameManager gameManager, IPlayerInput playerInput, ThemeSO theme, GameObject blockPrefab)
+    public void Construct(IGameManager gameManager, IPlayerInput playerInput, ITicketManager ticketManager, GameResourcesSO gameResources)
     {
         _playerInput = playerInput;
 
-        _blockPrefab = blockPrefab;
+        _blockPrefab = gameResources.BlockPrefab;
 
         gameManager.OnGameManagerTickOver += UpdateView;
 
-        _theme = theme;
+        _theme = ticketManager.GetGameTicket().Theme;
 
         CreateField();
 
