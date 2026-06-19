@@ -15,7 +15,7 @@ public class HoldPieceView : NextPieceView
     {
         if(piece == null) return;
 
-        var theme = _theme.GetTheme(piece);
+        var theme = _theme.GetTheme(piece.id);
 
         base.ShowPiece(piece);
 

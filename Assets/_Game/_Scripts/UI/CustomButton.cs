@@ -4,10 +4,9 @@ using UnityEngine.EventSystems;
 using UnityEngine.UI;
 using TMPro;
 
-public class MainMenuButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IPointerDownHandler, IPointerUpHandler
+public class CustomButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IPointerDownHandler, IPointerUpHandler
 {
     //Отображение красивых кнопок для UI
-
 
     [SerializeField] private bool _selectedOn = false;
     [SerializeField, Range(0.05f, 10f)] private float _selectedDuration = 1f;

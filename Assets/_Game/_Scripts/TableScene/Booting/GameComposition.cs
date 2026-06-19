@@ -21,7 +21,7 @@ public class GameComposition
     public IGameParameters GameParameters { get; private set; }
 
 
-    public GameComposition(ITicketManager ticketManager, ILoadManager loadManager, IGameDataManager gameDataManager, IGameConfig gameConfig, GameResourcesSO gameResources)
+    public GameComposition(ITicketManager ticketManager, ILoadManager loadManager, IGameDataManager gameDataManager, GameConfigSO gameConfig, GameResourcesSO gameResources)
     {
         TicketManager = ticketManager;
         LoadManager = loadManager;
@@ -35,7 +35,7 @@ public class GameComposition
 
         PauseController = new PauseController(PlayerInput, UpdateManager);
 
-        TetrisField = new TetrisField(TicketManager);
+        TetrisField = new TetrisField();
 
         GameParameters = new GameParameters(gameConfig, TetrisField);
 
@@ -45,7 +45,7 @@ public class GameComposition
 
         GameScore = new GameScore(TicketManager, TetrisField, GameManager);
 
-        EndGameManager = new GameEndManager(TicketManager, GameScore, PlayerInput, PauseController, GameDataManager);
+        EndGameManager = new GameEndManager(TicketManager, GameScore, PauseController, GameDataManager);
     }
 
     public void CreateUpdateOrder()

@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GameConfigSO : ScriptableObject, IGameConfig
+public class GameConfigSO : ScriptableObject
 {
     //Хранит в себе данные скоростей и тему для данного раунда
     [Header("Down")]

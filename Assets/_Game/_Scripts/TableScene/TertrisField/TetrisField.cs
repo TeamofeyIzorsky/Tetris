@@ -7,20 +7,16 @@ public class TetrisField : ITetrisField
 {
     //Класс отвечающий за логику игрового поля
 
-    private ThemeSO _theme;
-
-    public TetrisField(ITicketManager ticketManager)
+    public TetrisField()
     {
-        _grid = new Cell[WIDTH, HEIGHT];
-
-        _theme = ticketManager.GetGameTicket().Theme;
+        _grid = new int[WIDTH, HEIGHT];
     }
 
     //Grid Settings
     public const int HEIGHT = 24;
     public const int WIDTH = 10;
 
-    private Cell[,] _grid;
+    private int[,] _grid;
 
     private int _allDestroyedLines = 0;
 
@@ -38,13 +34,7 @@ public class TetrisField : ITetrisField
 
         foreach (var position in piece.FinalPositons)
         {
-            _grid[position.x, position.y].Occupied = true;
-
-            var theme = _theme.GetTheme(piece);
-
-            _grid[position.x, position.y].Color = theme.Item1;
-
-            _grid[position.x, position.y].Sprite = theme.Item2;
+            _grid[position.x, position.y] = piece.id;
         }
 
         var randomPiece = piece.FinalPositons[Random.Range(0, piece.FinalPositons.Count)];
@@ -62,24 +52,24 @@ public class TetrisField : ITetrisField
 
         for (int y = HEIGHT - 1; y >= 0; y--)
         {
-            bool flagLine = true;
+            bool isFilledLine = true;
 
             for (int x = 0; x < WIDTH; x++)
             {
-                if (!_grid[x, y].Occupied)
+                if (_grid[x, y] == 0)
                 {
-                    flagLine = false;
+                    isFilledLine = false;
                 }
             }
 
-            if (flagLine)
+            if (isFilledLine)
             {
                 _allDestroyedLines++;
                 deletedLines++;
 
                 for (int x = 0; x < WIDTH; x++)
                 {
-                    _grid[x, y].Occupied = false;
+                    _grid[x, y] = 0;
                 }
 
                 for (int iy = y; iy < 22; iy++)
@@ -104,7 +94,7 @@ public class TetrisField : ITetrisField
 
         foreach (Vector2Int position in positions)
         {
-            if (position.y < 0 || position.x > 9 || position.x < 0 || _grid[position.x, position.y].Occupied)
+            if (position.y < 0 || position.x > 9 || position.x < 0 || _grid[position.x, position.y] != 0)
             {
                 isCorrectPositions = false;
                 break;
@@ -114,7 +104,7 @@ public class TetrisField : ITetrisField
         return isCorrectPositions;
     }
 
-    public Cell[,] GetGrid()
+    public int[,] GetGrid()
     {
         return _grid;
     }

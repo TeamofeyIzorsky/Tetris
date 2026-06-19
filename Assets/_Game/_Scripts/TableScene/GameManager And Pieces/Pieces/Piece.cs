@@ -46,6 +46,8 @@ public abstract class Piece
     private int _resetLockDelayCounter;
     private bool _isAnyMove;
 
+    public int id {  get; protected set; }
+
 
     //Проверка не занято ли место спавна
     public bool IsSpawnPositionValid()

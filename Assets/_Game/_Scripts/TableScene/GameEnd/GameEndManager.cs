@@ -5,20 +5,17 @@ public class GameEndManager : IEndGameManager
 {
     //Завершает игру и проверяет рекорды
     private GameMode _gameMode;
-
-    private IPlayerInput _playerInput;
     private IPauseController _pauseController;
 
     private IGameDataManager _gameDataManager;
 
-    public GameEndManager(ITicketManager ticketManager, IGameScore gameScore, IPlayerInput playerInput, IPauseController pauseController, IGameDataManager gameDataManager)
+    public GameEndManager(ITicketManager ticketManager, IGameScore gameScore, IPauseController pauseController, IGameDataManager gameDataManager)
     {
         gameScore.OnDefeat += Defeat;
         gameScore.OnGameEnd += GameEnd;
 
         _gameMode = ticketManager.GetGameTicket().GameMode;
 
-        _playerInput = playerInput;
         _pauseController = pauseController;
 
         _gameDataManager = gameDataManager;

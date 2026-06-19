@@ -42,7 +42,7 @@ public class NextPieceView : MonoBehaviour
         int firstLine = 0;
         int secondLine = 0;
 
-        var theme = _theme.GetTheme(piece);
+        var theme = _theme.GetTheme(piece.id);
 
         for (int x = 0; x < 4; x++)
         {

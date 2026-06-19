@@ -55,7 +55,7 @@ public class FieldView : MonoBehaviour
 
     private void UpdateView(ITetrisField tetrisField, Piece currentPiece)
     {
-        Cell[,] grid = null;
+        int[,] grid = null;
 
         if(tetrisField != null)
         {
@@ -83,21 +83,22 @@ public class FieldView : MonoBehaviour
                     _particleSystem.Play();
                 }
 
-                if (grid != null && grid[x, y].Occupied)
+                if (grid != null && grid[x, y] != 0)
                 {
 
                     blocks[x, y].ChangeActive(true);
 
+                    var theme = _theme.GetTheme(grid[x, y]);
 
-                    blocks[x, y].SetColor(grid[x, y].Color);
-                    blocks[x, y].SetSprite(grid[x, y].Sprite);
+                    blocks[x, y].SetColor(theme.Item1);
+                    blocks[x, y].SetSprite(theme.Item2);
                 }
                 else if (posistions.Contains(position))
                 {
                     blocks[x, y].ChangeActive(true);
 
                     //Debug.Log(G.DataManager.currentGameData.Theme);
-                    var theme = _theme.GetTheme(currentPiece);
+                    var theme = _theme.GetTheme(currentPiece.id);
 
 
                     blocks[x, y].SetColor(theme.Item1);
@@ -109,7 +110,7 @@ public class FieldView : MonoBehaviour
 
                    // Debug.Log(G.DataManager.currentGameData.Theme);
 
-                    var theme = _theme.GetTheme(currentPiece);
+                    var theme = _theme.GetTheme(currentPiece.id);
 
                     Color color = new Color(theme.Item1.r, theme.Item1.g, theme.Item1.b, 0.075f);
 

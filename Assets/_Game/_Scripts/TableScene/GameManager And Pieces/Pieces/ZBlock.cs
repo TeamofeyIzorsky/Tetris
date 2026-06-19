@@ -4,6 +4,8 @@ public class ZBlock : Piece
 {
     public ZBlock(IPlayerInput playerInput, ITetrisField tetrisField, IGameParameters gameParameters) : base(tetrisField, playerInput, gameParameters)
     {
+        id = 5;
+
         string[,] shape = new string[,]
         {
             {" ", " ", " ", " " },

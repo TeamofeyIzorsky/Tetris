@@ -7,7 +7,7 @@ public interface ITetrisField
     public event Action<int, int> OnDeleteLinesEnd;
 
 
-    public Cell[,] GetGrid();
+    public int[,] GetGrid();
     public Vector2Int? GetRandomLastPlace();
     public void Place(Piece piece);
     public int GetDeletedLinesCount();

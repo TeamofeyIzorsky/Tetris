@@ -14,7 +14,7 @@ public class GameParameters : IGameParameters
 
     private int _currentSpeedLevel;
 
-    public GameParameters(IGameConfig gameConfig, ITetrisField tetrisField)
+    public GameParameters(GameConfigSO gameConfig, ITetrisField tetrisField)
     {
         tetrisField.OnDeleteLinesEnd += TryIncreaseSpeedLevel;
 
