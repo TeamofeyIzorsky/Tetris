@@ -19,7 +19,7 @@ public class GameComposition
     public IBag Bag { get; private set; }
     public IGameManager GameManager { get; private set; }
     public IGameScore GameScore { get; private set; }
-    public IEndGameManager EndGameManager { get; private set; }
+    public IGameEndController GameEndController { get; private set; }
     public IGameParameters GameParameters { get; private set; }
 
     public GameComposition(ITicketManager ticketManager, ILoadManager loadManager, IGameDataManager gameDataManager, GameConfigSO gameConfig, GameResourcesSO gameResources)
@@ -48,7 +48,16 @@ public class GameComposition
 
         GameScore = new GameScore(TicketManager, TetrisField, GameManager);
 
-        EndGameManager = new GameEndManager(GameStateMachine, TicketManager, GameScore, GameDataManager);
+
+        IEndStrategy endStrategy = TicketManager.GetGameTicket().GameMode switch
+        {
+            GameMode.Blitz => new BlitzEndStrategy(),
+            GameMode.Lines40 => new Lines40EndStategy(),
+            GameMode.Standard => new StandardEndStategy(),
+            _ => new StandardEndStategy()
+        };
+
+        GameEndController = new GameEndController(endStrategy, GameScore, GameManager, GameStateMachine, gameDataManager);
     }
 
     public void CreateUpdateOrder()

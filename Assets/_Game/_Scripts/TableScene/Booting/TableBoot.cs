@@ -39,7 +39,7 @@ public class TableBoot : MonoBehaviour
         _pauseManagerView.Construct(_gameComposition.GameStateMachine);
         _tetrisFieldView.Construct(_gameComposition.GameManager, _gameComposition.PlayerInput, _gameComposition.TicketManager, _gameComposition.GameResources);
         _gameScoreView.Construct(_gameComposition.GameScore);
-        _gameEndView.Construct(_gameComposition.EndGameManager);
+        _gameEndView.Construct(_gameComposition.GameEndController);
 
         _menuOrRestart.Construct(_gameComposition.PauseController, _gameComposition.LoadManager);
     }

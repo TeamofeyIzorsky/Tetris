@@ -27,13 +27,13 @@ public class ScoreView : MonoBehaviour
         _comboValueText.gameObject.SetActive(false);
     }
 
-    private void UpdateView(float time, int score, int lines)
+    private void UpdateView(RoundData roundData)
     {
-        UpdateTimer(time);
+        UpdateTimer(roundData.Time);
 
-        UpdateScore(score);
+        UpdateScore(roundData.Score);
 
-        UpdateLines(lines);
+        UpdateLines(roundData.LinesDestroyed);
     }
 
     private void UpdateTimer(float time)

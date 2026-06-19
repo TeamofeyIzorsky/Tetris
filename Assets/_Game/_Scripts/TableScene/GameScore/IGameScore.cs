@@ -3,9 +3,11 @@ using UnityEngine;
 
 public interface IGameScore : IPauseUpdatable
 {
-    public event Action<float, int, int> OnAfterUpdate;
-    public event Action<ComboType, int> OnComboUpdate;
+    public RoundData GetRoundData();
 
-    public event Action<int, int, float> OnDefeat;
-    public event Action<int, int, float> OnGameEnd;
+    public event Action OnTimeOver;
+    public event Action On40Lines;
+
+    public event Action<RoundData> OnAfterUpdate;
+    public event Action<ComboType, int> OnComboUpdate;
 }

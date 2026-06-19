@@ -27,13 +27,28 @@ public class EndScreenView : MonoBehaviour
     [SerializeField] private TMP_Text _secondBestTitle;
     [SerializeField] private TMP_Text _secondBestValue;
 
-    public void Construct(IEndGameManager endGameManager)
+    public void Construct(IGameEndController endGameManager)
     {
         _gameEndCanvas.enabled = false;
 
-        endGameManager.OnStandartEnd += StandartEnd;
-        endGameManager.OnBlitzEnd += BlitzEnd;
-        endGameManager.On40LinesEnd += Lines40End;
+        endGameManager.OnGameEnded += GameEnded;
+    }
+
+
+    private void GameEnded(GameData previosRecords, RoundData roundData)
+    {
+        if(roundData.GameMode == GameMode.Standard)
+        {
+            StandartEnd(previosRecords.BestStandartScore, roundData.Score, previosRecords.BestStandartTime, roundData.Time);
+        }
+        else if(roundData.GameMode == GameMode.Blitz)
+        {
+            BlitzEnd(roundData.isDefeat, previosRecords.BestBlirzScore, roundData.Score, previosRecords.BestBlitzLinesCount, roundData.LinesDestroyed);
+        }
+        else if(roundData.GameMode == GameMode.Lines40)
+        {
+            Lines40End(roundData.isDefeat, previosRecords.Best40LinesTime, roundData.Time);
+        }
     }
 
     private void StandartEnd(int bestScore, int score, float bestTime, float time)
@@ -130,6 +145,7 @@ public class EndScreenView : MonoBehaviour
         }
 
         _firstValue.text = score.ToString();
+
 
 
         if (!defeat && bestLinesCount < linesCount)

@@ -29,7 +29,7 @@ public class GameManager : IGameManager
     public bool IsPausable { get => true; set => throw new NotImplementedException(); }
 
     public event Action<Piece, bool> OnUpdateHoldPiece;
-    public event Action OnGameOver;
+    public event Action OnSpawnBlocked;
     public event Action<ITetrisField, Piece> OnGameManagerTickOver;
 
     public void Tick(float deltaTime)
@@ -92,10 +92,7 @@ public class GameManager : IGameManager
 
         if (_currentPiece.IsSpawnPositionValid())
         {
-            Debug.Log("GAMEOVER!");
-
-            OnGameOver?.Invoke();
-
+            OnSpawnBlocked?.Invoke();
             return;
         }
     }

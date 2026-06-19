@@ -6,34 +6,27 @@ public class GameScore : IGameScore
 {
     //Класс, который считает статистику во время игры и вызывает конец игры
 
-    private GameMode _gameMode;
+    private RoundData _roundData;
 
     public GameScore(ITicketManager ticketManager, ITetrisField tetrisField, IGameManager gameManager)
     {
         tetrisField.OnDeleteLinesEnd += IncreaseScore;
-        gameManager.OnGameOver += Defeat;
 
-        _score = 0;
-        _linesCount = 0;
+        _roundData = new RoundData();
 
-        _gameMode = ticketManager.GetGameTicket().GameMode;
+        _roundData.GameMode = ticketManager.GetGameTicket().GameMode;
 
-        switch (_gameMode)
+        switch (_roundData.GameMode)
         {
             case GameMode.Standard:
-                _timerTime = 0f;
+                _roundData.Time = 0f;
                 break;
-
-            case GameMode.Casual:
-                _timerTime = 0f;
-                break;
-
             case GameMode.Lines40:
-                _timerTime = 0f;
+                _roundData.Time = 0f;
                 break;
 
             case GameMode.Blitz:
-                _timerTime = 120f;
+                _roundData.Time = 120f;
                 break;
 
             default:
@@ -41,27 +34,21 @@ public class GameScore : IGameScore
         }
     }
 
-    private int _linesCount;
-
     private ComboType _comboType = ComboType.None;
     private int _comboCount = 0;
-    private int _score;
-
-    private float _timerTime;
 
     public bool IsPausable { get => true; set => throw new NotImplementedException(); }
 
     //Events
-    public event Action<float, int, int> OnAfterUpdate;
+    public event Action<RoundData> OnAfterUpdate;
     public event Action<ComboType, int> OnComboUpdate;
 
-    public event Action<int, int, float> OnDefeat;
-    public event Action<int, int, float> OnGameEnd;
-
+    public event Action OnTimeOver;
+    public event Action On40Lines;
 
     public void Tick(float deltaTime)
     {
-        switch (_gameMode)
+        switch (_roundData.GameMode)
         {
             case GameMode.Standard:
                 IncreaseTime();
@@ -87,12 +74,12 @@ public class GameScore : IGameScore
                 break;
         }
 
-        OnAfterUpdate?.Invoke(_timerTime, _score, _linesCount);
+        OnAfterUpdate?.Invoke(_roundData);
     }
 
     private void IncreaseScore(int linesCount, int allDestroyedLines)
     {
-        _linesCount = allDestroyedLines;
+        _roundData.LinesDestroyed = allDestroyedLines;
 
         ComboType currentComboType = ComboType.None;
 
@@ -133,47 +120,34 @@ public class GameScore : IGameScore
 
         //Debug.Log(linesCount + " " +  score);
 
-        _score += (int)MathF.Round(score * (1 + 0.25f * _comboCount));
+        _roundData.Score += (int)MathF.Round(score * (1 + 0.25f * _comboCount));
 
         OnComboUpdate?.Invoke(_comboType, _comboCount);
 
-        if(_gameMode == GameMode.Lines40 && _linesCount >= 40)
+        if(_roundData.LinesDestroyed >= 40)
         {
-            GameEnd();
+            On40Lines?.Invoke();
         }
     }
 
-
-    // Update is called once per frame
     private void IncreaseTime()
     {
-        _timerTime += Time.deltaTime;
+        _roundData.Time += Time.deltaTime;
     }
 
     private void DecreaseTime()
     {
-        _timerTime -= Time.deltaTime;
+        _roundData.Time -= Time.deltaTime;
 
-        if (_timerTime <= 0)
+        if (_roundData.Time <= 0)
         {
-            GameEnd();
+            OnTimeOver?.Invoke();
         }
     }
 
-    private void Defeat()
+    public RoundData GetRoundData()
     {
-        if(_gameMode == GameMode.Standard)
-        {
-            GameEnd();
-            return;
-        }
-
-        OnDefeat?.Invoke(_score, _linesCount, _timerTime);
-    }
-
-    private void GameEnd()
-    {
-        OnGameEnd?.Invoke(_score, _linesCount, _timerTime);
+        return _roundData;
     }
 }
 
