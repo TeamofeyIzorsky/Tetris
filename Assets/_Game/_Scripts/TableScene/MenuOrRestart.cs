@@ -3,8 +3,8 @@ using UnityEngine;
 public class MenuOrRestart : MonoBehaviour
 {
     //UI Кнопки вызывают методы класса для возвращения в меню или рестарта
-    private IPauseController _pauseController;
     private ILoadManager _loadManager;
+    private IPauseController _pauseController;
 
     public void Construct(IPauseController pauseController, ILoadManager loadManager)
     {

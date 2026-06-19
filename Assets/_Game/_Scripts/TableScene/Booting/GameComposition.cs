@@ -10,8 +10,10 @@ public class GameComposition
 
 
     //Local
+    public IGameStateMachine GameStateMachine { get; private set; }
     public IUpdateManager UpdateManager { get; private set; }
     public IPlayerInput PlayerInput { get; private set; }
+
     public IPauseController PauseController { get; private set; }
     public ITetrisField TetrisField { get; private set; }
     public IBag Bag { get; private set; }
@@ -20,7 +22,6 @@ public class GameComposition
     public IEndGameManager EndGameManager { get; private set; }
     public IGameParameters GameParameters { get; private set; }
 
-
     public GameComposition(ITicketManager ticketManager, ILoadManager loadManager, IGameDataManager gameDataManager, GameConfigSO gameConfig, GameResourcesSO gameResources)
     {
         TicketManager = ticketManager;
@@ -28,12 +29,14 @@ public class GameComposition
         GameDataManager = gameDataManager;
         GameResources = gameResources;
 
+        GameStateMachine = new GameStateMachine();
 
-        UpdateManager = new GameObject("Update Manager Object").AddComponent<UpdateManager>();
+
+        UpdateManager = new GameObject("Update Manager Object").AddComponent<UpdateManager>().Construct(GameStateMachine);
 
         PlayerInput = new OldInputSystem();
 
-        PauseController = new PauseController(PlayerInput, UpdateManager);
+        PauseController = new PauseController(PlayerInput, GameStateMachine);
 
         TetrisField = new TetrisField();
 
@@ -45,7 +48,7 @@ public class GameComposition
 
         GameScore = new GameScore(TicketManager, TetrisField, GameManager);
 
-        EndGameManager = new GameEndManager(TicketManager, GameScore, PauseController, GameDataManager);
+        EndGameManager = new GameEndManager(GameStateMachine, TicketManager, GameScore, GameDataManager);
     }
 
     public void CreateUpdateOrder()

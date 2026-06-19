@@ -6,9 +6,9 @@ public class PauseMenuView : MonoBehaviour
 
     [SerializeField] private Canvas _pauseCanvas;
 
-    public void Construct(IPauseController pauseController)
+    public void Construct(IGameStateMachine gameStateMachine)
     {
-        pauseController.OnChangePauseStatus += UpdatePauseView;
+        gameStateMachine.OnStateChanged += UpdatePauseView;
     }
 
     private void Start()
@@ -17,9 +17,11 @@ public class PauseMenuView : MonoBehaviour
 
     }
 
-    
-    private void UpdatePauseView(bool pause)
+
+    private void UpdatePauseView(GameState gameState)
     {
+        bool pause = gameState == GameState.Paused;
+        
         _pauseCanvas.enabled = pause;
 
         Cursor.visible = pause;

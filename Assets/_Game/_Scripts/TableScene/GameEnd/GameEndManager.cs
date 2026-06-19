@@ -5,18 +5,19 @@ public class GameEndManager : IEndGameManager
 {
     //Завершает игру и проверяет рекорды
     private GameMode _gameMode;
-    private IPauseController _pauseController;
 
     private IGameDataManager _gameDataManager;
 
-    public GameEndManager(ITicketManager ticketManager, IGameScore gameScore, IPauseController pauseController, IGameDataManager gameDataManager)
+    private IGameStateMachine _gameStateMachine;
+
+    public GameEndManager(IGameStateMachine gameStateMachine, ITicketManager ticketManager, IGameScore gameScore, IGameDataManager gameDataManager)
     {
         gameScore.OnDefeat += Defeat;
         gameScore.OnGameEnd += GameEnd;
 
-        _gameMode = ticketManager.GetGameTicket().GameMode;
+        _gameStateMachine = gameStateMachine;
 
-        _pauseController = pauseController;
+        _gameMode = ticketManager.GetGameTicket().GameMode;
 
         _gameDataManager = gameDataManager;
     }
@@ -40,7 +41,7 @@ public class GameEndManager : IEndGameManager
     //Конец игры
     private void GameOver(bool defeat, int score, int linesCount, float timer)
     {
-        _pauseController.Pause(true);
+        _gameStateMachine.ChangeState(GameState.Ended);
 
         switch (_gameMode)
         {

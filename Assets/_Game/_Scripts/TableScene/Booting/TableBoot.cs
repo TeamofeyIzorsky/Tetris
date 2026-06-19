@@ -36,14 +36,12 @@ public class TableBoot : MonoBehaviour
 
         _bagView.Construct(_gameComposition.Bag, _gameComposition.TicketManager);
         _holdPieceView.Construct(_gameComposition.GameManager, _gameComposition.TicketManager);
-        _pauseManagerView.Construct(_gameComposition.PauseController);
+        _pauseManagerView.Construct(_gameComposition.GameStateMachine);
         _tetrisFieldView.Construct(_gameComposition.GameManager, _gameComposition.PlayerInput, _gameComposition.TicketManager, _gameComposition.GameResources);
         _gameScoreView.Construct(_gameComposition.GameScore);
         _gameEndView.Construct(_gameComposition.EndGameManager);
 
         _menuOrRestart.Construct(_gameComposition.PauseController, _gameComposition.LoadManager);
-
-        _gameComposition.PauseController.Pause(true);
     }
 
     private void Start()
@@ -85,6 +83,6 @@ public class TableBoot : MonoBehaviour
 
         _startCanvas.gameObject.SetActive(false);
 
-        _gameComposition.PauseController.Pause(false);
+        _gameComposition.GameStateMachine.ChangeState(GameState.Gameplay);
     }
 }

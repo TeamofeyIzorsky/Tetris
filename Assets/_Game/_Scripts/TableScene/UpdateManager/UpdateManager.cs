@@ -10,15 +10,22 @@ public class UpdateManager : MonoBehaviour, IUpdateManager
     private List<IUpdatable> _toAdd = new();
     private List<IUpdatable> _toRemove = new();
 
-    public bool IsPaused { get => _isPaused; }
+    public UpdateManager Construct(IGameStateMachine gameStateMachine)
+    {
+        gameStateMachine.OnStateChanged += CheckPaused;
+
+        CheckPaused(gameStateMachine.CurrentState);
+
+        return this;
+    }
 
     private bool _isPaused;
 
-    public void Pause(bool pause)
+    private void CheckPaused(GameState gameState)
     {
-        if (_isPaused == pause) return;
+        _isPaused = gameState != GameState.Gameplay;
 
-        _isPaused = pause;
+        Debug.Log("Pause: " + gameState);
     }
 
     public void Add(IUpdatable updatable)

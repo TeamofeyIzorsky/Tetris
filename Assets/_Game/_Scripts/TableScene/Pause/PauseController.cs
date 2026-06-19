@@ -1,33 +1,52 @@
-using System;
-using UnityEngine;
-
 public class PauseController : IPauseController
 {
     //Управлет состоянием паузы
-    private IUpdateManager _updateManager;
     private IPlayerInput _playerInput;
+    private IGameStateMachine _gameStateMachine;
 
-    public event Action<bool> OnChangePauseStatus;
-
-    public PauseController(IPlayerInput playerInput, IUpdateManager updateManager)
+    public PauseController(IPlayerInput playerInput, IGameStateMachine gameStateMachine)
     {
-        _updateManager = updateManager;
         _playerInput = playerInput;
+
+        _gameStateMachine = gameStateMachine;
     }
 
     public void Tick(float deltaTime)
     {
         if (_playerInput.Pause)
         {
-            Pause(!_updateManager.IsPaused);
+            switch(_gameStateMachine.CurrentState)
+            {
+                case GameState.Paused:
+                    _gameStateMachine.ChangeState(GameState.Gameplay);
+                    break;
+
+                case GameState.Gameplay:
+                    _gameStateMachine.ChangeState(GameState.Paused);
+                    break;
+
+                default:
+                    return;
+            }
         }
     }
 
-    //Останавливает игру
-    public void Pause(bool pauseStatus)
+    public void Pause(bool isPaused)
     {
-        _updateManager.Pause(pauseStatus);
+        switch (_gameStateMachine.CurrentState)
+        {
+            case GameState.Paused:
+                if(!isPaused)
+                    _gameStateMachine.ChangeState(GameState.Gameplay);
+                break;
 
-        OnChangePauseStatus?.Invoke(pauseStatus);
+            case GameState.Gameplay:
+                if (isPaused)
+                    _gameStateMachine.ChangeState(GameState.Paused);
+                break;
+
+            default:
+                return;
+        }
     }
 }

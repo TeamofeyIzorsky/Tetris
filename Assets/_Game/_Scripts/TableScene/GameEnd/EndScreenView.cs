@@ -38,6 +38,8 @@ public class EndScreenView : MonoBehaviour
 
     private void StandartEnd(int bestScore, int score, float bestTime, float time)
     {
+        Cursor.visible = true;
+
         _gameEndCanvas.enabled = true;
         _gameEndStatus.text = LocalizationSettings.StringDatabase.GetLocalizedString("Localization", "gameEnded");
 
@@ -95,6 +97,8 @@ public class EndScreenView : MonoBehaviour
 
     private void BlitzEnd(bool defeat, int bestScore, int score, int bestLinesCount, int linesCount)
     {
+        Cursor.visible = true;
+
         _gameEndCanvas.enabled = true;
 
         if (defeat)
@@ -142,6 +146,8 @@ public class EndScreenView : MonoBehaviour
     
     private void Lines40End(bool defeat, float bestTime, float time)
     {
+        Cursor.visible = true;
+
         _gameEndCanvas.enabled = true;
 
         if (defeat)
