@@ -2,6 +2,7 @@ using System.Collections.Generic;
 
 public class GameParameters : IGameParameters
 {
+    //Хранит параметры скорости игры и времени для действий управления
     public float TimeForDown { get; private set; }
     public float LockDelay { get; }
 

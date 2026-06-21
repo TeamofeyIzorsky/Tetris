@@ -2,6 +2,8 @@ using UnityEngine;
 
 public class MenuBoot : MonoBehaviour
 {
+    //Класс, который запускает иницилизацию систем и инъекцию зависимостей для View на сцене
+
     [SerializeField] private DataView _dataView;
     [SerializeField] private StartNewGameTrigger _startGameTrigger;
     //[SerializeField] private 

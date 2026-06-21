@@ -2,6 +2,8 @@ using UnityEngine;
 
 public class StartNewGameTrigger : MonoBehaviour
 {
+    //UI кнопки вызывают StartNewGame для начала игры
+
     private ILoadManager _loadManager;
     private ITicketManager _ticketManager;
 

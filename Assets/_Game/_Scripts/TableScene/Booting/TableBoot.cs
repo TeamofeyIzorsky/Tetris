@@ -5,7 +5,8 @@ using UnityEngine;
 
 public class TableBoot : MonoBehaviour
 {
-    //Этот класс является точкой входа на игровом поле. Он иницилизирует системы и стартовую анимацию
+    //Этот класс является точкой входа на игровом поле. Он иницилизирует системы, делает инъекцию зависимостей для View и запускает анимацию начала раунда
+
     [Header("Game Config")]
     [SerializeField] private GameConfigSO gameConfig;
 

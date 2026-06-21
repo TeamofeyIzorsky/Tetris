@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class UpdateManager : MonoBehaviour, IUpdateManager
 {
+    //Контролирует обновление систем и порядок их обновления. Нужен, чтобы отделить системы от MonoBeheviour и сделать системы геймплея чистыми C# скриптами.
+
     private List<IUpdatable> _updatables = new();
     private List<IPauseUpdatable> _pauseUpdatables = new();
 

@@ -3,6 +3,8 @@ using UnityEngine;
 
 public class GameEndController : IGameEndController
 {
+    //Класс, который вызывается при конце игры. Меняет состояние игры на конец, передает значения счета в GameDataManager
+
     private IGameScore _gameScore;
     private IGameStateMachine _gameStateMachine;
     private IGameDataManager _gameDataManager;

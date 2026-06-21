@@ -2,6 +2,8 @@ using UnityEngine;
 
 public class OldInputSystem : IPlayerInput
 {
+    //Старая система ввода Юнити
+
     private bool Pause;
     private bool HardDrop;
     private bool Rotate;

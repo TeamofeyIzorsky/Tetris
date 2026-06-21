@@ -51,22 +51,22 @@ public class EndScreenView : MonoBehaviour
         }
     }
 
-    private void StandartEnd(int bestScore, int score, float bestTime, float time)
+    private async void StandartEnd(int bestScore, int score, float bestTime, float time)
     {
         Cursor.visible = true;
 
         _gameEndCanvas.enabled = true;
-        _gameEndStatus.text = LocalizationSettings.StringDatabase.GetLocalizedString("Localization", "gameEnded");
+        _gameEndStatus.text = await LocalizationSettings.StringDatabase.GetLocalizedStringAsync("Localization", "gameEnded").Task;
 
-        _gameModeTitle.text = LocalizationSettings.StringDatabase.GetLocalizedString("Localization", "standart");
+        _gameModeTitle.text = await LocalizationSettings.StringDatabase.GetLocalizedStringAsync("Localization", "standart").Task;
 
-        _decription.text = LocalizationSettings.StringDatabase.GetLocalizedString("Localization", "standartDescription");
+        _decription.text = await LocalizationSettings.StringDatabase.GetLocalizedStringAsync("Localization", "standartDescription").Task;
 
 
-        _firstBestTitle.text = LocalizationSettings.StringDatabase.GetLocalizedString("Localization", "bestScore");
+        _firstBestTitle.text = await LocalizationSettings.StringDatabase.GetLocalizedStringAsync("Localization", "bestScore").Task;
         _firstBestValue.text = bestScore.ToString();
 
-        _secondBestTitle.text = LocalizationSettings.StringDatabase.GetLocalizedString("Localization", "bestTime");
+        _secondBestTitle.text = await LocalizationSettings.StringDatabase.GetLocalizedStringAsync("Localization", "bestTime").Task;
 
         TimeSpan timeSpan = TimeSpan.FromSeconds(bestTime);
 
@@ -80,11 +80,11 @@ public class EndScreenView : MonoBehaviour
 
         if (bestScore < score)
         {
-            _firstTitlie.text = LocalizationSettings.StringDatabase.GetLocalizedString("Localization", "scoreNewBest");
+            _firstTitlie.text = await LocalizationSettings.StringDatabase.GetLocalizedStringAsync("Localization", "scoreNewBest").Task;
         }
         else
         {
-            _firstTitlie.text = LocalizationSettings.StringDatabase.GetLocalizedString("Localization", "scoreEnd");
+            _firstTitlie.text = await LocalizationSettings.StringDatabase.GetLocalizedStringAsync("Localization", "scoreEnd").Task;
         }
 
         _firstValue.text = score.ToString();
@@ -92,11 +92,11 @@ public class EndScreenView : MonoBehaviour
 
         if (bestTime < time)
         {
-            _secondTitlie.text = LocalizationSettings.StringDatabase.GetLocalizedString("Localization", "timeNewBest");
+            _secondTitlie.text = await LocalizationSettings.StringDatabase.GetLocalizedStringAsync("Localization", "timeNewBest").Task;
         }
         else
         {
-            _secondTitlie.text = LocalizationSettings.StringDatabase.GetLocalizedString("Localization", "timeEnd");
+            _secondTitlie.text = await LocalizationSettings.StringDatabase.GetLocalizedStringAsync("Localization", "timeEnd").Task;
         }
 
         timeSpan = TimeSpan.FromSeconds(time);
@@ -110,7 +110,7 @@ public class EndScreenView : MonoBehaviour
         _secondValue.text = $"{minutesAndSeconds}<size=70%>.{milliseconds}";
     }
 
-    private void BlitzEnd(bool defeat, int bestScore, int score, int bestLinesCount, int linesCount)
+    private async void BlitzEnd(bool defeat, int bestScore, int score, int bestLinesCount, int linesCount)
     {
         Cursor.visible = true;
 
@@ -118,30 +118,31 @@ public class EndScreenView : MonoBehaviour
 
         if (defeat)
         {
-            _gameEndStatus.text = LocalizationSettings.StringDatabase.GetLocalizedString("Localization", "defeat");
+            _gameEndStatus.text = await LocalizationSettings.StringDatabase.GetLocalizedStringAsync("Localization", "defeat").Task;
         }
         else
         {
-            _gameEndStatus.text = LocalizationSettings.StringDatabase.GetLocalizedString("Localization", "gameEnded");
+            _gameEndStatus.text = await LocalizationSettings.StringDatabase.GetLocalizedStringAsync("Localization", "gameEnded").Task;
         }
 
-        _gameModeTitle.text = LocalizationSettings.StringDatabase.GetLocalizedString("Localization", "blitz");
-        _decription.text = LocalizationSettings.StringDatabase.GetLocalizedString("Localization", "blitzDescription");
+        _gameModeTitle.text = await LocalizationSettings.StringDatabase.GetLocalizedStringAsync("Localization", "blitz").Task;
+        _decription.text = await LocalizationSettings.StringDatabase.GetLocalizedStringAsync("Localization", "blitzDescription").Task;
 
-        _firstBestTitle.text = LocalizationSettings.StringDatabase.GetLocalizedString("Localization", "bestScore");
+
+        _firstBestTitle.text = await LocalizationSettings.StringDatabase.GetLocalizedStringAsync("Localization", "bestScore").Task;
         _firstBestValue.text = bestScore.ToString();
 
-        _secondBestTitle.text = LocalizationSettings.StringDatabase.GetLocalizedString("Localization", "bestLinesCountEnd");
+        _secondBestTitle.text = await LocalizationSettings.StringDatabase.GetLocalizedStringAsync("Localization", "bestLinesCountEnd").Task;
         _secondBestValue.text = bestLinesCount.ToString();
 
 
         if (!defeat && bestScore < score)
         {
-            _firstTitlie.text = LocalizationSettings.StringDatabase.GetLocalizedString("Localization", "scoreNewBest");
+            _firstTitlie.text = await LocalizationSettings.StringDatabase.GetLocalizedStringAsync("Localization", "scoreNewBest").Task;
         }
         else
         {
-            _firstTitlie.text = LocalizationSettings.StringDatabase.GetLocalizedString("Localization", "scoreEnd");
+            _firstTitlie.text = await LocalizationSettings.StringDatabase.GetLocalizedStringAsync("Localization", "scoreEnd").Task;
         }
 
         _firstValue.text = score.ToString();
@@ -150,17 +151,17 @@ public class EndScreenView : MonoBehaviour
 
         if (!defeat && bestLinesCount < linesCount)
         {
-            _secondTitlie.text = LocalizationSettings.StringDatabase.GetLocalizedString("Localization", "linesNewBest");
+            _secondTitlie.text = await LocalizationSettings.StringDatabase.GetLocalizedStringAsync("Localization", "linesNewBest").Task;
         }
         else
         {
-            _secondTitlie.text = LocalizationSettings.StringDatabase.GetLocalizedString("Localization", "linesEnd");
+            _secondTitlie.text = await LocalizationSettings.StringDatabase.GetLocalizedStringAsync("Localization", "linesEnd").Task;
         }
 
         _secondValue.text = linesCount.ToString();
     }
     
-    private void Lines40End(bool defeat, float bestTime, float time)
+    private async void Lines40End(bool defeat, float bestTime, float time)
     {
         Cursor.visible = true;
 
@@ -168,17 +169,17 @@ public class EndScreenView : MonoBehaviour
 
         if (defeat)
         {
-            _gameEndStatus.text = LocalizationSettings.StringDatabase.GetLocalizedString("Localization", "defeat");
+            _gameEndStatus.text = await LocalizationSettings.StringDatabase.GetLocalizedStringAsync("Localization", "defeat").Task;
         }
         else
         {
-            _gameEndStatus.text = LocalizationSettings.StringDatabase.GetLocalizedString("Localization", "gameEnded");
+            _gameEndStatus.text = await LocalizationSettings.StringDatabase.GetLocalizedStringAsync("Localization", "gameEnded").Task;
         }
 
-        _gameModeTitle.text = LocalizationSettings.StringDatabase.GetLocalizedString("Localization", "40Lines");
-        _decription.text = LocalizationSettings.StringDatabase.GetLocalizedString("Localization", "40LinesDescription");
+        _gameModeTitle.text = await LocalizationSettings.StringDatabase.GetLocalizedStringAsync("Localization", "40Lines").Task;
+        _decription.text = await LocalizationSettings.StringDatabase.GetLocalizedStringAsync("Localization", "40LinesDescription").Task;
 
-        _firstBestTitle.text = LocalizationSettings.StringDatabase.GetLocalizedString("Localization", "bestTime");
+        _firstBestTitle.text = await LocalizationSettings.StringDatabase.GetLocalizedStringAsync("Localization", "bestTime").Task;
 
         TimeSpan timeSpan = TimeSpan.FromSeconds(bestTime);
 

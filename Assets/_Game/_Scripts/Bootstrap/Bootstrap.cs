@@ -2,6 +2,9 @@ using UnityEngine;
 
 public class Bootstrap : MonoBehaviour
 {
+    //Иницилиазация глобальных систем игры
+
+
     void Start()
     {
         GameResourcesSO gameResources = Resources.Load<GameResourcesSO>("GameResources");

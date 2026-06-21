@@ -6,6 +6,9 @@ using UnityEngine.Localization.Settings;
 
 public class DataView : MonoBehaviour
 {
+    //Класс, который отображает всю статистику и инфомацию по рекордам в Главном меню
+
+
     private IGameDataManager _gameDataManager;
 
     public void Construct(IGameDataManager gameDataManager)
@@ -59,7 +62,7 @@ public class DataView : MonoBehaviour
         _blitzLinesCount.text = _gameDataManager.GetGameData().BestBlitzLinesCount.ToString();
     }
 
-    private void ShowStatistic(Locale locale)
+    private async void ShowStatistic(Locale locale)
     {
         TimeSpan timeSpan = TimeSpan.FromSeconds(_gameDataManager.GetGameData().allTime);
 
@@ -67,9 +70,9 @@ public class DataView : MonoBehaviour
         string time = timeSpan.ToString(@"hh\:mm\:ss");
 
         // Получаем 2 цифры миллисекунд
-        _allTime.text = LocalizationSettings.StringDatabase.GetLocalizedString("Localization", "totalTime") + " " + time;
+        _allTime.text = await LocalizationSettings.StringDatabase.GetLocalizedStringAsync("Localization", "totalTime").Task + " " + time;
 
-        _playsCount.text = LocalizationSettings.StringDatabase.GetLocalizedString("Localization", "roundsFinished") + " " + _gameDataManager.GetGameData().gamesPlayed.ToString();
+        _playsCount.text = await LocalizationSettings.StringDatabase.GetLocalizedStringAsync("Localization", "totalTime").Task + " " + _gameDataManager.GetGameData().gamesPlayed.ToString();
 
     }
 
