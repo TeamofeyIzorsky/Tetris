@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -8,20 +9,24 @@ public class FieldView : MonoBehaviour
 
     private GameObject _blockPrefab;
     private IPlayerInput _playerInput;
+    private ITetrisField _tetrisField;
 
-    public void Construct(IGameManager gameManager, IPlayerInput playerInput, ITicketManager ticketManager, GameResourcesSO gameResources)
+    public void Construct(IGameManager gameManager, ITetrisField tetrisField, IPlayerInput playerInput, ITicketManager ticketManager, GameResourcesSO gameResources)
     {
+        _tetrisField = tetrisField;
+
         _playerInput = playerInput;
 
         _blockPrefab = gameResources.BlockPrefab;
 
-        gameManager.OnGameManagerTickOver += UpdateView;
+        gameManager.OnGameManagerTickOver += UpdateCurrentPieceView;
 
-        _theme = ticketManager.GetGameTicket().Theme;
+        _tetrisField.OnFieldUpdate += UpdateFieldView;
 
-        CreateField();
 
-        UpdateView(null, gameManager.GetCurrentPiece());
+        CreateField(ticketManager.GetGameTicket().Theme);
+
+        UpdateCurrentPieceView(gameManager.GetCurrentPiece());
     }
 
 
@@ -29,84 +34,107 @@ public class FieldView : MonoBehaviour
 
     [SerializeField] private Grid _grid;
 
-    private ThemeSO _theme;
+    private Block[,] _blocks;
 
-    private Block[,] blocks;
+    private List<Vector2Int> _lastCurrentPiecePositions = new List<Vector2Int>();
 
 
-    private void CreateField()
+    private void CreateField(ThemeSO theme)
     {
-        blocks = new Block[TetrisField.WIDTH, TetrisField.HEIGHT];
+        _blocks = new Block[ITetrisField.WIDTH, ITetrisField.HEIGHT];
 
-        for (int y = 0; y < TetrisField.HEIGHT; y++)
+        for (int y = 0; y < ITetrisField.HEIGHT; y++)
         {
-            for (int x = 0; x < TetrisField.WIDTH; x++)
+            for (int x = 0; x < ITetrisField.WIDTH; x++)
             {
                 GameObject blockGameObject = Instantiate(_blockPrefab, _grid.CellToWorld(new Vector3Int(x, y, 0)), _grid.transform.rotation, _grid.transform);
 
                 Block block = blockGameObject.GetComponent<Block>();
 
-                block.Construct(_theme);
+                block.Construct(theme);
 
                 block.UpdateBlockView(0);
 
-                blocks[x, y] = block;
+                _blocks[x, y] = block;
             }
         }
     }
 
-    private void UpdateView(ITetrisField tetrisField, Piece currentPiece)
+
+    private void UpdateFieldView(List<Vector2Int> lastPlace)
     {
-        int[,] grid = null;
-
-        if(tetrisField != null)
+        for (int y = 0; y < ITetrisField.HEIGHT; y++)
         {
-            grid = tetrisField.GetGrid();
-        }
-
-        List<Vector2Int> posistions = currentPiece.GetPositions();
-
-        List<Vector2Int> ghostPositions = currentPiece.FinalPositons;
-
-        List<Vector2Int> lastPlace = null;
-
-        if(tetrisField != null)
-        {
-            lastPlace = tetrisField.GetLastPlace();
-        }
-
-        for (int y = 0; y < TetrisField.HEIGHT; y++)
-        {
-            for (int x = 0; x < TetrisField.WIDTH; x++)
+            for (int x = 0; x < ITetrisField.WIDTH; x++)
             {
                 Vector2Int position = new Vector2Int(x, y);
+                
+                int blockStatus = _tetrisField.GetBlockStatus(position);
+
+                if (blockStatus == 0 && _lastCurrentPiecePositions.Contains(position))
+                {
+                    continue;
+                }
+
+                _blocks[x, y].UpdateBlockView(blockStatus);
 
                 if (lastPlace != null && lastPlace.Contains(position))
                 {
-                    blocks[position.x, position.y].PlayGlow();
+                    _blocks[position.x, position.y].PlayGlow();
 
                     if (_playerInput.HardDrop)
                     {
-                        _particleSystem.transform.position = blocks[x, y].transform.position + new Vector3(0.22f, 0.22f, 0);
+                        _particleSystem.transform.position = _blocks[x, y].transform.position + new Vector3(0.22f, 0.22f, 0);
                         _particleSystem.Play();
                     }
                 }
-
-                if (posistions != null && posistions.Contains(position))
-                {
-                    blocks[x, y].UpdateBlockView(currentPiece.id);
-                }
-                else if (ghostPositions != null && ghostPositions.Contains(position))
-                {
-                    blocks[x, y].UpdateBlockView(currentPiece.id, true);
-                }
-                else if (grid != null)
-                {
-                    blocks[x, y].UpdateBlockView(grid[x, y]);
-
-                    //blocks[x, y].PlayGlow();
-                }
             }
         }
+    }
+
+    private void UpdateCurrentPieceView(Piece currentPiece)
+    {
+        foreach (var lastPosition in _lastCurrentPiecePositions)
+        {
+            if (_tetrisField.GetBlockStatus(lastPosition) == 0)
+            {
+                _blocks[lastPosition.x, lastPosition.y].UpdateBlockView(0);
+            }
+        }
+
+        _lastCurrentPiecePositions.Clear();
+
+
+        List<Vector2Int> positions;
+        List<Vector2Int> ghostPositions;
+
+        if (currentPiece != null)
+        {
+
+            positions = currentPiece.GetPositions();
+            ghostPositions = currentPiece.FinalPositons;
+
+            foreach (var position in ghostPositions)
+            {
+                if (_tetrisField.GetBlockStatus(position) == 0)
+                {
+                    _blocks[position.x, position.y].UpdateBlockView(currentPiece.id, true);
+                }
+            }
+
+            foreach (var position in positions)
+            {
+                if (_tetrisField.GetBlockStatus(position) == 0)
+                {
+                    _blocks[position.x, position.y].UpdateBlockView(currentPiece.id);
+                }
+            }
+
+            _lastCurrentPiecePositions.AddRange(positions);
+            _lastCurrentPiecePositions.AddRange(ghostPositions);
+            return;
+        }
+
+        _lastCurrentPiecePositions.Clear();
     }
 }

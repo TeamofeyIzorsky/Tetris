@@ -271,13 +271,13 @@ public abstract class Piece
         {
             //Мгновенно спускаем, если это начало движения вниз или единичное нажатие
 
-            _downTimer = 0;
-
             (List<Vector2Int> positions, Vector2Int pivotPosition) newMove = Move(Vector2Int.down, GetPositions(), PivotPosition);
 
             if (_tetrisField.CheckPositions(newMove.positions))
             {
                 PivotPosition = newMove.pivotPosition;
+
+                _downTimer = 0;
 
                 FoundFinalPositions();
             }
@@ -285,8 +285,6 @@ public abstract class Piece
         else if (_playerInput.DownHold)
         {
             //Спускаем с задержкой, если кнопка зажата
-
-            _downTimer = 0;
 
             _downMoveTimer += Time.deltaTime;
 
@@ -299,6 +297,8 @@ public abstract class Piece
                 if (_tetrisField.CheckPositions(newMove.positions))
                 {
                     PivotPosition = newMove.pivotPosition;
+
+                    _downTimer = 0;
 
                     FoundFinalPositions();
                 }

@@ -5,7 +5,6 @@ public class Block : MonoBehaviour
 {
     //Компонент, который отображает отдельную клетку игрового поля
     [SerializeField] private SpriteRenderer _spriteRenderer;
-
     public bool isEnabled => _spriteRenderer.enabled;
 
 
@@ -15,6 +14,7 @@ public class Block : MonoBehaviour
     private static readonly int ProgressID = Shader.PropertyToID("_Progress");
     private Tween _tween;
 
+    private int _lastPieceNum;
 
     private ThemeSO _themeSO;
     public void Construct(ThemeSO theme)
@@ -36,31 +36,13 @@ public class Block : MonoBehaviour
         _spriteRenderer.SetPropertyBlock(_propertyBlock);
 
         // Анимируем через DOVirtual
-        _tween = DOVirtual.Float(
-            0f,           // от
-            1f,           // до
-            0.5f,         // длительность
-            (value) => {
+        _tween = DOVirtual.Float(0f, 1f, 0.5f, (value) => 
+        {
                 _propertyBlock.SetFloat(ProgressID, value);
                 _spriteRenderer.SetPropertyBlock(_propertyBlock);
-            }
+        }
         ).SetEase(Ease.OutQuad);
     }
-
-    /*    public void SetColor(Color color)
-        {
-            _spriteRenderer.color = color;
-        }
-
-        public void SetSprite(Sprite sprite)
-        {
-            _spriteRenderer.sprite = sprite;
-        }
-
-        public void ChangeActive(bool activeStatus)
-        {
-            _spriteRenderer.enabled = activeStatus;
-        }*/
 
     public void UpdateBlockView(int pieceNum, bool isGhost = false)
     {
@@ -69,6 +51,13 @@ public class Block : MonoBehaviour
             _spriteRenderer.enabled = false;
             return;
         }
+
+        if (_lastPieceNum != pieceNum)
+        {
+            _tween?.Kill();
+        }
+
+        _lastPieceNum = pieceNum;
 
         _spriteRenderer.enabled = true;
 

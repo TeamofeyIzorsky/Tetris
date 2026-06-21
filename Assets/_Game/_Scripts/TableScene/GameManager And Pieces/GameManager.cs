@@ -30,7 +30,7 @@ public class GameManager : IGameManager
 
     public event Action<Piece, bool> OnUpdateHoldPiece;
     public event Action OnSpawnBlocked;
-    public event Action<ITetrisField, Piece> OnGameManagerTickOver;
+    public event Action<Piece> OnGameManagerTickOver;
 
     public void Tick(float deltaTime)
     {
@@ -38,7 +38,7 @@ public class GameManager : IGameManager
         
         ProcessInput();
 
-        OnGameManagerTickOver?.Invoke(_tetrisField, _currentPiece);
+        OnGameManagerTickOver?.Invoke(_currentPiece);
     }
 
     private void ProcessInput()
@@ -92,6 +92,7 @@ public class GameManager : IGameManager
 
         if (_currentPiece.IsSpawnPositionValid())
         {
+            _currentPiece = null;
             OnSpawnBlocked?.Invoke();
             return;
         }

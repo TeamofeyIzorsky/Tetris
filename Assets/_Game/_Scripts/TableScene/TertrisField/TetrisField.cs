@@ -8,37 +8,38 @@ public class TetrisField : ITetrisField
 
     public TetrisField()
     {
-        _grid = new int[WIDTH, HEIGHT];
+        _grid = new int[ITetrisField.WIDTH, ITetrisField.HEIGHT];
     }
 
     //Grid Settings
-    public const int HEIGHT = 24;
-    public const int WIDTH = 10;
 
     private int[,] _grid;
 
     private int _allDestroyedLines = 0;
 
-    private List<Vector2Int> _lastPlace;
+    //private List<Vector2Int> _lastPlace;
 
     //Events
     public event Action<int, int> OnDeleteLinesEnd;
-    
+    public event Action<List<Vector2Int>> OnFieldUpdate;
+
 
 
     //Устанавливаем фигуру
     public void Place(Piece piece)
     {
         //Debug.Log("PLACE!");
+        List<Vector2Int> lastPlace = piece.FinalPositons;
 
-        foreach (var position in piece.FinalPositons)
+        foreach (var position in lastPlace)
         {
             _grid[position.x, position.y] = piece.id;
         }
 
-        _lastPlace = piece.FinalPositons;
-
         FoundAndDeleteFillLines();
+
+        OnFieldUpdate?.Invoke(lastPlace);
+
     }
 
     //После установки удаляем полные линии и сдвигаем верхние линии вниз
@@ -47,11 +48,11 @@ public class TetrisField : ITetrisField
         int deletedLines = 0;
 
 
-        for (int y = HEIGHT - 1; y >= 0; y--)
+        for (int y = ITetrisField.HEIGHT - 1; y >= 0; y--)
         {
             bool isFilledLine = true;
 
-            for (int x = 0; x < WIDTH; x++)
+            for (int x = 0; x < ITetrisField.WIDTH; x++)
             {
                 if (_grid[x, y] == 0)
                 {
@@ -64,14 +65,14 @@ public class TetrisField : ITetrisField
                 _allDestroyedLines++;
                 deletedLines++;
 
-                for (int x = 0; x < WIDTH; x++)
+                for (int x = 0; x < ITetrisField.WIDTH; x++)
                 {
                     _grid[x, y] = 0;
                 }
 
                 for (int iy = y; iy < 22; iy++)
                 {
-                    for (int ix = 0; ix < WIDTH; ix++)
+                    for (int ix = 0; ix < ITetrisField.WIDTH; ix++)
                     {
                         _grid[ix, iy] = _grid[ix, iy + 1];
 
@@ -101,22 +102,14 @@ public class TetrisField : ITetrisField
         return isCorrectPositions;
     }
 
-    public int[,] GetGrid()
-    {
-        return _grid;
-    }
-
-    public List<Vector2Int> GetLastPlace()
-    {
-        List<Vector2Int> lastPlace = _lastPlace;
-        _lastPlace = null;
-
-        return lastPlace;
-    }
-
     public int GetDeletedLinesCount()
     {
         return _allDestroyedLines;
+    }
+
+    public int GetBlockStatus(Vector2Int position)
+    {
+        return _grid[position.x, position.y];
     }
 }
 
