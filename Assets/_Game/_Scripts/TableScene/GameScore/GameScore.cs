@@ -8,12 +8,13 @@ public class GameScore : IGameScore
 
     private RoundData _roundData;
 
-    public GameScore(ITicketManager ticketManager, ITetrisField tetrisField, IGameManager gameManager)
+    public GameScore(ITicketManager ticketManager, ITetrisField tetrisField)
     {
         tetrisField.OnDeleteLinesEnd += IncreaseScore;
 
         _roundData = new RoundData();
 
+        _roundData.GameMode = ticketManager.GetGameTicket().GameMode;
         _roundData.GameMode = ticketManager.GetGameTicket().GameMode;
 
         switch (_roundData.GameMode)

@@ -3,11 +3,11 @@ using UnityEngine;
 public class HoldPieceView : NextPieceView
 {
     //Компнент, который отображает удержанную фигуру
-    public void Construct(IGameManager gameManager, ITicketManager ticketManager)
+    public void Construct(IPieceController pieceController, ITicketManager ticketManager)
     {
         base.Construct(ticketManager.GetGameTicket().Theme);
 
-        gameManager.OnUpdateHoldPiece += ShowHoldPiece;
+        pieceController.OnUpdateHold += ShowHoldPiece;
     }
 
 

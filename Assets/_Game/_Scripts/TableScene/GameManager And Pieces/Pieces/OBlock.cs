@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class OBlock : Piece
 {
-    public OBlock(IPlayerInput playerInput, ITetrisField tetrisField, IGameParameters gameParameters) : base(tetrisField, playerInput, gameParameters) 
+    public OBlock()
     {
         id = 7;
 

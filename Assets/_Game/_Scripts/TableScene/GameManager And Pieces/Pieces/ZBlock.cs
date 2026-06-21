@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class ZBlock : Piece
 {
-    public ZBlock(IPlayerInput playerInput, ITetrisField tetrisField, IGameParameters gameParameters) : base(tetrisField, playerInput, gameParameters)
+    public ZBlock()
     {
         id = 5;
 

@@ -55,13 +55,13 @@ public class Bag : IBag
     {
         Piece[] bag = new Piece[]
         {
-            new OBlock(_playerInput, _tetrisField, _gameParameters),
-            new ZBlock(_playerInput, _tetrisField, _gameParameters),
-            new SBlock(_playerInput, _tetrisField, _gameParameters),
-            new LBlock(_playerInput, _tetrisField, _gameParameters),
-            new JBlock(_playerInput, _tetrisField, _gameParameters),
-            new IBlock(_playerInput, _tetrisField,_gameParameters),
-            new TBlock(_playerInput, _tetrisField,_gameParameters),
+            new OBlock(),
+            new ZBlock(),
+            new SBlock(),
+            new LBlock(),
+            new JBlock(),
+            new IBlock(),
+            new TBlock(),
         };
 
         //Тасование Фишера — Йетса

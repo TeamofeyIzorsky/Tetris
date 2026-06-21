@@ -2,9 +2,9 @@ using UnityEngine;
 
 public class StandardEndStategy : IEndStrategy
 {
-    public void Subscribe(IGameEndController gameEndController, IGameScore gameScore, IGameManager gameManager)
+    public void Subscribe(IGameEndController gameEndController, IGameScore gameScore, IPieceController pieceController)
     {
-        gameManager.OnSpawnBlocked += gameEndController.GameEnd;
+        pieceController.OnSpawnBlocked += gameEndController.GameEnd;
 
     }
 }

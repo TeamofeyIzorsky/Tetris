@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class SBlock : Piece
 {
-    public SBlock(IPlayerInput playerInput, ITetrisField tetrisField, IGameParameters gameParameters) : base(tetrisField, playerInput, gameParameters)
+    public SBlock()
     {
         id = 6;
 

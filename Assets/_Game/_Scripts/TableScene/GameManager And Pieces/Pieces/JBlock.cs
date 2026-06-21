@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class JBlock : Piece
 {
-    public JBlock(IPlayerInput playerInput, ITetrisField tetrisField, IGameParameters gameParameters) : base(tetrisField, playerInput, gameParameters)
+    public JBlock()
     {
         id = 4;
 

@@ -17,7 +17,8 @@ public class GameComposition
     public IPauseController PauseController { get; private set; }
     public ITetrisField TetrisField { get; private set; }
     public IBag Bag { get; private set; }
-    public IGameManager GameManager { get; private set; }
+    public IGameInputHandler GameInputHandler { get; private set; }
+    public IPieceController PieceController { get; private set; }
     public IGameScore GameScore { get; private set; }
     public IGameEndController GameEndController { get; private set; }
     public IGameParameters GameParameters { get; private set; }
@@ -44,9 +45,11 @@ public class GameComposition
 
         Bag = new Bag(TetrisField, PlayerInput, GameParameters);
 
-        GameManager = new GameManager(Bag, TetrisField, PlayerInput);
+        GameInputHandler = new GameInputHandler(PlayerInput, GameParameters);
 
-        GameScore = new GameScore(TicketManager, TetrisField, GameManager);
+        PieceController = new PieceController(GameInputHandler, TetrisField, GameParameters, Bag);
+
+        GameScore = new GameScore(TicketManager, TetrisField);
 
 
         IEndStrategy endStrategy = TicketManager.GetGameTicket().GameMode switch
@@ -57,14 +60,15 @@ public class GameComposition
             _ => new StandardEndStategy()
         };
 
-        GameEndController = new GameEndController(endStrategy, GameScore, GameManager, GameStateMachine, gameDataManager);
+        GameEndController = new GameEndController(endStrategy, GameScore, PieceController, GameStateMachine, gameDataManager);
     }
 
     public void CreateUpdateOrder()
     {
         UpdateManager.Add(PlayerInput);
         UpdateManager.Add(PauseController);
-        UpdateManager.Add(GameManager);
+        UpdateManager.Add(GameInputHandler);
+        UpdateManager.Add(PieceController);
         UpdateManager.Add(GameScore);
     }
 

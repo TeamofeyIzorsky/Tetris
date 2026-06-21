@@ -7,7 +7,7 @@ public class GameEndController : IGameEndController
     private IGameStateMachine _gameStateMachine;
     private IGameDataManager _gameDataManager;
 
-    public GameEndController(IEndStrategy endStrategy, IGameScore gameScore, IGameManager gameManager, IGameStateMachine gameStateMachine, IGameDataManager gameDataManager)
+    public GameEndController(IEndStrategy endStrategy, IGameScore gameScore, IPieceController pieceController, IGameStateMachine gameStateMachine, IGameDataManager gameDataManager)
     {
         _gameScore = gameScore;
 
@@ -15,7 +15,7 @@ public class GameEndController : IGameEndController
 
         _gameDataManager = gameDataManager;
 
-        endStrategy.Subscribe(this, gameScore, gameManager);
+        endStrategy.Subscribe(this, gameScore, pieceController);
     }
 
     public event Action<GameData, RoundData> OnGameEnded;

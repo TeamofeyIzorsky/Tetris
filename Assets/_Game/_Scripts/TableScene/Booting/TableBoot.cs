@@ -35,9 +35,9 @@ public class TableBoot : MonoBehaviour
         _gameComposition.CreateUpdateOrder();
 
         _bagView.Construct(_gameComposition.Bag, _gameComposition.TicketManager);
-        _holdPieceView.Construct(_gameComposition.GameManager, _gameComposition.TicketManager);
+        _holdPieceView.Construct(_gameComposition.PieceController, _gameComposition.TicketManager);
         _pauseManagerView.Construct(_gameComposition.GameStateMachine);
-        _tetrisFieldView.Construct(_gameComposition.GameManager, _gameComposition.TetrisField, _gameComposition.PlayerInput, _gameComposition.TicketManager, _gameComposition.GameResources);
+        _tetrisFieldView.Construct(_gameComposition.PieceController, _gameComposition.TetrisField, _gameComposition.PlayerInput, _gameComposition.TicketManager, _gameComposition.GameResources);
         _gameScoreView.Construct(_gameComposition.GameScore);
         _gameEndView.Construct(_gameComposition.GameEndController);
 

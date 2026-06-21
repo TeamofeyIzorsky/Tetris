@@ -11,7 +11,7 @@ public class FieldView : MonoBehaviour
     private IPlayerInput _playerInput;
     private ITetrisField _tetrisField;
 
-    public void Construct(IGameManager gameManager, ITetrisField tetrisField, IPlayerInput playerInput, ITicketManager ticketManager, GameResourcesSO gameResources)
+    public void Construct(IPieceController pieceController, ITetrisField tetrisField, IPlayerInput playerInput, ITicketManager ticketManager, GameResourcesSO gameResources)
     {
         _tetrisField = tetrisField;
 
@@ -19,14 +19,14 @@ public class FieldView : MonoBehaviour
 
         _blockPrefab = gameResources.BlockPrefab;
 
-        gameManager.OnGameManagerTickOver += UpdateCurrentPieceView;
+        pieceController.PieceControllerTickOver += UpdateCurrentPieceView;
 
         _tetrisField.OnFieldUpdate += UpdateFieldView;
 
 
         CreateField(ticketManager.GetGameTicket().Theme);
 
-        UpdateCurrentPieceView(gameManager.GetCurrentPiece());
+        UpdateCurrentPieceView(pieceController.GetCurrentPiece());
     }
 
 
@@ -111,7 +111,7 @@ public class FieldView : MonoBehaviour
         if (currentPiece != null)
         {
 
-            positions = currentPiece.GetPositions();
+            positions = currentPiece.Position;
             ghostPositions = currentPiece.FinalPositons;
 
             foreach (var position in ghostPositions)

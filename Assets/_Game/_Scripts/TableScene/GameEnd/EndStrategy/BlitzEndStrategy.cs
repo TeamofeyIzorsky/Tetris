@@ -2,9 +2,9 @@ using UnityEngine;
 
 public class BlitzEndStrategy : IEndStrategy
 {
-    public void Subscribe(IGameEndController gameEndController, IGameScore gameScore, IGameManager gameManager)
+    public void Subscribe(IGameEndController gameEndController, IGameScore gameScore, IPieceController pieceController)
     {
-        gameManager.OnSpawnBlocked += gameEndController.GameDefeat;
+        pieceController.OnSpawnBlocked += gameEndController.GameDefeat;
 
         gameScore.OnTimeOver += gameEndController.GameEnd;
     }
