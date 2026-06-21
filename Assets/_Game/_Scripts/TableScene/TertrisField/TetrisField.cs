@@ -1,7 +1,6 @@
 using UnityEngine;
 using System.Collections.Generic;
 using System;
-using Random = UnityEngine.Random;
 
 public class TetrisField : ITetrisField
 {
@@ -20,7 +19,7 @@ public class TetrisField : ITetrisField
 
     private int _allDestroyedLines = 0;
 
-    private Vector2Int? _randomLastPlace;
+    private List<Vector2Int> _lastPlace;
 
     //Events
     public event Action<int, int> OnDeleteLinesEnd;
@@ -37,9 +36,7 @@ public class TetrisField : ITetrisField
             _grid[position.x, position.y] = piece.id;
         }
 
-        var randomPiece = piece.FinalPositons[Random.Range(0, piece.FinalPositons.Count)];
-
-        _randomLastPlace = new Vector2Int(randomPiece.x, randomPiece.y);
+        _lastPlace = piece.FinalPositons;
 
         FoundAndDeleteFillLines();
     }
@@ -109,12 +106,12 @@ public class TetrisField : ITetrisField
         return _grid;
     }
 
-    public Vector2Int? GetRandomLastPlace()
+    public List<Vector2Int> GetLastPlace()
     {
-        Vector2Int? random = _randomLastPlace;
-        _randomLastPlace = null;
+        List<Vector2Int> lastPlace = _lastPlace;
+        _lastPlace = null;
 
-        return random;
+        return lastPlace;
     }
 
     public int GetDeletedLinesCount()

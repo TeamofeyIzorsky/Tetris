@@ -46,7 +46,9 @@ public class FieldView : MonoBehaviour
 
                 Block block = blockGameObject.GetComponent<Block>();
 
-                block.ChangeActive(false);
+                block.Construct(_theme);
+
+                block.UpdateBlockView(0);
 
                 blocks[x, y] = block;
             }
@@ -64,11 +66,13 @@ public class FieldView : MonoBehaviour
 
         List<Vector2Int> posistions = currentPiece.GetPositions();
 
-        Vector2Int? randomLastPlace = null;
+        List<Vector2Int> ghostPositions = currentPiece.FinalPositons;
+
+        List<Vector2Int> lastPlace = null;
 
         if(tetrisField != null)
         {
-            randomLastPlace = tetrisField.GetRandomLastPlace();
+            lastPlace = tetrisField.GetLastPlace();
         }
 
         for (int y = 0; y < TetrisField.HEIGHT; y++)
@@ -77,52 +81,32 @@ public class FieldView : MonoBehaviour
             {
                 Vector2Int position = new Vector2Int(x, y);
 
-                if (_playerInput.HardDrop && randomLastPlace.HasValue && randomLastPlace.Value == position)
+                if (lastPlace != null && lastPlace.Contains(position))
                 {
-                    _particleSystem.transform.position = blocks[x, y].transform.position + new Vector3(0.22f, 0.22f, 0);
-                    _particleSystem.Play();
+                    blocks[position.x, position.y].PlayGlow();
+
+                    if (_playerInput.HardDrop)
+                    {
+                        _particleSystem.transform.position = blocks[x, y].transform.position + new Vector3(0.22f, 0.22f, 0);
+                        _particleSystem.Play();
+                    }
                 }
 
-                if (grid != null && grid[x, y] != 0)
+                if (posistions != null && posistions.Contains(position))
                 {
-
-                    blocks[x, y].ChangeActive(true);
-
-                    var theme = _theme.GetTheme(grid[x, y]);
-
-                    blocks[x, y].SetColor(theme.Item1);
-                    blocks[x, y].SetSprite(theme.Item2);
+                    blocks[x, y].UpdateBlockView(currentPiece.id);
                 }
-                else if (posistions.Contains(position))
+                else if (ghostPositions != null && ghostPositions.Contains(position))
                 {
-                    blocks[x, y].ChangeActive(true);
-
-                    //Debug.Log(G.DataManager.currentGameData.Theme);
-                    var theme = _theme.GetTheme(currentPiece.id);
-
-
-                    blocks[x, y].SetColor(theme.Item1);
-                    blocks[x, y].SetSprite(theme.Item2);
+                    blocks[x, y].UpdateBlockView(currentPiece.id, true);
                 }
-                else if (currentPiece.FinalPositons.Contains(position))
+                else if (grid != null)
                 {
-                    blocks[x, y].ChangeActive(true);
+                    blocks[x, y].UpdateBlockView(grid[x, y]);
 
-                   // Debug.Log(G.DataManager.currentGameData.Theme);
-
-                    var theme = _theme.GetTheme(currentPiece.id);
-
-                    Color color = new Color(theme.Item1.r, theme.Item1.g, theme.Item1.b, 0.075f);
-
-                    blocks[x, y].SetColor(color);
-                    blocks[x, y].SetSprite(theme.Item2);
-                }
-                else
-                {
-                    blocks[x, y].ChangeActive(false);
+                    //blocks[x, y].PlayGlow();
                 }
             }
-
         }
     }
 }

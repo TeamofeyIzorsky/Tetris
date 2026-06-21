@@ -15,35 +15,30 @@ public class HoldPieceView : NextPieceView
     {
         if(piece == null) return;
 
-        var theme = _theme.GetTheme(piece.id);
-
         base.ShowPiece(piece);
 
-        foreach(var block in _firstLine)
+        if (!active)
         {
-            block.SetSprite(theme.Item2);
+            foreach (var block in _firstLine)
+            {
+                if (!block.isEnabled)
+                {
+                    block.UpdateBlockView(0);
+                    continue;
+                }
 
-            if (active)
-            {
-                block.SetColor(theme.Item1);
+                block.UpdateBlockView(piece.id, true);
             }
-            else
-            {
-                block.SetColor(new Color32(125, 125, 125, 255));
-            }
-        }
 
-        foreach (var block in _secondLine)
-        {
-            block.SetSprite(theme.Item2);
+            foreach (var block in _secondLine)
+            {
+                if (!block.isEnabled)
+                {
+                    block.UpdateBlockView(0);
+                    continue;
+                }
 
-            if (active)
-            {
-                block.SetColor(theme.Item1);
-            }
-            else
-            {
-                block.SetColor(new Color32(125, 125, 125, 255));
+                block.UpdateBlockView(piece.id, true);
             }
         }
     }

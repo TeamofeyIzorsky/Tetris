@@ -22,12 +22,16 @@ public class NextPieceView : MonoBehaviour
 
         foreach (var block in _firstLine)
         {
-            block.ChangeActive(false);
+            block.Construct(theme);
+
+            block.UpdateBlockView(0);
         }
 
         foreach (var block in _secondLine)
         {
-            block.ChangeActive(false);
+            block.Construct(theme);
+
+            block.UpdateBlockView(0);
         }
     }
 
@@ -42,34 +46,28 @@ public class NextPieceView : MonoBehaviour
         int firstLine = 0;
         int secondLine = 0;
 
-        var theme = _theme.GetTheme(piece.id);
-
         for (int x = 0; x < 4; x++)
         {
             if(shape[1, x].ToLower() == "x")
             {
-                _firstLine[x].ChangeActive(true);
+                _firstLine[x].UpdateBlockView(piece.id);
 
-                _firstLine[x].SetSprite(theme.Item2);
-                _firstLine[x].SetColor(theme.Item1);
                 firstLine += 1;
             }
             else
             {
-                _firstLine[x].ChangeActive(false);
+                _firstLine[x].UpdateBlockView(0);
             }
 
             if (shape[2, x].ToLower() == "x")
             {
-                _secondLine[x].ChangeActive(true);
+                _secondLine[x].UpdateBlockView(piece.id);
 
-                _secondLine[x].SetSprite(theme.Item2);
-                _secondLine[x].SetColor(theme.Item1);
                 secondLine += 1;
             }
             else
             {
-                _secondLine[x].ChangeActive(false);
+                _secondLine[x].UpdateBlockView(0);
             }
         }
 
