@@ -78,7 +78,7 @@ public class GameDataManager : MonoBehaviour, IGameDataManager
 
     private void Lines40Round(RoundData roundData)
     {
-        if (roundData.Time > _gameData.Best40LinesTime)
+        if (roundData.Time < _gameData.Best40LinesTime)
         {
             _gameData.Best40LinesTime = roundData.Time;
         }
