@@ -71,7 +71,7 @@ public class Bag : IBag
         {
             Piece piece = bag[i];
 
-            int randIndex = UnityEngine.Random.Range(0, 7);
+            int randIndex = UnityEngine.Random.Range(i, 7);
             bag[i] = bag[randIndex];
             bag[randIndex] = piece;
         }
