@@ -35,6 +35,7 @@ This game is my first-year coursework for a Programming course at university. Th
 <br>Рандомизация фигур с помощью тасование Фишера — Йетса,
 <br>Возможность удерживать 1 фигуру,
 <br>Пауза и меню паузы,
+<br>Выбор из двух языков (Русский, Английский)
 
 <br>Main menu,
 <br>Choose from 3 game modes,
@@ -48,9 +49,13 @@ This game is my first-year coursework for a Programming course at university. Th
 <br>
 
 ## Инструкцию по запуску | Launch instructions
-///
-<br>
-<br>
+1. Зайдите на страницу игры в Itch.io
+2. Скачайте архив с игрой снизу страницы
+3. Распакуйте архив с игрой,
+4. Вам нужно иметь ПК с 64-битной операционной системой Windows ,
+5. Запустите Tetris.exe,
+6. Поменяйте язык в настройках при желании,
+7. Нажмите Начать игру и выберете игровой режим в открывшемся окне,
 
 ## Управление | Controll:
 A/D or Right/Left arrows - Горизонтальное движение | Horizontal Move 
